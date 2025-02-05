@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8waskkpj52xw"]
+
+[ext_resource type="Script" path="res://Code/Forklift.cs" id="1_g0d5j"]
+[ext_resource type="Texture2D" uid="uid://dlis1jg0ntod" path="res://Graphics/fork-concept.png" id="1_kkhnw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmihj"]
+size = Vector2(277, 294)
+
+[node name="Forklift" type="CharacterBody2D"]
+script = ExtResource("1_g0d5j")
+_steeringAngle = 40.0
+_enginePower = 3000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 0)
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_kkhnw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_wmihj")
