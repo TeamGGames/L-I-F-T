@@ -7,6 +7,8 @@ public partial class Forklift : CharacterBody2D
 {
 	[Export] private float _steeringAngle = 50.0f; // Maximum steering angle (degrees)
 	[Export] private float _enginePower = 800.0f; // Acceleration force
+
+	[Export] private float _reversePower = -16000.0f;
 	private float _wheelBase = 70.0f; // Distance from front wheel to rear wheel
 
 	private Vector2 _velocity = Vector2.Zero;
@@ -14,6 +16,8 @@ public partial class Forklift : CharacterBody2D
 	private Vector2 _acceleration = Vector2.Zero;
 	private float _friction = -0.05f;
 	private float _drag = -0.0005f;
+
+
 
     public override void _PhysicsProcess(double delta)
     {
@@ -46,9 +50,12 @@ public partial class Forklift : CharacterBody2D
 		if (Input.IsActionPressed("forward"))
 		{
 			_acceleration = Transform.X * _enginePower;
-		} else if (Input.IsActionPressed("reverse"))
+		}
+		else if (Input.IsActionPressed("reverse"))
 		{
-			_acceleration = -Transform.X * _enginePower;
+
+			_acceleration =  Transform.X * _reversePower;
+
 		}
 	}
 
@@ -66,21 +73,32 @@ public partial class Forklift : CharacterBody2D
 
 	private void ApplyFriction()
 	{
-		// Stop when speed is low
-		if (_velocity.Length() < 5)
-		{
-			_velocity = Vector2.Zero;
-			return;
-		}
-
 		Vector2 frictionForce = _velocity * _friction;
 		Vector2 dragForce = _velocity * _velocity.Length() * _drag;
+
+		// Stop when speed is low
+
+		if (Input.IsActionJustReleased("forward")) {
+			_velocity = Vector2.Zero;
+
+		// if (_velocity.Length() < 5)
+		// {
+		// 	_velocity = Vector2.Zero;
+		// 	return;
+		}
+		else if(Input.IsActionJustReleased("reverse")) {
+
+				_velocity = Vector2.Zero;
+			}
+
+
 
 		// Apply extra friction only when moving forward.
 		if (_velocity.Length() < 100 && _velocity.Dot(Transform.X) > 0)
 		{
 			frictionForce *= 3;
 		}
+
 
 		_velocity += (dragForce + frictionForce) * 0.5f;
 	}
