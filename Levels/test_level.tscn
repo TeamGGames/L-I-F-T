@@ -1,17 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpwysj80p6k8q"]
+[gd_scene load_steps=5 format=3 uid="uid://bpwysj80p6k8q"]
 
 [ext_resource type="PackedScene" uid="uid://c8waskkpj52xw" path="res://Levels/Forklift.tscn" id="1_ifxcf"]
-[ext_resource type="Texture2D" uid="uid://bneeq75lx1iu3" path="res://Graphics/Test Graphics/black_box.png" id="2_5gjx7"]
+[ext_resource type="Texture2D" uid="uid://bneeq75lx1iu3" path="res://Assets/Test Graphics/black_box.png" id="2_5gjx7"]
+[ext_resource type="PackedScene" uid="uid://cqujoyug0hy8l" path="res://Levels/box.tscn" id="3_m8veq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rdyr3"]
 size = Vector2(45, 11)
 
-[node name="Node2D" type="Node2D"]
+[node name="TestLevel" type="Node2D"]
 
 [node name="Forklift" parent="." instance=ExtResource("1_ifxcf")]
 
 [node name="BlackBox" type="StaticBody2D" parent="."]
-position = Vector2(200, 200)
+position = Vector2(119, 172)
 scale = Vector2(5, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlackBox"]
@@ -19,3 +20,28 @@ shape = SubResource("RectangleShape2D_rdyr3")
 
 [node name="Sprite2D" type="Sprite2D" parent="BlackBox"]
 texture = ExtResource("2_5gjx7")
+
+[node name="BlackBox2" type="StaticBody2D" parent="."]
+position = Vector2(1035, 196)
+scale = Vector2(5, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackBox2"]
+shape = SubResource("RectangleShape2D_rdyr3")
+
+[node name="Sprite2D" type="Sprite2D" parent="BlackBox2"]
+texture = ExtResource("2_5gjx7")
+
+[node name="BlackBox3" type="StaticBody2D" parent="."]
+position = Vector2(263, 262)
+rotation = 1.5708
+scale = Vector2(5, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackBox3"]
+shape = SubResource("RectangleShape2D_rdyr3")
+
+[node name="Sprite2D" type="Sprite2D" parent="BlackBox3"]
+texture = ExtResource("2_5gjx7")
+
+[node name="Box" parent="." instance=ExtResource("3_m8veq")]
+position = Vector2(124, 282)
+mass = 1000.0

@@ -1,13 +1,13 @@
 using Godot;
 using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Xml.Serialization;
 
-namespace Forklift;
+namespace ForkliftGame;
 public partial class Forklift : CharacterBody2D
 {
 	[Export] private float _steeringAngle = 50.0f; // Maximum steering angle (degrees)
 	[Export] private float _enginePower = 800.0f; // Acceleration force
-
 	[Export] private float _reversePower = -16000.0f;
 	private float _wheelBase = 70.0f; // Distance from front wheel to rear wheel
 
@@ -17,8 +17,14 @@ public partial class Forklift : CharacterBody2D
 	private float _friction = -0.05f;
 	private float _drag = -0.0005f;
 
+	private Box _box;
+	private bool _nearBox = false;
 
 
+    public override void _Ready()
+    {
+        _box = GetNode<Box>("/root/TestLevel/Box");
+    }
     public override void _PhysicsProcess(double delta)
     {
 		_acceleration = Vector2.Zero;
@@ -31,7 +37,21 @@ public partial class Forklift : CharacterBody2D
 		MoveAndSlide();
     }
 
-	private void ReadInput()
+    public override void _Process(double delta)
+    {
+		if (_nearBox)
+		{
+			if (Input.IsActionJustPressed("interact"))
+			{
+				_box.Grab();
+			}
+		} else if (_box.IsGrabbed && Input.IsActionJustPressed("interact"))
+		{
+			_box.Release();
+		}
+    }
+
+    private void ReadInput()
 	{
 		int turn = 0;
 
@@ -102,4 +122,21 @@ public partial class Forklift : CharacterBody2D
 
 		_velocity += (dragForce + frictionForce) * 0.5f;
 	}
+
+	private void OnInteractionAreaBodyEntered(Node2D body)
+    {
+        if (body is Box box)
+        {
+			_nearBox = true;
+            _box = box;
+        }
+    }
+
+	private void OnInteractionAreaBodyExited(Node2D body)
+    {
+        if (body is Box box)
+        {
+			_nearBox = false;
+        }
+    }
 }

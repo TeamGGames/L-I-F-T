@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlis1jg0ntod"
-path="res://.godot/imported/fork-concept.png-0b33a08132c4d781e7c1100de36e825d.ctex"
+uid="uid://bahhplgvk6jns"
+path="res://.godot/imported/box2.png-e9559c6112c195a164b7974708f0ca97.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/fork-concept.png"
-dest_files=["res://.godot/imported/fork-concept.png-0b33a08132c4d781e7c1100de36e825d.ctex"]
+source_file="res://Assets/box2.png"
+dest_files=["res://.godot/imported/box2.png-e9559c6112c195a164b7974708f0ca97.ctex"]
 
 [params]
 

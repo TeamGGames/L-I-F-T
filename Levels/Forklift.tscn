@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://c8waskkpj52xw"]
 
 [ext_resource type="Script" path="res://Code/Forklift.cs" id="1_g0d5j"]
-[ext_resource type="Texture2D" uid="uid://dlis1jg0ntod" path="res://Graphics/fork-concept.png" id="1_kkhnw"]
+[ext_resource type="Texture2D" uid="uid://dlis1jg0ntod" path="res://Assets/fork-concept.png" id="1_kkhnw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmihj"]
-size = Vector2(134, 127)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0fe1"]
+size = Vector2(96, 90)
 
 [node name="Forklift" type="CharacterBody2D"]
 script = ExtResource("1_g0d5j")
@@ -17,7 +17,21 @@ rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_kkhnw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-1.5, -0.999901)
 rotation = 1.5708
-shape = SubResource("RectangleShape2D_wmihj")
+polygon = PackedVector2Array(-49.0002, -27.4998, -46.9999, 57.5002, -39.9999, 64.5001, -9.99986, 65.5, -6.99983, 73.5, 11.0002, 74.5, 15.0002, 72.4999, 15.0001, 66.4999, 26.0001, 64.4999, 39.0001, 63.4999, 45.0001, 59.4998, 47.0001, 54.4998, 47.9998, -30.5002, 53.9998, -26.5002, 60.9998, -26.5002, 65.9998, -27.5002, 69.9998, -34.5003, 69.9997, -59.5003, 65.9997, -64.5002, 57.9997, -64.5002, 50.9997, -62.5002, 47.9997, -58.5002, 35.9997, -57.5001, 34.9999, -1.50013, 29.9999, -0.500109, 27.9998, -16.5001, -31.0002, -15.4999, -33.0001, 1.50012, -39.0001, 1.50014, -39.0003, -53.4999, -45.0003, -55.4998, -49.0003, -61.4998, -57.0003, -65.4998, -64.0003, -64.4998, -68.0003, -58.4998, -69.0003, -51.4998, -68.0003, -40.4998, -65.0002, -29.4998, -61.0002, -27.4998, -56.0002, -27.4998, -50.0002, -30.4998)
+
+[node name="InteractionComponents" type="Node2D" parent="."]
+
+[node name="InteractionArea" type="Area2D" parent="InteractionComponents"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponents/InteractionArea"]
+position = Vector2(46, -2)
+shape = SubResource("RectangleShape2D_w0fe1")
+
+[connection signal="body_entered" from="InteractionComponents/InteractionArea" to="." method="OnInteractionAreaBodyEntered"]
+[connection signal="body_exited" from="InteractionComponents/InteractionArea" to="." method="OnInteractionAreaBodyExited"]

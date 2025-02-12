@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqujoyug0hy8l"]
+
+[ext_resource type="Texture2D" uid="uid://ca57buhqobye2" path="res://Assets/icon.png" id="1_t81jm"]
+[ext_resource type="Script" path="res://Code/Box.cs" id="1_ub5t1"]
+[ext_resource type="PackedScene" uid="uid://c4m81yoliko1u" path="res://Game Components/interaction_area.tscn" id="2_wsulr"]
+
+[node name="Box" type="RigidBody2D"]
+collision_layer = 2
+mass = 5.0
+gravity_scale = 0.0
+script = ExtResource("1_ub5t1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.27, 0.27)
+texture = ExtResource("1_t81jm")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(34, -34, -35, -34, -34, 34, 35, 33)
+
+[node name="InteractionArea" parent="." instance=ExtResource("2_wsulr")]
