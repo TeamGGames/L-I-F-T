@@ -6,7 +6,7 @@
 
 [node name="Box" type="RigidBody2D"]
 collision_layer = 2
-mass = 5.0
+mass = 0.001
 gravity_scale = 0.0
 script = ExtResource("1_ub5t1")
 
