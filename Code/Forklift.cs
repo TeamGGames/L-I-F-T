@@ -35,6 +35,7 @@ public partial class Forklift : CharacterBody2D
 		_velocity += _acceleration * (float)delta;
 		Velocity = _velocity;
 		MoveAndSlide();
+
     }
 
     public override void _Process(double delta)
@@ -47,7 +48,12 @@ public partial class Forklift : CharacterBody2D
 			}
 		} else if (_box.IsGrabbed && Input.IsActionJustPressed("interact"))
 		{
+			_acceleration =  Transform.X * _reversePower;
+			_velocity += _acceleration * (float)delta;
+			Velocity = _velocity;
 			_box.Release();
+
+
 		}
     }
 
@@ -128,6 +134,7 @@ public partial class Forklift : CharacterBody2D
         if (body is Box box)
         {
 			_nearBox = true;
+
             _box = box;
         }
     }
@@ -137,6 +144,8 @@ public partial class Forklift : CharacterBody2D
         if (body is Box box)
         {
 			_nearBox = false;
+
+
         }
     }
 }

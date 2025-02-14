@@ -7,7 +7,7 @@ public partial class Box : RigidBody2D
 	private bool _isGrabbed = false;
 	private Node2D _forklift;
 	private CollisionShape2D _forkCollision;
-
+	private Vector2 _velocity = Vector2.Zero;
 	public bool IsGrabbed {
 		get { return _isGrabbed; }
 	}
@@ -21,8 +21,12 @@ public partial class Box : RigidBody2D
 
 
 	}
-
-	public override void _Process(double delta)
+    public override void _IntegrateForces(PhysicsDirectBodyState2D state)
+    {
+       LinearVelocity = Vector2.Zero;
+	   AngularVelocity = 0;
+    }
+    public override void _Process(double delta)
 	{
 	}
 
@@ -40,5 +44,6 @@ public partial class Box : RigidBody2D
 		Reparent(GetTree().Root);
 		Freeze = false;
 		_isGrabbed = false;
+		Sleeping = true;
 	}
 }

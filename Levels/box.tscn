@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c4m81yoliko1u" path="res://Game Components/interaction_area.tscn" id="2_wsulr"]
 
 [node name="Box" type="RigidBody2D"]
+position = Vector2(200, 200)
 collision_layer = 2
 mass = 0.001
 gravity_scale = 0.0
