@@ -28,6 +28,8 @@ public partial class Box : RigidBody2D
 
 
 	}
+
+	// Don't use _PhysicsProcess because the _IntegrateForces method below is in use
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
     {
        LinearVelocity = Vector2.Zero;
@@ -39,6 +41,7 @@ public partial class Box : RigidBody2D
 
 	public void Grab()
 	{
+
 		GetParent().RemoveChild(this);
 		_forklift.AddChild(this);
 		GlobalPosition = _forkCollision.GlobalPosition;

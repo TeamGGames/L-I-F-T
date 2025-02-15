@@ -22,6 +22,7 @@ public partial class TestLevel : Node2D
         _current = this;
     }
 
+
     public void PrintScore()
 	{
 		GD.Print($"Score: {Score}");
