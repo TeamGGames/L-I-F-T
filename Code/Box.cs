@@ -4,6 +4,13 @@ using System;
 namespace ForkliftGame;
 public partial class Box : RigidBody2D
 {
+	[Export] private int _scoreAddUp = 10;
+
+	public int ScoreAddUp
+	{
+		get { return _scoreAddUp; }
+	}
+
 	private bool _isGrabbed = false;
 	private Node2D _forklift;
 	private CollisionShape2D _forkCollision;

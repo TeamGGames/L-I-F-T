@@ -1,13 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpwysj80p6k8q"]
+[gd_scene load_steps=7 format=3 uid="uid://bpwysj80p6k8q"]
 
+[ext_resource type="Script" path="res://Code/TestLevel.cs" id="1_edbc4"]
 [ext_resource type="PackedScene" uid="uid://c8waskkpj52xw" path="res://Levels/Forklift.tscn" id="1_ifxcf"]
 [ext_resource type="Texture2D" uid="uid://bneeq75lx1iu3" path="res://Assets/Test Graphics/black_box.png" id="2_5gjx7"]
 [ext_resource type="PackedScene" uid="uid://cqujoyug0hy8l" path="res://Levels/box.tscn" id="3_m8veq"]
+[ext_resource type="PackedScene" uid="uid://cil3obdg4vsi4" path="res://Levels/loading_area.tscn" id="5_j2v3j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rdyr3"]
 size = Vector2(45, 11)
 
 [node name="TestLevel" type="Node2D"]
+script = ExtResource("1_edbc4")
 
 [node name="Forklift" parent="." instance=ExtResource("1_ifxcf")]
 position = Vector2(27, 78)
@@ -45,6 +48,11 @@ shape = SubResource("RectangleShape2D_rdyr3")
 
 [node name="Sprite2D" type="Sprite2D" parent="BlackBox3"]
 texture = ExtResource("2_5gjx7")
+
+[node name="LoadingArea" parent="." instance=ExtResource("5_j2v3j")]
+z_index = 2
+position = Vector2(116, 293)
+scale = Vector2(0.78, 0.62)
 
 [node name="Box" parent="." instance=ExtResource("3_m8veq")]
 position = Vector2(166, 72)
