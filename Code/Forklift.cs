@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Serialization;
 
@@ -17,13 +18,16 @@ public partial class Forklift : CharacterBody2D
 	private float _friction = -0.05f;
 	private float _drag = -0.0005f;
 
-	private Box _box;
 	private bool _nearBox = false;
+
+	private List<Box> _nearBoxes;
+	private List<Box> _stackedBoxes;
 
 
     public override void _Ready()
     {
-        _box = GetNode<Box>("/root/TestLevel/Box");
+		_nearBoxes = new List<Box>();
+		_stackedBoxes = new List<Box>();
     }
     public override void _PhysicsProcess(double delta)
     {
@@ -42,16 +46,18 @@ public partial class Forklift : CharacterBody2D
     {
 		if (_nearBox)
 		{
-			if (Input.IsActionJustPressed("interact"))
+			if (Input.IsActionJustPressed("grab"))
 			{
-				_box.Grab();
+				_stackedBoxes.Insert(0, _nearBoxes[0]);
+				_stackedBoxes[0].Grab();
 			}
-		} else if (_box.IsGrabbed && Input.IsActionJustPressed("interact"))
+		} else if (_stackedBoxes.Count > 0 && _stackedBoxes[0].IsGrabbed && Input.IsActionJustPressed("release"))
 		{
 			_acceleration =  Transform.X * _reversePower;
 			_velocity += _acceleration * (float)delta;
 			Velocity = _velocity;
-			_box.Release();
+			_stackedBoxes[0].Release();
+			_stackedBoxes.Remove(_stackedBoxes[0]);
 
 
 		}
@@ -134,8 +140,7 @@ public partial class Forklift : CharacterBody2D
         if (body is Box box)
         {
 			_nearBox = true;
-
-            _box = box;
+			_nearBoxes.Insert(0, box);
         }
     }
 
@@ -144,8 +149,7 @@ public partial class Forklift : CharacterBody2D
         if (body is Box box)
         {
 			_nearBox = false;
-
-
+			_nearBoxes.Remove(box);
         }
     }
 }
