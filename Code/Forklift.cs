@@ -44,18 +44,27 @@ public partial class Forklift : CharacterBody2D
 
     public override void _Process(double delta)
     {
+
+		//GD.Print(_stackedBoxes.Count);
 		if (_nearBox)
 		{
+			// grabs a single nearby box
 			if (Input.IsActionJustPressed("grab"))
 			{
 				_stackedBoxes.Insert(0, _nearBoxes[0]);
 				_stackedBoxes[0].Grab();
 			}
-		} else if (_stackedBoxes.Count > 0 && _stackedBoxes[0].IsGrabbed && Input.IsActionJustPressed("release"))
+		}
+
+		// releases all the grabbed boxes at the same time
+		else if (_stackedBoxes.Count > 0  && Input.IsActionJustPressed("release"))
+		//&& _stackedBoxes[0].IsGrabbed
 		{
+			for(int i = 0; i <= _stackedBoxes.Count; i++) {
+
 			_stackedBoxes[0].Release();
 			_stackedBoxes.Remove(_stackedBoxes[0]);
-
+			}
 
 		}
     }
@@ -149,4 +158,5 @@ public partial class Forklift : CharacterBody2D
 			_nearBoxes.Remove(box);
         }
     }
+
 }

@@ -1,10 +1,12 @@
 using Godot;
 using System;
 
+
 namespace ForkliftGame;
 public partial class Box : RigidBody2D
 {
 	[Export] private int _scoreAddUp = 10;
+	[Export] private Node2D BlackBox = null;
 
 	public int ScoreAddUp
 	{
@@ -32,8 +34,12 @@ public partial class Box : RigidBody2D
 	// Don't use _PhysicsProcess because the _IntegrateForces method below is in use
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
     {
-       LinearVelocity = Vector2.Zero;
-	   AngularVelocity = 0;
+		//sets the box in place and it doesn't inherit the forklift's velocity
+		// LinearVelocity = Vector2.Zero; won't work as elegantly
+       state.SetLinearVelocity(new Vector2 (0, 0));
+	   //LockRotation = true;
+	   RotationDegrees = 0;
+
     }
     public override void _Process(double delta)
 	{
@@ -55,5 +61,16 @@ public partial class Box : RigidBody2D
 		Freeze = false;
 		_isGrabbed = false;
 		Sleeping = true;
+		OnBodyEntered(BlackBox);
 	}
+
+	public void OnBodyEntered(Node2D body)
+	{
+
+		GD.Print("wrecked box");
+
+
+
+	}
+
 }
