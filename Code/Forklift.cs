@@ -53,9 +53,6 @@ public partial class Forklift : CharacterBody2D
 			}
 		} else if (_stackedBoxes.Count > 0 && _stackedBoxes[0].IsGrabbed && Input.IsActionJustPressed("release"))
 		{
-			_acceleration =  Transform.X * _reversePower;
-			_velocity += _acceleration * (float)delta;
-			Velocity = _velocity;
 			_stackedBoxes[0].Release();
 			_stackedBoxes.Remove(_stackedBoxes[0]);
 
