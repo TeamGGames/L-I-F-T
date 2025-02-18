@@ -10,6 +10,12 @@ public partial class Forklift : CharacterBody2D
 	[Export] private float _steeringAngle = 50.0f; // Maximum steering angle (degrees)
 	[Export] private float _enginePower = 800.0f; // Acceleration force
 	[Export] private float _reversePower = -16000.0f;
+
+	[Export] private int _gearOne = 1;
+
+	[Export] private int _gearTwo = 1;
+
+	[Export] private int _gearThree = 1;
 	private float _wheelBase = 70.0f; // Distance from front wheel to rear wheel
 
 	private Vector2 _velocity = Vector2.Zero;
@@ -71,24 +77,68 @@ public partial class Forklift : CharacterBody2D
 
     private void ReadInput()
 	{
-		int turn = 0;
+		float turn = 0;
 
-		if (Input.IsActionPressed("left"))
+		if (Input.IsActionPressed("left") && Input.IsActionPressed("gearOne"))
 		{
-			turn -= 1;
+			turn -= 1.25f;
 		}
 
-		if (Input.IsActionPressed("right"))
+		if (Input.IsActionPressed("right")&& Input.IsActionPressed("gearOne"))
 		{
-			turn += 1;
+			turn += 1.25f;
 		}
+
+		if(Input.IsActionPressed("right") && Input.IsActionPressed("gearTwo")) {
+
+			turn += 1.0f;
+		}
+
+		if(Input.IsActionPressed("left") && Input.IsActionPressed("gearTwo")) {
+
+			turn -= 1.0f;
+		}
+
+		if(Input.IsActionPressed("right") && Input.IsActionPressed("gearThree")) {
+
+			turn += 0.75f;
+		}
+
+		if(Input.IsActionPressed("left") && Input.IsActionPressed("gearThree")) {
+
+			turn -= 0.75f;
+		}
+
+
 
 		_steerAngle = turn * Mathf.DegToRad(_steeringAngle);
 
-		if (Input.IsActionPressed("forward"))
+
+		if (Input.IsActionPressed("forward") && Input.IsActionPressed("gearOne"))
 		{
 			_acceleration = Transform.X * _enginePower;
 		}
+
+			else if (Input.IsActionPressed("forward") && Input.IsActionPressed("gearTwo")) {
+				_acceleration = Transform.X * _enginePower * _gearTwo;
+			}
+			else if (Input.IsActionPressed("forward") && Input.IsActionPressed("gearThree")) {
+				_acceleration = Transform.X * _enginePower * _gearThree;
+
+				// tästä oma metodi, käytetään usein kun aloitetaan lastin tiputtelun randomointi
+
+
+			// 	if (_steerAngle >=  0.5) {
+			// 	//	for(int i = 0; i <= _stackedBoxes.Count; i++) {
+
+			// 	_stackedBoxes[0].Release();
+			// 	_stackedBoxes.Remove(_stackedBoxes[0]);
+			// 	//}
+
+			// }
+
+			}
+
 		else if (Input.IsActionPressed("reverse"))
 		{
 
