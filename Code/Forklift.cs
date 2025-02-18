@@ -109,6 +109,14 @@ public partial class Forklift : CharacterBody2D
 			turn -= 0.75f;
 		}
 
+		if (Input.IsActionPressed("reverse") && Input.IsActionPressed("right")) {
+			turn = 1.0f;
+		}
+
+		if (Input.IsActionPressed("reverse") && Input.IsActionPressed("left")) {
+			turn = -1.0f;
+		}
+
 
 
 		_steerAngle = turn * Mathf.DegToRad(_steeringAngle);
@@ -128,18 +136,18 @@ public partial class Forklift : CharacterBody2D
 				// tästä oma metodi, käytetään usein kun aloitetaan lastin tiputtelun randomointi
 
 
-			// 	if (_steerAngle >=  0.5) {
-			// 	//	for(int i = 0; i <= _stackedBoxes.Count; i++) {
+				if (_steerAngle >=  0.5) {
+					for(int i = 0; i < _stackedBoxes.Count; i++) {
 
-			// 	_stackedBoxes[0].Release();
-			// 	_stackedBoxes.Remove(_stackedBoxes[0]);
-			// 	//}
-
-			// }
+				_stackedBoxes[0].Release();
+				_stackedBoxes.Remove(_stackedBoxes[0]);
+				}
 
 			}
 
-		else if (Input.IsActionPressed("reverse"))
+			}
+
+		if (Input.IsActionPressed("reverse"))
 		{
 
 			_acceleration =  Transform.X * _reversePower;
