@@ -147,6 +147,7 @@ public partial class Forklift : CharacterBody2D
         {
 			_nearBox = true;
 			_nearBoxes.Insert(0, box);
+
         }
     }
 

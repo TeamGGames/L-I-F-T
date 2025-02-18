@@ -6,7 +6,7 @@ namespace ForkliftGame;
 public partial class Box : RigidBody2D
 {
 	[Export] private int _scoreAddUp = 10;
-	[Export] private Node2D BlackBox = null;
+
 
 	public int ScoreAddUp
 	{
@@ -61,16 +61,14 @@ public partial class Box : RigidBody2D
 		Freeze = false;
 		_isGrabbed = false;
 		Sleeping = true;
-		OnBodyEntered(BlackBox);
-	}
-
-	public void OnBodyEntered(Node2D body)
-	{
-
-		GD.Print("wrecked box");
-
-
 
 	}
+
+	// keskeneräinen ajatus
+	// public void OnBodyEntered(Node2D body)
+	// {
+
+	// 	GD.Print("wrecked box");
+	// }
 
 }

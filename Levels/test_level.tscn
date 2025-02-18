@@ -57,12 +57,11 @@ z_index = 2
 position = Vector2(116, 293)
 scale = Vector2(0.78, 0.62)
 
-[node name="Box" parent="." node_paths=PackedStringArray("BlackBox") instance=ExtResource("3_m8veq")]
+[node name="Box" parent="." instance=ExtResource("3_m8veq")]
 position = Vector2(166, 72)
 disable_mode = 1
 collision_mask = 3
 can_sleep = false
-BlackBox = NodePath("../BlackBox")
 
 [node name="Box2" parent="." instance=ExtResource("3_m8veq")]
 position = Vector2(966, 297)

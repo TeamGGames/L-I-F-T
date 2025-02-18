@@ -17,11 +17,8 @@ public partial class LoadingArea : Node2D
             _box = box;
             TestLevel.Current.Score += _box.ScoreAddUp;
             TestLevel.Current.PrintScore();
+
         }
-
-
-
-
     }
 
 	private void OnRegisteringAreaBodyExited(Node2D body)
@@ -30,7 +27,6 @@ public partial class LoadingArea : Node2D
         {
             TestLevel.Current.Score = TestLevel.Current.Score;
             TestLevel.Current.Score -= _box.ScoreAddUp;
-            //TestLevel.Current.PrintScore();
             _box = null;
 
         }
