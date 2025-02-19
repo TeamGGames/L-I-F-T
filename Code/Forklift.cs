@@ -11,21 +11,27 @@ public partial class Forklift : CharacterBody2D
 	[Export] private float _enginePower = 800.0f; // Acceleration force
 	[Export] private float _reversePower = -16000.0f;
 
-	[Export] private int _gearOne = 1;
+	[Export] private float _gearOne = 1.0f;
 
-	[Export] private int _gearTwo = 1;
+	[Export] private float _gearTwo = 1.0f;
 
-	[Export] private int _gearThree = 1;
+	[Export] private float _gearThree = 1.0f;
 	private float _wheelBase = 70.0f; // Distance from front wheel to rear wheel
 
 	private Vector2 _velocity = Vector2.Zero;
 	private float _steerAngle;
+
+	private float _addedWeight = 1.0f;
+
+	[Export] private float _reducedSpeedFromWeight = 1.0f;
+
+	private float _stackedBoxesFallBreakPoint = 0.53f;
 	private Vector2 _acceleration = Vector2.Zero;
 	private float _friction = -0.05f;
 	private float _drag = -0.0005f;
 
 	private bool _nearBox = false;
-
+	private bool _dropBoxes = false;
 	private List<Box> _nearBoxes;
 	private List<Box> _stackedBoxes;
 
@@ -59,6 +65,8 @@ public partial class Forklift : CharacterBody2D
 			{
 				_stackedBoxes.Insert(0, _nearBoxes[0]);
 				_stackedBoxes[0].Grab();
+				_addedWeight -= _reducedSpeedFromWeight;
+
 			}
 		}
 
@@ -70,6 +78,7 @@ public partial class Forklift : CharacterBody2D
 
 			_stackedBoxes[0].Release();
 			_stackedBoxes.Remove(_stackedBoxes[0]);
+			_addedWeight = 1.0f;
 			}
 
 		}
@@ -82,65 +91,76 @@ public partial class Forklift : CharacterBody2D
 		if (Input.IsActionPressed("left") && Input.IsActionPressed("gearOne"))
 		{
 			turn -= 1.25f;
+			_dropBoxes = false;
 		}
 
 		if (Input.IsActionPressed("right")&& Input.IsActionPressed("gearOne"))
 		{
 			turn += 1.25f;
+			_dropBoxes = false;
 		}
 
 		if(Input.IsActionPressed("right") && Input.IsActionPressed("gearTwo")) {
 
 			turn += 1.0f;
+			_dropBoxes = false;
 		}
 
 		if(Input.IsActionPressed("left") && Input.IsActionPressed("gearTwo")) {
 
 			turn -= 1.0f;
+			_dropBoxes = false;
 		}
 
 		if(Input.IsActionPressed("right") && Input.IsActionPressed("gearThree")) {
 
 			turn += 0.75f;
+			_dropBoxes = true;
 		}
 
 		if(Input.IsActionPressed("left") && Input.IsActionPressed("gearThree")) {
 
 			turn -= 0.75f;
+			_dropBoxes = true;
 		}
 
 		if (Input.IsActionPressed("reverse") && Input.IsActionPressed("right")) {
 			turn = 1.0f;
+			_dropBoxes = false;
 		}
 
 		if (Input.IsActionPressed("reverse") && Input.IsActionPressed("left")) {
 			turn = -1.0f;
+			_dropBoxes = false;
 		}
 
 
 
 		_steerAngle = turn * Mathf.DegToRad(_steeringAngle);
-
+		//GD.Print($"steer angle: {_steerAngle}");
+		//GD.Print($"steering angle: {_steeringAngle}");
 
 		if (Input.IsActionPressed("forward") && Input.IsActionPressed("gearOne"))
 		{
-			_acceleration = Transform.X * _enginePower;
+			_acceleration = Transform.X * _enginePower * _addedWeight;
 		}
 
-			else if (Input.IsActionPressed("forward") && Input.IsActionPressed("gearTwo")) {
-				_acceleration = Transform.X * _enginePower * _gearTwo;
-			}
-			else if (Input.IsActionPressed("forward") && Input.IsActionPressed("gearThree")) {
-				_acceleration = Transform.X * _enginePower * _gearThree;
+		else if (Input.IsActionPressed("forward") && Input.IsActionPressed("gearTwo")) {
+				_acceleration = Transform.X * _enginePower * _gearTwo * _addedWeight;
+		}
+		else if (Input.IsActionPressed("forward") && Input.IsActionPressed("gearThree")) {
+				_acceleration = Transform.X * _enginePower * _gearThree * _addedWeight;
 
 				// tästä oma metodi, käytetään usein kun aloitetaan lastin tiputtelun randomointi
+				// kun käytetään _stackedBoxesFallBreakPoint -muuttujaa niin voidaan määrittää missä
+				// vaiheessa ruvetaan kaatamaan pinoa trukin kyydistä
+				// TODO: jos
+				GD.Print(_stackedBoxes.Count);
 
-
-				if (_steerAngle >=  0.5) {
+				if (_dropBoxes == true) {
 					for(int i = 0; i < _stackedBoxes.Count; i++) {
-
-				_stackedBoxes[0].Release();
-				_stackedBoxes.Remove(_stackedBoxes[0]);
+					_stackedBoxes[0].Release();
+					_stackedBoxes.Remove(_stackedBoxes[0]);
 				}
 
 			}

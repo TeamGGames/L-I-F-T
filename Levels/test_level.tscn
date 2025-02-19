@@ -16,8 +16,9 @@ script = ExtResource("1_edbc4")
 position = Vector2(27, 78)
 collision_layer = 2
 motion_mode = 1
-_gearTwo = 3
-_gearThree = 5
+_gearTwo = 1.75
+_gearThree = 2.75
+_reducedSpeedFromWeight = 0.15
 
 [node name="BlackBox" type="StaticBody2D" parent="."]
 position = Vector2(119, 172)
