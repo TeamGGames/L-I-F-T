@@ -6,10 +6,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0fe1"]
 size = Vector2(96, 90)
 
-[node name="Forklift" type="CharacterBody2D"]
+[node name="Forklift" type="CharacterBody2D" node_paths=PackedStringArray("_stackedBoxesLabel")]
 script = ExtResource("1_g0d5j")
 _steeringAngle = 40.0
 _enginePower = 3000.0
+_stackedBoxesLabel = NodePath("StackedBoxesCount")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, 0)
@@ -32,6 +33,12 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponents/InteractionArea"]
 position = Vector2(46, -2)
 shape = SubResource("RectangleShape2D_w0fe1")
+
+[node name="StackedBoxesCount" type="Label" parent="."]
+offset_left = -56.0
+offset_top = -35.0
+offset_right = 16.0
+offset_bottom = 10.0
 
 [connection signal="body_entered" from="InteractionComponents/InteractionArea" to="." method="OnInteractionAreaBodyEntered"]
 [connection signal="body_exited" from="InteractionComponents/InteractionArea" to="." method="OnInteractionAreaBodyExited"]

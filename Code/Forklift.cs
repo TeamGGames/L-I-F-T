@@ -13,9 +13,11 @@ public partial class Forklift : CharacterBody2D
 
 	[Export] private float _gearOne = 1.0f;
 
-	[Export] private float _gearTwo = 1.0f;
+	[Export] private float _gearTwo = 1.75f;
 
-	[Export] private float _gearThree = 1.0f;
+	[Export] private float _gearThree = 2.75f;
+	[Export] private float _reducedSpeedFromWeight = 0.15f;
+	[Export] private Label _stackedBoxesLabel = null;
 	private float _wheelBase = 70.0f; // Distance from front wheel to rear wheel
 
 	private Vector2 _velocity = Vector2.Zero;
@@ -23,9 +25,6 @@ public partial class Forklift : CharacterBody2D
 
 	private float _addedWeight = 1.0f;
 
-	[Export] private float _reducedSpeedFromWeight = 1.0f;
-
-	private float _stackedBoxesFallBreakPoint = 0.53f;
 	private Vector2 _acceleration = Vector2.Zero;
 	private float _friction = -0.05f;
 	private float _drag = -0.0005f;
@@ -40,6 +39,7 @@ public partial class Forklift : CharacterBody2D
     {
 		_nearBoxes = new List<Box>();
 		_stackedBoxes = new List<Box>();
+		_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
     }
     public override void _PhysicsProcess(double delta)
     {
@@ -61,17 +61,17 @@ public partial class Forklift : CharacterBody2D
 		if (_nearBox)
 		{
 			// grabs a single nearby box
-			if (Input.IsActionJustPressed("grab"))
+			if (Input.IsActionJustPressed(Config.GrabAction))
 			{
 				_stackedBoxes.Insert(0, _nearBoxes[0]);
 				_stackedBoxes[0].Grab();
 				_addedWeight -= _reducedSpeedFromWeight;
-
+				_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
 			}
 		}
 
 		// releases all the grabbed boxes at the same time
-		else if (_stackedBoxes.Count > 0  && Input.IsActionJustPressed("release"))
+		else if (_stackedBoxes.Count > 0  && Input.IsActionJustPressed(Config.ReleaseAction))
 		//&& _stackedBoxes[0].IsGrabbed
 		{
 			for(int i = 0; i <= _stackedBoxes.Count; i++) {
@@ -79,6 +79,7 @@ public partial class Forklift : CharacterBody2D
 			_stackedBoxes[0].Release();
 			_stackedBoxes.Remove(_stackedBoxes[0]);
 			_addedWeight = 1.0f;
+			_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
 			}
 
 		}
@@ -88,48 +89,48 @@ public partial class Forklift : CharacterBody2D
 	{
 		float turn = 0;
 
-		if (Input.IsActionPressed("left") && Input.IsActionPressed("gearOne"))
+		if (Input.IsActionPressed(Config.TurnLeftAction) && Input.IsActionPressed(Config.GearOne))
 		{
 			turn -= 1.25f;
 			_dropBoxes = false;
 		}
 
-		if (Input.IsActionPressed("right")&& Input.IsActionPressed("gearOne"))
+		if (Input.IsActionPressed(Config.TurnRightAction)&& Input.IsActionPressed(Config.GearOne))
 		{
 			turn += 1.25f;
 			_dropBoxes = false;
 		}
 
-		if(Input.IsActionPressed("right") && Input.IsActionPressed("gearTwo")) {
+		if(Input.IsActionPressed(Config.TurnRightAction) && Input.IsActionPressed(Config.GearTwo)) {
 
 			turn += 1.0f;
 			_dropBoxes = false;
 		}
 
-		if(Input.IsActionPressed("left") && Input.IsActionPressed("gearTwo")) {
+		if(Input.IsActionPressed(Config.TurnLeftAction) && Input.IsActionPressed(Config.GearTwo)) {
 
 			turn -= 1.0f;
 			_dropBoxes = false;
 		}
 
-		if(Input.IsActionPressed("right") && Input.IsActionPressed("gearThree")) {
+		if(Input.IsActionPressed(Config.TurnRightAction) && Input.IsActionPressed(Config.GearThree)) {
 
 			turn += 0.75f;
 			_dropBoxes = true;
 		}
 
-		if(Input.IsActionPressed("left") && Input.IsActionPressed("gearThree")) {
+		if(Input.IsActionPressed(Config.TurnLeftAction) && Input.IsActionPressed(Config.GearThree)) {
 
 			turn -= 0.75f;
 			_dropBoxes = true;
 		}
 
-		if (Input.IsActionPressed("reverse") && Input.IsActionPressed("right")) {
+		if (Input.IsActionPressed(Config.ReverseAction) && Input.IsActionPressed(Config.TurnRightAction)) {
 			turn = 1.0f;
 			_dropBoxes = false;
 		}
 
-		if (Input.IsActionPressed("reverse") && Input.IsActionPressed("left")) {
+		if (Input.IsActionPressed(Config.ReverseAction) && Input.IsActionPressed(Config.TurnLeftAction)) {
 			turn = -1.0f;
 			_dropBoxes = false;
 		}
@@ -140,34 +141,33 @@ public partial class Forklift : CharacterBody2D
 		//GD.Print($"steer angle: {_steerAngle}");
 		//GD.Print($"steering angle: {_steeringAngle}");
 
-		if (Input.IsActionPressed("forward") && Input.IsActionPressed("gearOne"))
+		if (Input.IsActionPressed(Config.ForwardAction) && Input.IsActionPressed(Config.GearOne))
 		{
 			_acceleration = Transform.X * _enginePower * _addedWeight;
 		}
 
-		else if (Input.IsActionPressed("forward") && Input.IsActionPressed("gearTwo")) {
+		else if (Input.IsActionPressed(Config.ForwardAction) && Input.IsActionPressed(Config.GearTwo)) {
 				_acceleration = Transform.X * _enginePower * _gearTwo * _addedWeight;
 		}
-		else if (Input.IsActionPressed("forward") && Input.IsActionPressed("gearThree")) {
+		else if (Input.IsActionPressed(Config.ForwardAction) && Input.IsActionPressed(Config.GearThree)) {
 				_acceleration = Transform.X * _enginePower * _gearThree * _addedWeight;
 
 				// tästä oma metodi, käytetään usein kun aloitetaan lastin tiputtelun randomointi
 				// kun käytetään _stackedBoxesFallBreakPoint -muuttujaa niin voidaan määrittää missä
 				// vaiheessa ruvetaan kaatamaan pinoa trukin kyydistä
 				// TODO: jos
-				GD.Print(_stackedBoxes.Count);
 
 				if (_dropBoxes == true) {
 					for(int i = 0; i < _stackedBoxes.Count; i++) {
 					_stackedBoxes[0].Release();
 					_stackedBoxes.Remove(_stackedBoxes[0]);
+					}
+
 				}
 
-			}
+		}
 
-			}
-
-		if (Input.IsActionPressed("reverse"))
+		if (Input.IsActionPressed(Config.ReverseAction))
 		{
 
 			_acceleration =  Transform.X * _reversePower;
@@ -193,21 +193,13 @@ public partial class Forklift : CharacterBody2D
 		Vector2 dragForce = _velocity * _velocity.Length() * _drag;
 
 		// Stop when speed is low
-
-		if (Input.IsActionJustReleased("forward")) {
+		if (Input.IsActionJustReleased(Config.ForwardAction)) {
 			_velocity = Vector2.Zero;
-
-		// if (_velocity.Length() < 5)
-		// {
-		// 	_velocity = Vector2.Zero;
-		// 	return;
 		}
-		else if(Input.IsActionJustReleased("reverse")) {
+		else if(Input.IsActionJustReleased(Config.ReverseAction)) {
 
 				_velocity = Vector2.Zero;
 			}
-
-
 
 		// Apply extra friction only when moving forward.
 		if (_velocity.Length() < 100 && _velocity.Dot(Transform.X) > 0)
