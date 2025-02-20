@@ -1,6 +1,8 @@
 using Godot;
 using System;
-
+/// <summary>
+/// Currently not in use.
+/// </summary>
 public partial class InteractionArea : Area2D
 {
 

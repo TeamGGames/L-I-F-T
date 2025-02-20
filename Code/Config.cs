@@ -2,7 +2,9 @@ using Godot;
 using System;
 
 namespace ForkliftGame;
-
+/// <summary>
+/// Config file for input control for the whole project.
+/// </summary>
 public static class Config
 {
     public const string GrabAction = "grab";

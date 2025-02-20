@@ -2,6 +2,11 @@ using Godot;
 using System;
 
 namespace ForkliftGame;
+
+
+/// <summary>
+/// Currently the Testlevel.cs handles keeping track of the score
+/// </summary>
 public partial class TestLevel : Node2D
 {
 	private static TestLevel _current = null;
