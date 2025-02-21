@@ -30,7 +30,9 @@ public partial class Forklift : CharacterBody2D
 
 	// Used in connection with the above _reducedSpeedFromWeight to
 	// calculate thereduced speed when carrying a box. the _startAddedWeight
-	// variable is used for runtime reset of the _addedWeight variable.
+	// variable is used for runtime reset of the _addedWeight variable. Otherwise
+	// the value _addedWeight variable would stack making the truck eventually
+	// unable to move.
 	private float _addedWeight;
 	private float _startAddedWeight = 1.0f;
 
@@ -74,34 +76,46 @@ public partial class Forklift : CharacterBody2D
     public override void _Ready()
     {
 		// Initialise the lists used.
+
 		_nearBoxes = new List<Box>();
 		_stackedBoxes = new List<Box>();
 
 		// Initialise the counter of how many boxes carried by the forklift.
+
 		_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
 
 		// Initialise the _addedWeight to default value.
+
 		_addedWeight = _startAddedWeight;
     }
     public override void _PhysicsProcess(double delta)
     {
 		// Reset the _acceleration every frame so the program responds to input real-time.
+
 		_acceleration = Vector2.Zero;
 
 		// Read the user input.
+
 		ReadInput();
 
 		// Apply friction forces.
+
 		ApplyFriction();
 
 		// Calculate steering.
+
 		CalculateSteering((float)delta);
 
 		// Set _velocity.
+
 		_velocity += _acceleration * (float)delta;
+
+		// Velocity is a property of the forklift and used as input in MoveAndSlide() method.
+
 		Velocity = _velocity;
 
-		// Move the CharacterBody 2D Forklift based on the calculated speed and direction.
+		// Move the CharacterBody 2D Forklift based on the Velocity value of the forklift.
+		// Could be written as "MoveAndSlide(_velocity);"
 		MoveAndSlide();
 
     }
@@ -163,11 +177,13 @@ public partial class Forklift : CharacterBody2D
     private void ReadInput()
 	{
 		// Initialise the turn angle value of the forklift. Will be used so that the higher
-		// the speed, the wider arc the forklift turns.
+		// the speed, the wider arc the forklift turns. the turn variable is set as a different
+		// value depending on user input, and is either decreased or increased every frame, as well
+		// as reset to zero. This gives the forklift the feel of a continuous smooth movement.
 
 		float turn = 0;
 
-		// On Gear One the turn arc is quite tight and boxes won't be dropped.
+		// On GearOne the turn arc is quite tight and boxes won't be dropped.
 
 		if (Input.IsActionPressed(Config.TurnLeftAction) && Input.IsActionPressed(Config.GearOne))
 		{
@@ -181,7 +197,7 @@ public partial class Forklift : CharacterBody2D
 			_dropBoxes = false;
 		}
 
-		// On Gear Two the arc is wider and the boxes won't be dropped.
+		// On GearTwo the arc is wider and the boxes won't be dropped.
 
 		if(Input.IsActionPressed(Config.TurnRightAction) && Input.IsActionPressed(Config.GearTwo)) {
 
@@ -195,7 +211,7 @@ public partial class Forklift : CharacterBody2D
 			_dropBoxes = false;
 		}
 
-		// On Gear Three the arc is wide and if the player tries to turn with this speed
+		// On GearThree the arc is wide and if the player tries to turn with this speed
 		// the boxes will be dropped from the forklift. The player can drive straight on without
 		// the boxes dropping.
 
@@ -212,6 +228,7 @@ public partial class Forklift : CharacterBody2D
 		}
 
 		// On reverse the turning arc is normal and there is no fear of boxes dropping.
+
 		if (Input.IsActionPressed(Config.ReverseAction) && Input.IsActionPressed(Config.TurnRightAction)) {
 			turn = 1.0f;
 			_dropBoxes = false;
@@ -283,47 +300,86 @@ public partial class Forklift : CharacterBody2D
 		// _steerAngle can now be calculated and will be used later in CalculateSteering();
 
 		_steerAngle = turn * Mathf.DegToRad(_steeringAngle);
+
 	}
 
+/// <summary>
+/// Without CalculateSteering the forklift cannot turn. The  _steerAngle variable calculated in ReadInput()
+/// is an integral part of the calulations. Also, this method provides the forklift with a natural feel to steering.
+/// </summary>
+/// <param name="delta"></param>
 	private void CalculateSteering(float delta)
 	{
+		// The direction vector of both front and rear wheels are set.
+		// Without using two sets of wheels the turning of the forklift would happen on a single spot,
+		// conmparable to a for example a carousel.
+
 		Vector2 rearWheel = Position - Transform.X * _wheelBase / 2.0f;
 		Vector2 frontWheel = Position + Transform.X * _wheelBase / 2.0f;
+
+		// Rear wheels won't rotate, just follow the front wheels.
+
 		rearWheel += _velocity * delta;
+
+		// Front wheels are rotated. NOTE: If we need to implement rear wheel rotation
+		// and front wheel lock, it can be done here with a switch of frontWheel to rearWheel.
+
 		frontWheel += _velocity.Rotated(_steerAngle) * delta;
 
+		// The new direction vector based on the turn is calculated every frame. Also, it is
+		// normalised so the actual speed of the forklift won't stack.
+
 		Vector2 newHeading = (frontWheel - rearWheel).Normalized();
+
+		// The new heading is set as _velocity value (Which in turn is set as Veolocity property
+		// of the forklift in _Process).
+
 		_velocity = newHeading * _velocity.Length();
+
+		// Finally the Rotation property is set as the angle property of the newHeading vector.
+		// Rotation is the forklift's rotation in relation to the level scene. That means the nose
+		// of the forklift stays in the correct heading after the turn.
+
 		Rotation = newHeading.Angle();
 	}
 
+/// <summary>
+/// In applyFriction we limit Godot's RigidBody2D physics so that the forklift moves in a more
+/// natural way. Without the limitations in this method there would be no slowing down when
+/// for example releasing the 'forward' button. This method provides a natural feel to the
+/// movement of the forklift.
+/// </summary>
 	private void ApplyFriction()
 	{
+
 		Vector2 frictionForce = _velocity * _friction;
 		Vector2 dragForce = _velocity * _velocity.Length() * _drag;
 
-		// Stops the forklift when going forward and the speed is low.
+		// Stops the forklift when going forward and the player releases the forward
+		// button.
 
 		if (Input.IsActionJustReleased(Config.ForwardAction))
 		{
 			_velocity = Vector2.Zero;
 		}
 
-		// Stops the forklift when reversing and the speed is low.
+		// Stops the forklift when reversing and and the player releases the reverse
+		// button.
 
 		else if(Input.IsActionJustReleased(Config.ReverseAction))
 		{
-
 			_velocity = Vector2.Zero;
 		}
 
-		// Apply extra friction only when moving forward.
+		// Apply extra friction to movement on turning the forklift. Dot calue of zero
+		// is 90 degrees and considered straiaghth movement where turn friction won't apply.
 
 		if (_velocity.Length() < 100 && _velocity.Dot(Transform.X) > 0)
 		{
 			frictionForce *= 3;
 		}
 
+		// Calculate the final _velocity vector based on both dragForce and fricionForce.
 
 		_velocity += (dragForce + frictionForce) * 0.5f;
 	}
