@@ -25,8 +25,8 @@ public partial class LoadingArea : Node2D
         if (body is Box box)
         {
             _box = box;
-            TestLevel.Current.Score += _box.ScoreAddUp;
-            TestLevel.Current.PrintScore();
+            LevelManager.Current.Score += _box.ScoreAddUp;
+            LevelManager.Current.PrintScore();
 
         }
     }
@@ -40,8 +40,8 @@ public partial class LoadingArea : Node2D
     {
         if (body is Box box && box.Freeze != true)
         {
-            TestLevel.Current.Score = TestLevel.Current.Score;
-            TestLevel.Current.Score -= _box.ScoreAddUp;
+            LevelManager.Current.Score = LevelManager.Current.Score;
+            LevelManager.Current.Score -= _box.ScoreAddUp;
             _box = null;
 
         }

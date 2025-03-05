@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://de6eq0raky3vt"]
+
+[ext_resource type="Texture2D" uid="uid://dj23bmcf7urtl" path="res://Assets/Self1.png" id="1_37iqq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gukfm"]
+size = Vector2(45, 11)
+
+[node name="Shelf (empty)" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gukfm")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+position = Vector2(0.0999985, -0.0999985)
+scale = Vector2(0.0227733, 0.0164179)
+texture = ExtResource("1_37iqq")

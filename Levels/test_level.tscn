@@ -1,85 +1,36 @@
-[gd_scene load_steps=9 format=3 uid="uid://bpwysj80p6k8q"]
+[gd_scene load_steps=8 format=3 uid="uid://bpwysj80p6k8q"]
 
 [ext_resource type="Script" path="res://Code/LevelManager.cs" id="1_edbc4"]
 [ext_resource type="PackedScene" uid="uid://c8waskkpj52xw" path="res://GameComponents/Forklift.tscn" id="1_ifxcf"]
 [ext_resource type="PackedScene" uid="uid://cqujoyug0hy8l" path="res://GameComponents/box.tscn" id="3_m8veq"]
-[ext_resource type="Texture2D" uid="uid://dj23bmcf7urtl" path="res://Assets/Self1.png" id="3_wux04"]
 [ext_resource type="PackedScene" uid="uid://cil3obdg4vsi4" path="res://Levels/loading_area.tscn" id="5_j2v3j"]
 [ext_resource type="PackedScene" uid="uid://b370xr7v0ishw" path="res://GameComponents/Timer.tscn" id="6_mhgug"]
+[ext_resource type="PackedScene" uid="uid://de6eq0raky3vt" path="res://GameComponents/EmptyShelf.tscn" id="7_eu3iy"]
 [ext_resource type="PackedScene" uid="uid://cyj0a1ui0divw" path="res://GameComponents/BatteryPowerUp.tscn" id="7_pqfyr"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdyr3"]
-size = Vector2(45, 11)
 
 [node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_timer")]
 script = ExtResource("1_edbc4")
 _timer = NodePath("Timer")
 
 [node name="Forklift" parent="." instance=ExtResource("1_ifxcf")]
-position = Vector2(308, 331)
+position = Vector2(118, 288)
+rotation = 1.5708
 collision_layer = 2
 motion_mode = 1
 
-[node name="Camera2D" type="Camera2D" parent="Forklift"]
-rotation = 1.5708
-offset = Vector2(100, 0)
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true
-rotation_smoothing_speed = 3.0
-
-[node name="BlackBox" type="StaticBody2D" parent="."]
-position = Vector2(119, 172)
-scale = Vector2(5, 5)
-disable_mode = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackBox"]
-shape = SubResource("RectangleShape2D_rdyr3")
-
-[node name="Sprite2D" type="Sprite2D" parent="BlackBox/CollisionShape2D"]
-position = Vector2(0.0999985, -0.0999985)
-scale = Vector2(0.0227733, 0.0164179)
-texture = ExtResource("3_wux04")
-
-[node name="BlackBox2" type="StaticBody2D" parent="."]
-position = Vector2(1035, 196)
-scale = Vector2(5, 5)
-disable_mode = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackBox2"]
-shape = SubResource("RectangleShape2D_rdyr3")
-
-[node name="Sprite2D" type="Sprite2D" parent="BlackBox2/CollisionShape2D"]
-position = Vector2(0.0999991, -0.0999974)
-scale = Vector2(0.0227733, 0.0164179)
-texture = ExtResource("3_wux04")
-
-[node name="BlackBox3" type="StaticBody2D" parent="."]
-position = Vector2(263, 262)
-rotation = 1.5708
-scale = Vector2(5, 5)
-disable_mode = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackBox3"]
-shape = SubResource("RectangleShape2D_rdyr3")
-
-[node name="Sprite2D" type="Sprite2D" parent="BlackBox3/CollisionShape2D"]
-position = Vector2(0.0999991, -0.0999974)
-scale = Vector2(0.0227733, 0.0164179)
-texture = ExtResource("3_wux04")
-
 [node name="LoadingArea" parent="." instance=ExtResource("5_j2v3j")]
 z_index = 2
-position = Vector2(116, 293)
+position = Vector2(110, 97)
 scale = Vector2(0.78, 0.62)
 
 [node name="Box" parent="." instance=ExtResource("3_m8veq")]
-position = Vector2(552, 404)
+position = Vector2(1559, 613)
 disable_mode = 1
 collision_mask = 3
 can_sleep = false
 
 [node name="Box2" parent="." instance=ExtResource("3_m8veq")]
-position = Vector2(966, 297)
+position = Vector2(403, 674)
 rotation = 0.507891
 disable_mode = 1
 collision_mask = 3
@@ -89,7 +40,215 @@ can_sleep = false
 _time = 15.0
 
 [node name="BatteryArea2D" parent="." node_paths=PackedStringArray("_timer") instance=ExtResource("7_pqfyr")]
-position = Vector2(974, 90)
+position = Vector2(1242, 1113)
+scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 3
 _timer = NodePath("../Timer")
+
+[node name="Shelf (empty)" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(265, 137)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)2" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(965, -35)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)5" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1246, -35)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)6" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1525, -37)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)7" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1806, -39)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)8" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(2089, -39)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)9" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(-42, 129)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)10" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(-44, 396)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)11" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(-44, 671)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)12" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(-40, 950)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)13" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(-38, 1227)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)14" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(137, 537)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)29" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(421, 539)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)30" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(698, 541)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)31" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(982, 541)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)32" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(433, 238)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)33" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(708, 236)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)34" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(978, 234)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)35" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(133, 1030)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)44" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(415, 1028)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)45" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(697, 1023)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)46" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1099, 1115)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)47" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1371, 1108)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)36" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1425, 338)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)37" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1425, 615)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)38" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(592, 669)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)39" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(421, 773)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)40" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1520, 771)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)41" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1802, 776)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)42" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1689, 608)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)43" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1687, 340)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)15" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(2271, 131)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)16" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(2269, 398)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)17" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(2269, 673)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)18" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(2273, 952)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)19" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(2275, 1229)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)20" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(2275, 1502)
+rotation = 1.5708
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)3" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(408, -35)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)4" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(693, -35)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)21" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(973, 1272)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)22" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1254, 1272)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)23" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1533, 1270)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)24" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(1814, 1268)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)25" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(2097, 1268)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)26" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(416, 1272)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)28" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(145, 1276)
+scale = Vector2(6, 6)
+
+[node name="Shelf (empty)27" parent="." instance=ExtResource("7_eu3iy")]
+position = Vector2(701, 1272)
+scale = Vector2(6, 6)

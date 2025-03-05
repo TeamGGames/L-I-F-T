@@ -10,6 +10,9 @@ size = Vector2(96, 90)
 script = ExtResource("1_g0d5j")
 _steeringAngle = 40.0
 _enginePower = 3000.0
+_gearOne = 1.5
+_gearTwo = 2.25
+_gearThree = 3.0
 _stackedBoxesLabel = NodePath("StackedBoxesCount")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -39,6 +42,13 @@ offset_left = -56.0
 offset_top = -35.0
 offset_right = 16.0
 offset_bottom = 10.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+rotation = 1.5708
+offset = Vector2(100, 0)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 3.0
 
 [connection signal="body_entered" from="InteractionComponents/InteractionArea" to="." method="OnInteractionAreaBodyEntered"]
 [connection signal="body_exited" from="InteractionComponents/InteractionArea" to="." method="OnInteractionAreaBodyExited"]

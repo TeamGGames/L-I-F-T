@@ -39,9 +39,8 @@ public partial class LevelManager : Node2D
     public override void _Ready()
     {
         _current = this;
-		//StartGame();
+		// StartGame();
 		_timer.Reset(true);
-		//_timer.AddTime(3.0); //aktivoidaan kun saadaan signaali collectablelta ajan lisäksestä
 
     }
 
