@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b370xr7v0ishw"]
+
+[ext_resource type="Script" path="res://Code/Timer.cs" id="1_vytex"]
+
+[node name="Timer" type="Node"]
+script = ExtResource("1_vytex")
+_time = 4.0

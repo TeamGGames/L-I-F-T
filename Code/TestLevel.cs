@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Data;
 
 namespace ForkliftGame;
 
@@ -9,6 +10,8 @@ namespace ForkliftGame;
 /// </summary>
 public partial class TestLevel : Node2D
 {
+
+	[Export] Timer _timer = null;
 	private static TestLevel _current = null;
 			public static TestLevel Current
 			{
@@ -25,6 +28,9 @@ public partial class TestLevel : Node2D
     public override void _Ready()
     {
         _current = this;
+		_timer.Reset(true);
+		//_timer.AddTime(3.0); //aktivoidaan kun saadaan signaali collectablelta ajan lisäksestä
+
     }
 
 
