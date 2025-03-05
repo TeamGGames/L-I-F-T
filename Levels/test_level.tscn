@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://bpwysj80p6k8q"]
 
-[ext_resource type="Script" path="res://Code/TestLevel.cs" id="1_edbc4"]
-[ext_resource type="PackedScene" uid="uid://c8waskkpj52xw" path="res://Levels/Forklift.tscn" id="1_ifxcf"]
-[ext_resource type="PackedScene" uid="uid://cqujoyug0hy8l" path="res://Levels/box.tscn" id="3_m8veq"]
+[ext_resource type="Script" path="res://Code/LevelManager.cs" id="1_edbc4"]
+[ext_resource type="PackedScene" uid="uid://c8waskkpj52xw" path="res://GameComponents/Forklift.tscn" id="1_ifxcf"]
+[ext_resource type="PackedScene" uid="uid://cqujoyug0hy8l" path="res://GameComponents/box.tscn" id="3_m8veq"]
 [ext_resource type="Texture2D" uid="uid://dj23bmcf7urtl" path="res://Assets/Self1.png" id="3_wux04"]
 [ext_resource type="PackedScene" uid="uid://cil3obdg4vsi4" path="res://Levels/loading_area.tscn" id="5_j2v3j"]
-[ext_resource type="PackedScene" uid="uid://b370xr7v0ishw" path="res://Game Components/Timer.tscn" id="6_mhgug"]
-[ext_resource type="PackedScene" uid="uid://cyj0a1ui0divw" path="res://Game Components/BatteryPowerUp.tscn" id="7_pqfyr"]
+[ext_resource type="PackedScene" uid="uid://b370xr7v0ishw" path="res://GameComponents/Timer.tscn" id="6_mhgug"]
+[ext_resource type="PackedScene" uid="uid://cyj0a1ui0divw" path="res://GameComponents/BatteryPowerUp.tscn" id="7_pqfyr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rdyr3"]
 size = Vector2(45, 11)
@@ -16,7 +16,7 @@ script = ExtResource("1_edbc4")
 _timer = NodePath("Timer")
 
 [node name="Forklift" parent="." instance=ExtResource("1_ifxcf")]
-position = Vector2(27, 55)
+position = Vector2(308, 331)
 collision_layer = 2
 motion_mode = 1
 

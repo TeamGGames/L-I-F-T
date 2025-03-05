@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ca57buhqobye2" path="res://Assets/box.png" id="1_t81jm"]
 [ext_resource type="Script" path="res://Code/Box.cs" id="1_ub5t1"]
-[ext_resource type="PackedScene" uid="uid://c4m81yoliko1u" path="res://Game Components/interaction_area.tscn" id="2_wsulr"]
+[ext_resource type="PackedScene" uid="uid://c4m81yoliko1u" path="res://GameComponents/interaction_area.tscn" id="2_wsulr"]
 
 [node name="Box" type="RigidBody2D"]
 position = Vector2(200, 200)
