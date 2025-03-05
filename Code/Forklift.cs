@@ -149,7 +149,7 @@ public partial class Forklift : CharacterBody2D
 		// If there are boxes in the _stackedBoxes list, the player can release them. Will release all the boxes at once.
 		else if (_stackedBoxes.Count > 0  && Input.IsActionJustPressed(Config.ReleaseAction))
 			{
-				for(int i = 0; i <= _stackedBoxes.Count; i++)
+				for(int i = 0; i <= _stackedBoxes.Count; i++) //(int i = 0; i < _stackedBoxes.Count; i++) tiputtaa yhden boksin kerrallaan
 			{
 					// Remove the box from being a child of the forklift and restore it as a child of the scene.
 
