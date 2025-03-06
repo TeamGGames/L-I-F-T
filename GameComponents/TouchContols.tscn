@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://cha3wvlaa8s5v"]
+
+[ext_resource type="Script" path="res://Code/TouchControls.cs" id="1_pca2y"]
+[ext_resource type="Script" path="res://Code/MovementSlider.cs" id="1_u2v5k"]
+
+[node name="TouchControls" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pca2y")
+
+[node name="MovementSlider" type="VSlider" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.5
+offset_top = 72.0
+offset_right = 99.0
+offset_bottom = 307.0
+grow_vertical = 2
+min_value = -1.0
+max_value = 3.0
+step = 0.0
+script = ExtResource("1_u2v5k")
+
+[node name="LeftButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -266.0
+offset_top = -217.0
+offset_right = -171.0
+offset_bottom = -128.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="RightButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -138.0
+offset_top = -246.0
+offset_right = -45.0
+offset_bottom = -149.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[connection signal="button_down" from="LeftButton" to="." method="LeftButtonDown"]
+[connection signal="button_up" from="LeftButton" to="." method="LeftButtonUp"]
+[connection signal="button_down" from="RightButton" to="." method="RightButtonDown"]
+[connection signal="button_up" from="RightButton" to="." method="RightButtonUp"]
