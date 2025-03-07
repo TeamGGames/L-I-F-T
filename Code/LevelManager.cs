@@ -14,12 +14,15 @@ public partial class LevelManager : Node2D
 	[Export] private string _forkliftScenePath = "res://GameComponents/Forklift.tscn";
 	[Export] private string _boxScenePath = "res://GameComponents/box.tscn";
 	[Export] private string _batteryScenePath = "res://GameComponents/BatteryPowerUp.tscn";
+	[Export] private int _boxesPerLevel = 3;
 	[Export] Timer _timer = null;
 
 	private PackedScene _forkliftScene = null;
 	private PackedScene _boxScene = null;
 	private PackedScene _batteryScene = null;
 	private static LevelManager _current = null;
+
+
 
 	private Forklift _forklift = null;
 	private Box _box = null;
@@ -39,7 +42,7 @@ public partial class LevelManager : Node2D
     public override void _Ready()
     {
         _current = this;
-		// StartGame();
+		 StartGame();
 		_timer.Reset(true);
 
     }
@@ -70,8 +73,13 @@ public partial class LevelManager : Node2D
 		_forklift = CreateForklift();
 		AddChild(_forklift);
 		Score = 0;
-		SpawnBox();
-		SpawnBattery();
+		for (int i = 0; i < _boxesPerLevel; i++)
+		{
+			_box = SpawnBox();
+			AddChild(_box);
+		}
+
+		//SpawnBattery();
 
 	}
 
@@ -83,25 +91,35 @@ public partial class LevelManager : Node2D
 			_forklift = null;
 		}
 	}
-	public void SpawnBox ()
+	private Box SpawnBox ()
 	{
-		if (_box != null)
-		{
-			_box.QueueFree();
-			_box = null;
-		}
-
 		if (_boxScene == null)
 		{
 			_boxScene = ResourceLoader.Load<PackedScene>(_boxScenePath);
 			if (_boxScene == null)
 			{
 				GD.PrintErr("Box scene cannot be found!");
-				return;
+				return null;
 			}
 		}
-		 _boxScene.Instantiate<Box>();
-		 AddChild(_box);
+		return _boxScene.Instantiate<Box>();
+		// if (_box != null)
+		// {
+		// 	_box.QueueFree();
+		// 	_box = null;
+		// }
+
+		// if (_boxScene == null)
+		// {
+		// 	_boxScene = ResourceLoader.Load<PackedScene>(_boxScenePath);
+		// 	if (_boxScene == null)
+		// 	{
+		// 		GD.PrintErr("Box scene cannot be found!");
+		// 		return;
+		// 	}
+		// }
+		//  _boxScene.Instantiate<Box>();
+		//  AddChild(_box);
 	}
 
 	public void SpawnBattery()
@@ -122,7 +140,7 @@ public partial class LevelManager : Node2D
 			}
 		}
 		 _batteryScene.Instantiate<Battery>();
-		// AddChild(_battery);
+		 AddChild(_battery);
 	}
 
 

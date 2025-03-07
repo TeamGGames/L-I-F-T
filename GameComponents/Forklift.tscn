@@ -7,6 +7,7 @@
 size = Vector2(96, 90)
 
 [node name="Forklift" type="CharacterBody2D" node_paths=PackedStringArray("_stackedBoxesLabel")]
+collision_mask = 2
 script = ExtResource("1_g0d5j")
 _steeringAngle = 40.0
 _enginePower = 3000.0

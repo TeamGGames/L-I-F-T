@@ -46,6 +46,8 @@ public partial class Forklift : CharacterBody2D
 	// Initialise the _velocity of the forklift.
 	private Vector2 _velocity = Vector2.Zero;
 
+	//private Vector2 _fallDistance = Vector2.Zero;
+
 	// Initialise the _acceleration Vector2.
 	private Vector2 _acceleration = Vector2.Zero;
 
@@ -116,6 +118,7 @@ public partial class Forklift : CharacterBody2D
 
 		// Move the CharacterBody 2D Forklift based on the Velocity value of the forklift.
 		// Could be written as "MoveAndSlide(_velocity);"
+
 		MoveAndSlide();
 
     }
@@ -219,12 +222,14 @@ public partial class Forklift : CharacterBody2D
 
 			turn += 0.75f;
 			_dropBoxes = true;
+			//_fallDistance = new Vector2(5,5);
 		}
 
 		if(Input.IsActionPressed(Config.TurnLeftAction) && Input.IsActionPressed(Config.GearThree)) {
 
 			turn -= 0.75f;
 			_dropBoxes = true;
+			//_fallDistance = new Vector2(-5,-5);
 		}
 
 		// On reverse the turning arc is normal and there is no fear of boxes dropping.
@@ -282,6 +287,8 @@ public partial class Forklift : CharacterBody2D
 
 					// Update the label which tells how many boxes are carried.
 					_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
+
+					//_stackedBoxes[0].GlobalPosition = this.GlobalPosition + _fallDistance;
 
 					// Reset the _addedWeight factor. Otherwise it will keep on stacking
 					// and eventually the truck won't be able to move even when empty.

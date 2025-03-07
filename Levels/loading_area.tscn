@@ -7,13 +7,14 @@
 size = Vector2(298, 299)
 
 [node name="LoadingArea" type="Node2D"]
+visibility_layer = 3
 script = ExtResource("1_2ut1n")
 
 [node name="LoadingAreaAsset" type="Sprite2D" parent="."]
 texture = ExtResource("1_eid88")
 
 [node name="RegisteringArea" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 8
 collision_mask = 2
 monitorable = false
 

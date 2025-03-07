@@ -71,6 +71,7 @@ public partial class Box : RigidBody2D
 	/// </summary>
 	public void Grab()
 	{
+
 		// Remove the box from its parent
 		GetParent().RemoveChild(this);
 
@@ -94,6 +95,9 @@ public partial class Box : RigidBody2D
 	{
 		// The box is reparented to its original tree defined in the Godot Scene
 		Reparent(GetTree().Root);
+
+		// The box is dropped nicely on the ground.
+		GlobalPosition = _forkCollision.GlobalPosition;
 
 		// The box regains its own physics
 		Freeze = false;

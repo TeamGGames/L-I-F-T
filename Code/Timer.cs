@@ -70,6 +70,7 @@ public partial class Timer : Node
 		//GD.Print($"Aikaa: {_timer}");
 	}
 
+	// Adds the amount of time given by for example power to timer
 		public void AddTime(double time)
 	{
 		//_time = time;
@@ -80,7 +81,7 @@ public partial class Timer : Node
 		}
 		//GD.Print($"Aikaa lisätty {time}, aikaa jäljellä: {_timer}");
 	}
-	// Reset
+	// Resets the timer to default value and starts the countdown.
 
 	public void Reset(bool autoStart)
 	{

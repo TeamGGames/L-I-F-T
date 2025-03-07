@@ -42,7 +42,7 @@ public partial class LoadingArea : Node2D
         {
             LevelManager.Current.Score = LevelManager.Current.Score;
             LevelManager.Current.Score -= _box.ScoreAddUp;
-            _box = null;
+            //_box = null;
 
         }
     }
