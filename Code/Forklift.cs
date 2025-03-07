@@ -437,6 +437,7 @@ public partial class Forklift : CharacterBody2D
 
 			_nearBox = true;
 
+
 			// The box is inserted to the _nearBoxes list.
 			_nearBoxes.Insert(0, box);
         }
