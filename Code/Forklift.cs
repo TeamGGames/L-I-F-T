@@ -72,6 +72,17 @@ public partial class Forklift : CharacterBody2D
 	// List of boxes that are currently grabbed
 	private List<Box> _stackedBoxes;
 
+	private double _speedInput = 0.0;
+
+	public double SpeedInput
+	{
+		get { return _speedInput; }
+		set { _speedInput = value; }
+	}
+
+	public bool _leftButtonPressed = false;
+	public bool _rightButtonPressed = false;
+
 
     public override void _Ready()
     {
@@ -97,6 +108,7 @@ public partial class Forklift : CharacterBody2D
 		// Read the user input.
 
 		ReadInput();
+		ReadInput2();
 
 		// Apply friction forces.
 
@@ -171,6 +183,33 @@ public partial class Forklift : CharacterBody2D
 
 		}
     }
+
+	private void ReadInput2()
+	{
+		float turn = 0.0f;
+
+		if (SpeedInput != 0 && _leftButtonPressed)
+		{
+			turn -= 1.0f;
+		}
+
+		if (SpeedInput != 0 && _rightButtonPressed)
+		{
+			turn += 1.0f;
+		}
+
+		if (SpeedInput > 0)
+		{
+			_acceleration = Transform.X * _enginePower * (float)SpeedInput * _addedWeight;
+		}
+		else if (SpeedInput < 0)
+		{
+			_acceleration =  Transform.X * _reversePower;
+		}
+
+		_steerAngle = turn * Mathf.DegToRad(_steeringAngle);
+	}
+
 	/// <summary>
 	/// Reads user input and controls the movement of the forklift accordingly.
 	/// </summary>
@@ -397,6 +436,7 @@ public partial class Forklift : CharacterBody2D
 			// The box gets a true value on _nearBox.
 
 			_nearBox = true;
+
 
 			// The box is inserted to the _nearBoxes list.
 			_nearBoxes.Insert(0, box);

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8waskkpj52xw"]
+[gd_scene load_steps=5 format=3 uid="uid://c8waskkpj52xw"]
 
 [ext_resource type="Script" path="res://Code/Forklift.cs" id="1_g0d5j"]
 [ext_resource type="Texture2D" uid="uid://cb8do3wtwdi8j" path="res://Assets/Forklift.png" id="2_8pni1"]
+[ext_resource type="PackedScene" uid="uid://cha3wvlaa8s5v" path="res://GameComponents/TouchContols.tscn" id="3_idbqy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0fe1"]
 size = Vector2(96, 90)
@@ -44,11 +45,20 @@ offset_right = 16.0
 offset_bottom = 10.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-rotation = 1.5708
-offset = Vector2(100, 0)
+position = Vector2(100, 0)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 3.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+offset = Vector2(550, 350)
+transform = Transform2D(1, 0, 0, 1, 550, 350)
+
+[node name="TouchControls" parent="UI" instance=ExtResource("3_idbqy")]
+offset_left = -1179.0
+offset_top = -721.0
+offset_right = 101.0
+offset_bottom = -1.0
 
 [connection signal="body_entered" from="InteractionComponents/InteractionArea" to="." method="OnInteractionAreaBodyEntered"]
 [connection signal="body_exited" from="InteractionComponents/InteractionArea" to="." method="OnInteractionAreaBodyExited"]
