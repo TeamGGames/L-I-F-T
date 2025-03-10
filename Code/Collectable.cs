@@ -23,7 +23,7 @@ namespace ForkliftGame
 			if (body is Forklift forklift)
 			{
                 GD.Print("Body entered");
-				// Jos alueelle saapunut olio on MainCharacter,
+				// Jos alueelle saapunut olio on forklift,
 				// kerättävä esine kerätään.
 				Collect(forklift);
 				// Poista kerättävä esine.
