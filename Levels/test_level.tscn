@@ -12,7 +12,7 @@ _timer = NodePath("Timer")
 
 [node name="LoadingArea" parent="." instance=ExtResource("5_j2v3j")]
 z_index = 2
-position = Vector2(110, 97)
+position = Vector2(382, -171)
 scale = Vector2(0.78, 0.62)
 
 [node name="Timer" parent="." instance=ExtResource("6_mhgug")]

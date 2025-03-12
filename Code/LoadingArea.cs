@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 namespace ForkliftGame;
 public partial class LoadingArea : Node2D
@@ -12,22 +13,41 @@ public partial class LoadingArea : Node2D
 
 {
 
-	private Box _box;
+	private Box _box = null;
     private int _score = 10;
+    private List<Box> _boxesInTargetList = new List<Box>();
+
+
+public Box Box {
+		get { return _box; }
+	}
 
 /// <summary>
 /// Adds points whenever a box is released int the target area.
 /// </summary>
 /// <param name="body"></param>
+///
+public override void _Process(double delta)
+{
+     if(_boxesInTargetList.Count == 1)
+            {
+                for (int i = 0; i < _boxesInTargetList.Count; i ++)
+                {
+                    _box.QueueFree();
+                }
+                _boxesInTargetList.Clear();
+                LevelManager.Current.GoToNextLevel();
+            }
+}
 	private void OnRegisteringAreaBodyEntered(Node2D body)
     {
 
         if (body is Box box)
         {
             _box = box;
-            LevelManager.Current.Score += _box.ScoreAddUp;
+            _boxesInTargetList.Insert(0, box);
+            // LevelManager.Current.Score += _box.ScoreAddUp;
             LevelManager.Current.PrintScore();
-
         }
     }
 /// <summary>

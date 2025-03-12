@@ -105,7 +105,7 @@ public partial class Box : RigidBody2D
 		_isGrabbed = false;
 
 	 	// Sets the box asleep. Releasing the box is a bit more realistic.
-		Sleeping = true;
+		//Sleeping = true;
 
 	}
 }

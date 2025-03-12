@@ -15,7 +15,7 @@ public partial class LevelManager : Node2D
 	[Export] private string _boxScenePath = "res://GameComponents/box.tscn";
 	[Export] private string _batteryScenePath = "res://GameComponents/BatteryPowerUp.tscn";
 	[Export] Timer _timer = null;
-
+	private SceneTree _levelSceneTree = null;
 	private PackedScene _forkliftScene = null;
 	private PackedScene _boxScene = null;
 	private PackedScene _batteryScene = null;
@@ -70,12 +70,14 @@ public partial class LevelManager : Node2D
 		_forklift = CreateForklift();
 		AddChild(_forklift);
 		Score = 0;
+		DestroyBoxes();
 		_box = SpawnBox();
 		_box.SetCollisionLayerValue(2, true);
 		_box.SetCollisionMaskValue(1, true);
 		AddChild(_box);
-		//SpawnBattery();
 
+		//SpawnBattery();
+		//AddChild(_battery);
 	}
 
 	public void DestroyForklift()
@@ -86,13 +88,18 @@ public partial class LevelManager : Node2D
 			_forklift = null;
 		}
 	}
-	public Box SpawnBox ()
+
+	public void DestroyBoxes()
 	{
 		if (_box != null)
 		{
 			_box.QueueFree();
+
 			_box = null;
 		}
+	}
+	public Box SpawnBox ()
+	{
 
 		if (_boxScene == null)
 		{
@@ -110,7 +117,7 @@ public partial class LevelManager : Node2D
 
 	}
 
-	public void SpawnBattery()
+	public Battery SpawnBattery()
 	{
 		if (_battery != null)
 		{
@@ -124,14 +131,18 @@ public partial class LevelManager : Node2D
 			if (_batteryScene == null)
 			{
 				GD.PrintErr("Battery scene cannot be found!");
-				return;
+				return null;
 			}
 		}
-		 _batteryScene.Instantiate<Battery>();
+		 return _batteryScene.Instantiate<Battery>();
 		// AddChild(_battery);
 	}
 
-
+	public void GoToNextLevel()
+	{
+		_levelSceneTree = GetTree();
+		_levelSceneTree.ChangeSceneToFile("res://Levels/test_level2.tscn");
+	}
 	#endregion public methods
 }
 }
