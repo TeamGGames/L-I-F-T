@@ -39,7 +39,7 @@ public partial class LevelManager : Node2D
     public override void _Ready()
     {
         _current = this;
-		// StartGame();
+		StartGame();
 		_timer.Reset(true);
 
     }
@@ -70,8 +70,11 @@ public partial class LevelManager : Node2D
 		_forklift = CreateForklift();
 		AddChild(_forklift);
 		Score = 0;
-		SpawnBox();
-		SpawnBattery();
+		_box = SpawnBox();
+		_box.SetCollisionLayerValue(2, true);
+		_box.SetCollisionMaskValue(1, true);
+		AddChild(_box);
+		//SpawnBattery();
 
 	}
 
@@ -83,7 +86,7 @@ public partial class LevelManager : Node2D
 			_forklift = null;
 		}
 	}
-	public void SpawnBox ()
+	public Box SpawnBox ()
 	{
 		if (_box != null)
 		{
@@ -97,11 +100,14 @@ public partial class LevelManager : Node2D
 			if (_boxScene == null)
 			{
 				GD.PrintErr("Box scene cannot be found!");
-				return;
+				return null;
 			}
 		}
-		 _boxScene.Instantiate<Box>();
-		 AddChild(_box);
+
+		return _boxScene.Instantiate<Box>();
+
+
+
 	}
 
 	public void SpawnBattery()

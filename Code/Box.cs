@@ -36,6 +36,9 @@ public partial class Box : RigidBody2D
 
 	public override void _Ready()
 	{
+		//SetCollisionLayerValue(2, true);
+		//SetCollisionMaskValue(1, true);
+
 		_forklift = GetNode<Forklift>("/root/TestLevel/Forklift");
 
 		_forkCollision = GetNode<CollisionShape2D>(
