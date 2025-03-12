@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://f27bdr3jfoha"]
+
+[ext_resource type="FontFile" uid="uid://boggguosli71" path="res://Fonts/manrope/manrope-bold.otf" id="1_45v82"]
+[ext_resource type="Script" path="res://Code/MainMenuController.cs" id="1_m87ug"]
+[ext_resource type="PackedScene" uid="uid://cti7cqbbw8nut" path="res://UI/DialogWindow.tscn" id="3_3l5fd"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_settingsButton", "_instructionsButton", "_settingsWindow")]
+clip_contents = true
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_m87ug")
+_startButton = NodePath("BackGround/ButtonContainer/StartButton")
+_settingsButton = NodePath("BackGround/HBoxContainer/SettingsButton")
+_instructionsButton = NodePath("BackGround/HBoxContainer/Button")
+_settingsWindow = NodePath("BackGround/DialogWindow")
+
+[node name="BackGround" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BackGround"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -139.0
+offset_top = 50.0
+offset_right = 140.0
+offset_bottom = 121.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_45v82")
+theme_override_font_sizes/font_size = 41
+text = "L I F T"
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="BackGround"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = -118.0
+offset_right = 127.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="BackGround/ButtonContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BackGround"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 999.0
+offset_bottom = 100.0
+grow_horizontal = 2
+
+[node name="SettingsButton" type="Button" parent="BackGround/HBoxContainer"]
+layout_mode = 2
+text = "SSS"
+
+[node name="Settings" type="Sprite2D" parent="BackGround/HBoxContainer/SettingsButton"]
+
+[node name="Button" type="Button" parent="BackGround/HBoxContainer"]
+layout_mode = 2
+text = "III"
+
+[node name="InstructionsButton" type="Sprite2D" parent="BackGround/HBoxContainer/Button"]
+
+[node name="DialogWindow" parent="BackGround" instance=ExtResource("3_3l5fd")]
+layout_mode = 0
+offset_left = 553.0
+offset_top = 432.0
+offset_right = 734.0
+offset_bottom = 549.0
+_openOnStart = false
