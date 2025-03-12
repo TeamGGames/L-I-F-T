@@ -46,6 +46,7 @@ public partial class Timer : Node
 				IsComplete = true;
 				Stop();
 				GD.Print("ajastin kului loppuun");
+				LevelManager.Current.GameOver();
 			}
 		}
 		//base._Process(delta);

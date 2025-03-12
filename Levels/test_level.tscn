@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpwysj80p6k8q"]
+[gd_scene load_steps=7 format=3 uid="uid://bpwysj80p6k8q"]
 
 [ext_resource type="Script" path="res://Code/LevelManager.cs" id="1_qr6ma"]
+[ext_resource type="PackedScene" uid="uid://dhkj3eo7sf74c" path="res://GameComponents/UI.tscn" id="2_v8g0v"]
 [ext_resource type="PackedScene" uid="uid://cil3obdg4vsi4" path="res://Levels/loading_area.tscn" id="5_j2v3j"]
 [ext_resource type="PackedScene" uid="uid://b370xr7v0ishw" path="res://GameComponents/Timer.tscn" id="6_mhgug"]
 [ext_resource type="PackedScene" uid="uid://de6eq0raky3vt" path="res://GameComponents/EmptyShelf.tscn" id="7_eu3iy"]
 [ext_resource type="PackedScene" uid="uid://cyj0a1ui0divw" path="res://GameComponents/BatteryPowerUp.tscn" id="7_pqfyr"]
 
-[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_timer", "_loadingArea")]
+[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_timer", "_ui", "_loadingArea")]
 script = ExtResource("1_qr6ma")
 _timer = NodePath("Timer")
+_ui = NodePath("UI")
 _loadingArea = NodePath("LoadingArea")
 
 [node name="LoadingArea" parent="." instance=ExtResource("5_j2v3j")]
@@ -17,7 +19,7 @@ position = Vector2(382, -171)
 scale = Vector2(0.78, 0.62)
 
 [node name="Timer" parent="." instance=ExtResource("6_mhgug")]
-_time = 15.0
+_time = 20.0
 
 [node name="BatteryArea2D" parent="." node_paths=PackedStringArray("_timer") instance=ExtResource("7_pqfyr")]
 position = Vector2(1242, 1113)
@@ -232,3 +234,9 @@ scale = Vector2(6, 6)
 [node name="Shelf (empty)27" parent="." instance=ExtResource("7_eu3iy")]
 position = Vector2(701, 1272)
 scale = Vector2(6, 6)
+
+[node name="UI" parent="." instance=ExtResource("2_v8g0v")]
+offset_left = 640.0
+offset_top = 360.0
+offset_right = 640.0
+offset_bottom = 360.0

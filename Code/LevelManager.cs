@@ -16,6 +16,7 @@ public partial class LevelManager : Node2D
 	[Export] private string _boxScenePath = "res://GameComponents/box.tscn";
 	[Export] private string _batteryScenePath = "res://GameComponents/BatteryPowerUp.tscn";
 	[Export] Timer _timer = null;
+	[Export] private Ui _ui = null;
 	private SceneTree _levelSceneTree = null;
 	private PackedScene _forkliftScene = null;
 	private PackedScene _boxScene = null;
@@ -155,5 +156,12 @@ public partial class LevelManager : Node2D
 		_levelSceneTree.ChangeSceneToFile("res://Levels/test_level2.tscn");
 	}
 	#endregion public methods
+
+	public void GameOver()
+	{
+		DestroyForklift();
+		DestroyBoxes();
+		_ui.ToggleGameOver();
+	}
 }
 }

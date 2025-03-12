@@ -14,6 +14,7 @@ _enginePower = 3000.0
 _gearOne = 1.5
 _gearTwo = 2.25
 _gearThree = 3.0
+_reducedSpeedFromWeight = 0.15
 _stackedBoxesLabel = NodePath("StackedBoxesCount")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
