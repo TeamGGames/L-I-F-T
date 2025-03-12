@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 
@@ -23,6 +24,7 @@ public partial class LevelManager : Node2D
 
 	private Forklift _forklift = null;
 	private Box _box = null;
+	[Export] private LoadingArea _loadingArea = null;
 	private Battery _battery = null;
 			public static LevelManager Current
 			{
@@ -35,6 +37,8 @@ public partial class LevelManager : Node2D
 		get { return _score; }
 		set { _score = value; }
 	}
+
+	private List<Box> _spawnedBoxes = new List<Box>();
 
     public override void _Ready()
     {
@@ -69,12 +73,14 @@ public partial class LevelManager : Node2D
 		DestroyForklift();
 		_forklift = CreateForklift();
 		AddChild(_forklift);
+		_forklift.GlobalPosition = _loadingArea.SpawnPosition;
 		Score = 0;
 		DestroyBoxes();
-		_box = SpawnBox();
-		_box.SetCollisionLayerValue(2, true);
-		_box.SetCollisionMaskValue(1, true);
-		AddChild(_box);
+
+		for (int i = 0; i < 3; i++)
+		{
+			SpawnBox();
+		}
 
 		//SpawnBattery();
 		//AddChild(_battery);
@@ -97,8 +103,14 @@ public partial class LevelManager : Node2D
 
 			_box = null;
 		}
+
+		for (int i = 0; i < _spawnedBoxes.Count; i++)
+		{
+			_spawnedBoxes[i].QueueFree();
+		}
+		_spawnedBoxes.Clear();
 	}
-	public Box SpawnBox ()
+	public void SpawnBox()
 	{
 
 		if (_boxScene == null)
@@ -107,14 +119,13 @@ public partial class LevelManager : Node2D
 			if (_boxScene == null)
 			{
 				GD.PrintErr("Box scene cannot be found!");
-				return null;
 			}
 		}
-
-		return _boxScene.Instantiate<Box>();
-
-
-
+		_box = _boxScene.Instantiate<Box>();
+		_box.SetCollisionLayerValue(2, true);
+		_box.SetCollisionMaskValue(1, true);
+		AddChild(_box);
+		_spawnedBoxes.Insert(0, _box);
 	}
 
 	public Battery SpawnBattery()

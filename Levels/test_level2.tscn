@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://cyj0a1ui0divw" path="res://GameComponents/BatteryPowerUp.tscn" id="4_fd33u"]
 [ext_resource type="PackedScene" uid="uid://de6eq0raky3vt" path="res://GameComponents/EmptyShelf.tscn" id="5_8oltd"]
 
-[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_timer")]
+[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_timer", "_loadingArea")]
 script = ExtResource("1_58i38")
 _timer = NodePath("Timer")
+_loadingArea = NodePath("LoadingArea")
 
 [node name="LoadingArea" parent="." instance=ExtResource("2_rdgv7")]
 z_index = 2

@@ -9,36 +9,43 @@ public partial class LoadingArea : Node2D
 /// and recognizes (updates the score) whenever the box is loaded in the
 /// designated area.
 /// </summary>
-
-
 {
 
 	private Box _box = null;
     private int _score = 10;
+    private Vector2 _spawnPosition;
+    public Vector2 SpawnPosition {
+        get { return _spawnPosition; }
+    }
     private List<Box> _boxesInTargetList = new List<Box>();
 
 
-public Box Box {
-		get { return _box; }
-	}
+    public Box Box {
+        get { return _box; }
+    }
 
+    public override void _Ready()
+    {
+        _spawnPosition = GlobalPosition;
+    }
+
+    public override void _Process(double delta)
+    {
+        if(_boxesInTargetList.Count >= 3)
+                {
+                    for (int i = 0; i < _boxesInTargetList.Count; i ++)
+                    {
+                        _boxesInTargetList[i].QueueFree();
+                    }
+                    _boxesInTargetList.Clear();
+                    LevelManager.Current.GoToNextLevel();
+                }
+    }
 /// <summary>
 /// Adds points whenever a box is released int the target area.
 /// </summary>
 /// <param name="body"></param>
 ///
-public override void _Process(double delta)
-{
-     if(_boxesInTargetList.Count == 1)
-            {
-                for (int i = 0; i < _boxesInTargetList.Count; i ++)
-                {
-                    _box.QueueFree();
-                }
-                _boxesInTargetList.Clear();
-                LevelManager.Current.GoToNextLevel();
-            }
-}
 	private void OnRegisteringAreaBodyEntered(Node2D body)
     {
 
@@ -56,14 +63,14 @@ public override void _Process(double delta)
 /// box exits the 2D area and points are awarded unless this piece of code is run.
 /// </summary>
 /// <param name="body"></param>
-	private void OnRegisteringAreaBodyExited(Node2D body)
-    {
-        if (body is Box box && box.Freeze != true)
-        {
-            LevelManager.Current.Score = LevelManager.Current.Score;
-            LevelManager.Current.Score -= _box.ScoreAddUp;
-            _box = null;
+	// private void OnRegisteringAreaBodyExited(Node2D body)
+    // {
+    //     if (body is Box box && box.Freeze != true)
+    //     {
+    //         LevelManager.Current.Score = LevelManager.Current.Score;
+    //         LevelManager.Current.Score -= _box.ScoreAddUp;
+    //         _box = null;
 
-        }
-    }
+    //     }
+    // }
 }
