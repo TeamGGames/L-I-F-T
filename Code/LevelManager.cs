@@ -15,16 +15,21 @@ public partial class LevelManager : Node2D
 	[Export] private string _forkliftScenePath = "res://GameComponents/Forklift.tscn";
 	[Export] private string _boxScenePath = "res://GameComponents/box.tscn";
 	[Export] private string _batteryScenePath = "res://GameComponents/BatteryPowerUp.tscn";
+	[Export] private string _spawnPointScenePath = "res://GameComponents/SpawnPoint.tscn";
 	[Export] Timer _timer = null;
 	[Export] private Ui _ui = null;
+	[Export] private SpawnPoint _spawner = null;
+
 	private SceneTree _levelSceneTree = null;
 	private PackedScene _forkliftScene = null;
 	private PackedScene _boxScene = null;
 	private PackedScene _batteryScene = null;
+	private PackedScene _spawnPointScene = null;
 	private static LevelManager _current = null;
 
 	private Forklift _forklift = null;
 	private Box _box = null;
+	private SpawnPoint _spawnPoint = null;
 	[Export] private LoadingArea _loadingArea = null;
 	private Battery _battery = null;
 			public static LevelManager Current
@@ -40,13 +45,18 @@ public partial class LevelManager : Node2D
 	}
 
 	private List<Box> _spawnedBoxes = new List<Box>();
+	private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
+	private List<string> _levels = new List<string> {Config.Level1, Config.Level2};
+
+	public int _nextLevel = 0;
+
 
     public override void _Ready()
     {
+		_spawner.fillSpawnerList(_nextLevel);
         _current = this;
 		StartGame();
 		_timer.Reset(true);
-
     }
 
 	private Forklift CreateForklift()
@@ -76,11 +86,15 @@ public partial class LevelManager : Node2D
 		AddChild(_forklift);
 		_forklift.GlobalPosition = _loadingArea.SpawnPosition;
 		Score = 0;
+		ClearSpawnPoints();
+
 		DestroyBoxes();
+
 
 		for (int i = 0; i < 3; i++)
 		{
-			SpawnBox();
+			SpawnBox(CreateSpawnPoints());
+
 		}
 
 		//SpawnBattery();
@@ -111,7 +125,7 @@ public partial class LevelManager : Node2D
 		}
 		_spawnedBoxes.Clear();
 	}
-	public void SpawnBox()
+	public void SpawnBox(Vector2 spawnPosition)
 	{
 
 		if (_boxScene == null)
@@ -127,6 +141,7 @@ public partial class LevelManager : Node2D
 		_box.SetCollisionMaskValue(1, true);
 		AddChild(_box);
 		_spawnedBoxes.Insert(0, _box);
+		_box.GlobalPosition = spawnPosition;
 	}
 
 	public Battery SpawnBattery()
@@ -150,10 +165,36 @@ public partial class LevelManager : Node2D
 		// AddChild(_battery);
 	}
 
+public void ClearSpawnPoints()
+{
+
+}
+
+public Vector2 CreateSpawnPoints()
+{
+	if (_spawnPointScene == null)
+		{
+			_spawnPointScene = ResourceLoader.Load<PackedScene>(_spawnPointScenePath);
+			if (_spawnPointScene == null)
+			{
+				GD.PrintErr("Box scene cannot be found!");
+			}
+		}
+		_spawnPoint = _spawnPointScene.Instantiate<SpawnPoint>();
+
+		AddChild(_spawnPoint);
+		_spawnPoint.GlobalPosition = _spawner.GetRandomPosition();
+		_spawnPoints.Insert(0, _spawnPoint);
+		GD.Print(_spawnPoint);
+		return _spawnPoint.GlobalPosition;
+}
 	public void GoToNextLevel()
 	{
 		_levelSceneTree = GetTree();
-		_levelSceneTree.ChangeSceneToFile("res://Levels/test_level2.tscn");
+		_nextLevel = GD.RandRange(0 ,_levels.Count - 1);
+		_spawner.fillSpawnerList(_nextLevel);
+		_levelSceneTree.ChangeSceneToFile(_levels[_nextLevel]);
+
 	}
 	#endregion public methods
 
