@@ -38,7 +38,7 @@ public partial class Timer : Node
 		if (IsRunning && !IsComplete)
 		{
 			_timer -= delta; // TODO: animaatio, akku vähenee
-			//GD.Print(_timer);
+			GD.Print(_timer);
 			if(_timer <= 0)
 			{
 				//ajastin päättyi
@@ -75,9 +75,9 @@ public partial class Timer : Node
 	{
 		//_time = time;
 		_timer = _timer + time;
-		if (_timer > 15)
+		if (_timer > _time)
 		{
-			_timer = 15;
+			_timer = _time;
 		}
 		//GD.Print($"Aikaa lisätty {time}, aikaa jäljellä: {_timer}");
 	}

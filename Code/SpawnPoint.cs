@@ -32,22 +32,25 @@ public partial class SpawnPoint : Node2D
 		switch (level)
 		{
 			case 0:
-			_spawnerList.Insert(0, new Vector2 (1233, 390));
-			GD.Print(_spawnerList[0]);
-			_spawnerList.Insert(0, new Vector2 (633, 384));
-			GD.Print(_spawnerList[0]);
-			_spawnerList.Insert(0, new Vector2 (138, 394));
-			GD.Print(_spawnerList[0]);
-			_spawnerList.Insert(0, new Vector2 (0, 0));
-			_spawnerList.Insert(0, new Vector2 (138, -20));
+			_spawnerList.Insert(0, new Vector2 (429, 107));
+			_spawnerList.Insert(0, new Vector2 (436, 652));
+			_spawnerList.Insert(0, new Vector2 (127, 1158));
+			_spawnerList.Insert(0, new Vector2 (1290, 724));
+			_spawnerList.Insert(0, new Vector2 (2075, 156));
 			break;
 
 			case 1:
-			GD.Print("level 2");
+			GD.Print("level 2: spawn points not yet released!");
 			break;
 
 		}
 	}
+
+	public void ClearSpawnerList()
+	{
+		_spawnerList.Clear();
+	}
+
 	public Vector2 GetRandomPosition()
 	{
 		int randomIndex = GD.RandRange(0 ,_spawnerList.Count - 1);

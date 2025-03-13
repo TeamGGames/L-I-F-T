@@ -86,7 +86,7 @@ public partial class LevelManager : Node2D
 		AddChild(_forklift);
 		_forklift.GlobalPosition = _loadingArea.SpawnPosition;
 		Score = 0;
-		ClearSpawnPoints();
+		// ClearSpawnPoints();
 
 		DestroyBoxes();
 
@@ -97,8 +97,7 @@ public partial class LevelManager : Node2D
 
 		}
 
-		//SpawnBattery();
-		//AddChild(_battery);
+		SpawnBattery(CreateSpawnPoints());
 	}
 
 	public void DestroyForklift()
@@ -144,30 +143,48 @@ public partial class LevelManager : Node2D
 		_box.GlobalPosition = spawnPosition;
 	}
 
-	public Battery SpawnBattery()
+	public void SpawnBattery(Vector2 position)
 	{
-		if (_battery != null)
-		{
-			_battery.QueueFree();
-			_battery = null;
-		}
-
 		if (_batteryScene == null)
 		{
 			_batteryScene = ResourceLoader.Load<PackedScene>(_batteryScenePath);
 			if (_batteryScene == null)
 			{
 				GD.PrintErr("Battery scene cannot be found!");
-				return null;
 			}
 		}
-		 return _batteryScene.Instantiate<Battery>();
-		// AddChild(_battery);
+		_battery =_batteryScene.Instantiate<Battery>();
+		_battery.SetCollisionLayerValue(1, true);
+		_battery.SetCollisionMaskValue(1, true);
+		AddChild(_battery);
+		_battery.GlobalPosition = position;
+	}
+
+	public void DestroyBattery()
+	{
+		if (_battery != null)
+		{
+			_battery.QueueFree();
+
+			_battery = null;
+		}
 	}
 
 public void ClearSpawnPoints()
 {
+	if (_spawnPoint != null)
+		{
+			_spawnPoint.QueueFree();
 
+			_spawnPoint = null;
+		}
+
+		for (int i = 0; i < _spawnPoints.Count; i++)
+		{
+			_spawnPoints[i].QueueFree();
+		}
+		_spawnPoints.Clear();
+		_spawner.ClearSpawnerList();
 }
 
 public Vector2 CreateSpawnPoints()
