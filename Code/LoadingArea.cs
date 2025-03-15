@@ -48,29 +48,17 @@ public partial class LoadingArea : Node2D
 ///
 	private void OnRegisteringAreaBodyEntered(Node2D body)
     {
-
         if (body is Box box)
         {
             _box = box;
             _boxesInTargetList.Insert(0, box);
-            // LevelManager.Current.Score += _box.ScoreAddUp;
+            LevelManager.Current.Score += _box.ScoreAddUp;
             LevelManager.Current.PrintScore();
         }
-    }
-/// <summary>
-/// Handles the box leaving the area so that no points are given when leaving.
-/// Because the box becomes active (unfreezes) the moment the forklift picks it up, the
-/// box exits the 2D area and points are awarded unless this piece of code is run.
-/// </summary>
-/// <param name="body"></param>
-	// private void OnRegisteringAreaBodyExited(Node2D body)
-    // {
-    //     if (body is Box box && box.Freeze != true)
-    //     {
-    //         LevelManager.Current.Score = LevelManager.Current.Score;
-    //         LevelManager.Current.Score -= _box.ScoreAddUp;
-    //         _box = null;
 
-    //     }
-    // }
+        if (body is Forklift forklift)
+        {
+            forklift._readForRelease = true;
+        }
+    }
 }

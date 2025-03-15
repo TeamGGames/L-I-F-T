@@ -34,11 +34,19 @@ public partial class Forklift : CharacterBody2D
 	// the value _addedWeight variable would stack making the truck eventually
 	// unable to move.
 	private float _addedWeight;
+
+	public float AddedWeight
+	{
+		get { return _addedWeight; }
+		set { _addedWeight = value; }
+	}
 	private float _startAddedWeight = 1.0f;
+
+	public float StartAddedWeight { get { return _startAddedWeight; } }
 
 	// Reference to label which counts how many boxes are currently stacked and
 	// carried by the forklift.
-	[Export] private Label _stackedBoxesLabel = null;
+	[Export] public Label _stackedBoxesLabel = null;
 
 	// Distance from front wheel to rear wheel.
 	private float _wheelBase = 70.0f;
@@ -70,7 +78,7 @@ public partial class Forklift : CharacterBody2D
 	private List<Box> _nearBoxes;
 
 	// List of boxes that are currently grabbed
-	private List<Box> _stackedBoxes;
+	public List<Box> _stackedBoxes;
 
 	private double _speedInput = 0.0;
 
@@ -82,6 +90,9 @@ public partial class Forklift : CharacterBody2D
 
 	public bool _leftButtonPressed = false;
 	public bool _rightButtonPressed = false;
+	public bool _grabReleasePressed = false;
+	public bool _inArea = false;
+	public bool _readForRelease = false;
 
 
     public override void _Ready()
@@ -108,7 +119,7 @@ public partial class Forklift : CharacterBody2D
 		// Read the user input.
 
 		ReadInput();
-		// ReadTouchInput();
+		ReadTouchInput();
 
 		// Apply friction forces.
 
@@ -135,52 +146,64 @@ public partial class Forklift : CharacterBody2D
     public override void _Process(double delta)
     {
 		// If the list _nearBox contains boxes, the user can grab it by GrabAction keypress.
-		if (_nearBox)
+		if (!_inArea)
 		{
-			if (Input.IsActionJustPressed(Config.GrabAction))
+			if (_nearBox)
 			{
-				// Insert the box from _nearBoxes list to _stackedBoxes list.
+				if (Input.IsActionJustPressed(Config.GrabAction) || _grabReleasePressed)
+				{
+					if ( _nearBoxes.Count > 0)
+					{
+						Box box = _nearBoxes[0];
+						// Insert the box from _nearBoxes list to _stackedBoxes list.
 
-				_stackedBoxes.Insert(0, _nearBoxes[0]);
+						_stackedBoxes.Insert(0, box);
 
-				// Call the Grab() method to add it as a child of the Forklift node, making it possible
-				// for the forklift to carry the box.
+						// Call the Grab() method to add it as a child of the Forklift node, making it possible
+						// for the forklift to carry the box.
 
-				_stackedBoxes[0].Grab();
+						box.Grab();
 
-				// Count the new value of _addedWeight. This will be used to reduce the speed of the forklift.
+						// Count the new value of _addedWeight. This will be used to reduce the speed of the forklift.
 
-				_addedWeight -= _reducedSpeedFromWeight;
+						_addedWeight -= _reducedSpeedFromWeight;
 
-				// Update the amount of boxes carried shown on the label on the forklift.
+						// Update the amount of boxes carried shown on the label on the forklift.
 
-				_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
+						_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
+					}
+				}
 			}
 		}
 
 		// If there are boxes in the _stackedBoxes list, the player can release them. Will release all the boxes at once.
-		else if (_stackedBoxes.Count > 0  && Input.IsActionJustPressed(Config.ReleaseAction))
-			{
-				while (_stackedBoxes.Count != 0) // until the list is done
-			{
-					// Remove the box from being a child of the forklift and restore it as a child of the scene.
+		if (_inArea)
+		{
+			if (_stackedBoxes.Count > 0  && Input.IsActionJustPressed(Config.ReleaseAction) || _stackedBoxes.Count > 0  && _grabReleasePressed && _readForRelease)
+				{
+					while (_stackedBoxes.Count != 0) // until the list is done
+				{
+						// Remove the box from being a child of the forklift and restore it as a child of the scene.
 
-					_stackedBoxes[0].Release();
+						_stackedBoxes[0].Release();
 
-					// Remove the Box from the _stackedBoxes list.
+						// Remove the Box from the _stackedBoxes list.
 
-					_stackedBoxes.Remove(_stackedBoxes[0]);
+						_stackedBoxes.Remove(_stackedBoxes[0]);
 
-					// Reset the _addedWeight so the forklift can move normally without the load. Without this, the
-					// _addedWeight variable would stack until the forklift cannot move even if empty.
+						// Reset the _addedWeight so the forklift can move normally without the load. Without this, the
+						// _addedWeight variable would stack until the forklift cannot move even if empty.
 
-					_addedWeight = _startAddedWeight;
+						_addedWeight = _startAddedWeight;
 
-					// Update the label with the new amount of carried boxes (= zero.)
+						// Update the label with the new amount of carried boxes (= zero.)
 
-					_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
+						_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
+
+						_readForRelease = false;
+				}
+
 			}
-
 		}
     }
 
@@ -506,4 +529,14 @@ public partial class Forklift : CharacterBody2D
 			_nearBoxes.Remove(box);
         }
     }
+
+	private void EnteredLoadingArea(Area2D area)
+	{
+			_inArea = true;
+	}
+
+	private void ExitedLoadingArea(Area2D loadingArea)
+	{
+		_inArea = false;
+	}
 }

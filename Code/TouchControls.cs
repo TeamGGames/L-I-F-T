@@ -32,4 +32,16 @@ public partial class TouchControls : Control
 		_forklift._leftButtonPressed = false;
 	}
 
+	private void GrabReleaseButtonDown()
+	{
+		_forklift._grabReleasePressed = true;
+	}
+
+	private void GrabReleaseButtonUp()
+	{
+		_forklift._grabReleasePressed = false;
+	}
+
+
+
 }

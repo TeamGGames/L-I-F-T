@@ -31,7 +31,7 @@ polygon = PackedVector2Array(-46.0002, -22.4998, -58.0002, -22.4998, -59.0001, -
 [node name="InteractionComponents" type="Node2D" parent="."]
 
 [node name="InteractionArea" type="Area2D" parent="InteractionComponents"]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 2
 monitorable = false
 
@@ -61,5 +61,7 @@ offset_top = -721.0
 offset_right = 101.0
 offset_bottom = -1.0
 
+[connection signal="area_entered" from="InteractionComponents/InteractionArea" to="." method="EnteredLoadingArea"]
+[connection signal="area_exited" from="InteractionComponents/InteractionArea" to="." method="ExitedLoadingArea"]
 [connection signal="body_entered" from="InteractionComponents/InteractionArea" to="." method="OnInteractionAreaBodyEntered"]
 [connection signal="body_exited" from="InteractionComponents/InteractionArea" to="." method="OnInteractionAreaBodyExited"]
