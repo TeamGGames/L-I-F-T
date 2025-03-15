@@ -108,7 +108,7 @@ public partial class Forklift : CharacterBody2D
 		// Read the user input.
 
 		ReadInput();
-		//ReadTouchInput();
+		// ReadTouchInput();
 
 		// Apply friction forces.
 
@@ -161,7 +161,7 @@ public partial class Forklift : CharacterBody2D
 		// If there are boxes in the _stackedBoxes list, the player can release them. Will release all the boxes at once.
 		else if (_stackedBoxes.Count > 0  && Input.IsActionJustPressed(Config.ReleaseAction))
 			{
-				for(int i = 0; i <= _stackedBoxes.Count; i++) //(int i = 0; i < _stackedBoxes.Count; i++) tiputtaa yhden boksin kerrallaan
+				while (_stackedBoxes.Count != 0) // until the list is done
 			{
 					// Remove the box from being a child of the forklift and restore it as a child of the scene.
 
@@ -188,12 +188,28 @@ public partial class Forklift : CharacterBody2D
 	{
 		float turn = 0.0f;
 
-		if (SpeedInput != 0 && _leftButtonPressed)
+		if (SpeedInput > 2.15 && _leftButtonPressed)
+		{
+			turn -= 0.5f;
+		}
+		else if (SpeedInput > 1.75 && _leftButtonPressed)
+		{
+			turn -= 0.75f;
+		}
+		else if (SpeedInput != 0 && _leftButtonPressed)
 		{
 			turn -= 1.0f;
 		}
 
-		if (SpeedInput != 0 && _rightButtonPressed)
+		if (SpeedInput > 2.15 && _rightButtonPressed)
+		{
+			turn += 0.5f;
+		}
+		else if (SpeedInput > 1.75 && _rightButtonPressed)
+		{
+			turn += 0.75f;
+		}
+		else if (SpeedInput != 0 && _rightButtonPressed)
 		{
 			turn += 1.0f;
 		}
@@ -207,7 +223,34 @@ public partial class Forklift : CharacterBody2D
 			_acceleration =  Transform.X * _reversePower;
 		}
 
+		if (SpeedInput > 2.25 && _rightButtonPressed || SpeedInput > 2.25 && _leftButtonPressed)
+		{
+			_dropBoxes = true;
+		}
+
 		_steerAngle = turn * Mathf.DegToRad(_steeringAngle);
+
+		if (_dropBoxes == true)
+		{
+
+			// Perform as long as there are items in the _stackedBoxes list.
+			for(int i = 0; i < _stackedBoxes.Count; i++)
+			{
+			// Release a box.
+			_stackedBoxes[0].Release();
+
+			// Remove from the list.
+			_stackedBoxes.Remove(_stackedBoxes[0]);
+
+			// Update the label which tells how many boxes are carried.
+			_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
+
+			// Reset the _addedWeight factor. Otherwise it will keep on stacking
+			// and eventually the truck won't be able to move even when empty.
+			_addedWeight = _startAddedWeight;
+			}
+			_dropBoxes = false;
+		}
 	}
 
 	/// <summary>
