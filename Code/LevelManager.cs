@@ -16,7 +16,8 @@ public partial class LevelManager : Node2D
 	[Export] private string _boxScenePath = "res://GameComponents/box.tscn";
 	[Export] private string _batteryScenePath = "res://GameComponents/BatteryPowerUp.tscn";
 	[Export] private string _spawnPointScenePath = "res://GameComponents/SpawnPoint.tscn";
-	[Export] Timer _timer = null;
+	[Export] private string _timerScenePath = "res://GameComponents/Timer.tscn";
+
 	[Export] private Ui _ui = null;
 	[Export] private SpawnPoint _spawner = null;
 
@@ -25,10 +26,12 @@ public partial class LevelManager : Node2D
 	private PackedScene _boxScene = null;
 	private PackedScene _batteryScene = null;
 	private PackedScene _spawnPointScene = null;
+	private PackedScene _timerScene = null;
 	private static LevelManager _current = null;
 
 	private Forklift _forklift = null;
 	private Box _box = null;
+	private Timer _timer = null;
 	private SpawnPoint _spawnPoint = null;
 	[Export] private LoadingArea _loadingArea = null;
 	private Battery _battery = null;
@@ -56,6 +59,7 @@ public partial class LevelManager : Node2D
 		_spawner.fillSpawnerList(_nextLevel);
         _current = this;
 		StartGame();
+
 		_timer.Reset(true);
     }
 
@@ -72,6 +76,19 @@ public partial class LevelManager : Node2D
 		}
 		return _forkliftScene.Instantiate<Forklift>();
 	}
+	private Timer CreateTimer()
+	{
+		if (_timerScene == null)
+		{
+			_timerScene = ResourceLoader.Load<PackedScene>(_timerScenePath);
+			if (_timerScene == null)
+			{
+				GD.PrintErr("Timer scene cannot be found!");
+				return null;
+			}
+		}
+		return _timerScene.Instantiate<Timer>();
+	}
 
 	#region public methods
     public void PrintScore()
@@ -84,6 +101,8 @@ public partial class LevelManager : Node2D
 		DestroyForklift();
 		_forklift = CreateForklift();
 		AddChild(_forklift);
+		_timer = CreateTimer();
+		AddChild(_timer);
 		_forklift.GlobalPosition = _loadingArea.SpawnPosition;
 		Score = 0;
 		// ClearSpawnPoints();

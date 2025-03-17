@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8waskkpj52xw"]
+[gd_scene load_steps=6 format=3 uid="uid://c8waskkpj52xw"]
 
 [ext_resource type="Script" path="res://Code/Forklift.cs" id="1_g0d5j"]
 [ext_resource type="Texture2D" uid="uid://cb8do3wtwdi8j" path="res://Assets/Forklift.png" id="2_8pni1"]
 [ext_resource type="PackedScene" uid="uid://cha3wvlaa8s5v" path="res://GameComponents/TouchContols.tscn" id="3_idbqy"]
+[ext_resource type="PackedScene" uid="uid://dh6p7p856h1od" path="res://UI/ProgressUI.tscn" id="4_02cgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0fe1"]
 size = Vector2(96, 90)
@@ -54,6 +55,12 @@ rotation_smoothing_speed = 3.0
 [node name="UI" type="CanvasLayer" parent="."]
 offset = Vector2(550, 350)
 transform = Transform2D(1, 0, 0, 1, 550, 350)
+
+[node name="ProgressUI" parent="UI" instance=ExtResource("4_02cgl")]
+offset_left = -539.0
+offset_top = -361.0
+offset_right = -539.0
+offset_bottom = -361.0
 
 [node name="TouchControls" parent="UI" instance=ExtResource("3_idbqy")]
 offset_left = -1179.0

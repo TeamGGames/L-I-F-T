@@ -26,10 +26,17 @@ public partial class Timer : Node
 		private set{_isComplete = value;}
 		}
 
+	private TextureProgressBar _progressBar = null;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		_progressBar = GetNode<TextureProgressBar>("../Forklift/UI/ProgressUI/ProgressBar");
 
+		if (_progressBar == null)
+		{
+			GD.PrintErr("Progress bar not found");
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,6 +45,9 @@ public partial class Timer : Node
 		if (IsRunning && !IsComplete)
 		{
 			_timer -= delta; // TODO: animaatio, akku vähenee
+			_progressBar.SetValueNoSignal(_timer);
+			GD.Print(_timer);
+
 			if(_timer <= 0)
 			{
 				//ajastin päättyi
