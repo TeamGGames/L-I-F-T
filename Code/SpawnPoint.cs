@@ -48,7 +48,9 @@ public partial class SpawnPoint : Node2D
 
 	public void ClearSpawnerList()
 	{
+
 		_spawnerList.Clear();
+
 	}
 
 	public Vector2 GetRandomPosition()

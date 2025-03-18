@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Code/ProgressUi.cs" id="1_gk41f"]
 [ext_resource type="Texture2D" uid="uid://dtncqlqf31cfl" path="res://Assets/Battery.png" id="2_23l2y"]
 
-[node name="ProgressUI" type="Control" node_paths=PackedStringArray("_progressBar")]
+[node name="ProgressUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gk41f")
-_progressBar = NodePath("")
 
 [node name="ProgressBar" type="TextureProgressBar" parent="."]
 layout_mode = 1

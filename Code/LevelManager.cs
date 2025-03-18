@@ -101,19 +101,18 @@ public partial class LevelManager : Node2D
 		DestroyForklift();
 		_forklift = CreateForklift();
 		AddChild(_forklift);
+		DestroyTimer();
 		_timer = CreateTimer();
 		AddChild(_timer);
 		_forklift.GlobalPosition = _loadingArea.SpawnPosition;
 		Score = 0;
-		// ClearSpawnPoints();
+
 
 		DestroyBoxes();
-
 
 		for (int i = 0; i < 3; i++)
 		{
 			SpawnBox(CreateSpawnPoints());
-
 		}
 
 		SpawnBattery(CreateSpawnPoints());
@@ -125,6 +124,15 @@ public partial class LevelManager : Node2D
 		{
 			_forklift.QueueFree();
 			_forklift = null;
+		}
+	}
+
+	public void DestroyTimer()
+	{
+		if (_timer != null)
+		{
+			_timer.QueueFree();
+			_timer = null;
 		}
 	}
 
@@ -238,6 +246,7 @@ public Vector2 CreateSpawnPoints()
 	{
 		DestroyForklift();
 		DestroyBoxes();
+		ClearSpawnPoints();
 		_ui.ToggleGameOver();
 	}
 }
