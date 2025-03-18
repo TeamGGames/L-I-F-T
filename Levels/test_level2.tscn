@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cu1ffx5p5oqqr"]
+[gd_scene load_steps=7 format=3 uid="uid://cu1ffx5p5oqqr"]
 
 [ext_resource type="Script" path="res://Code/LevelManager.cs" id="1_58i38"]
 [ext_resource type="PackedScene" uid="uid://cil3obdg4vsi4" path="res://Levels/loading_area.tscn" id="2_rdgv7"]
 [ext_resource type="PackedScene" uid="uid://de6eq0raky3vt" path="res://GameComponents/EmptyShelf.tscn" id="5_8oltd"]
+[ext_resource type="PackedScene" uid="uid://fesxsculso7w" path="res://GameComponents/Darkness.tscn" id="6_sqauu"]
 [ext_resource type="PackedScene" uid="uid://dhkj3eo7sf74c" path="res://GameComponents/UI.tscn" id="6_t6aex"]
 [ext_resource type="PackedScene" uid="uid://30mo0njbrnjk" path="res://GameComponents/SpawnPoint.tscn" id="7_7pkxv"]
 
@@ -232,3 +233,6 @@ offset_bottom = 412.6
 
 [node name="SpawnPoint" parent="." instance=ExtResource("7_7pkxv")]
 position = Vector2(108, -168)
+
+[node name="CanvasModulate" parent="." instance=ExtResource("6_sqauu")]
+color = Color(0.680939, 0.71332, 0.820318, 1)

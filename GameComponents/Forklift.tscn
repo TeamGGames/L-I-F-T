@@ -1,14 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8waskkpj52xw"]
+[gd_scene load_steps=9 format=3 uid="uid://c8waskkpj52xw"]
 
 [ext_resource type="Script" path="res://Code/Forklift.cs" id="1_g0d5j"]
 [ext_resource type="Texture2D" uid="uid://cb8do3wtwdi8j" path="res://Assets/Forklift.png" id="2_8pni1"]
 [ext_resource type="PackedScene" uid="uid://cha3wvlaa8s5v" path="res://GameComponents/TouchContols.tscn" id="3_idbqy"]
 [ext_resource type="PackedScene" uid="uid://dh6p7p856h1od" path="res://UI/ProgressUI.tscn" id="4_02cgl"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vtdxb"]
+light_mode = 1
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0fe1"]
 size = Vector2(96, 90)
 
+[sub_resource type="Gradient" id="Gradient_2y4nq"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o87fl"]
+gradient = SubResource("Gradient_2y4nq")
+
 [node name="Forklift" type="CharacterBody2D" node_paths=PackedStringArray("_stackedBoxesLabel")]
+material = SubResource("CanvasItemMaterial_vtdxb")
 script = ExtResource("1_g0d5j")
 _steeringAngle = 40.0
 _enginePower = 3000.0
@@ -67,6 +76,15 @@ offset_left = -1179.0
 offset_top = -721.0
 offset_right = 101.0
 offset_bottom = -1.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(114.134, -6.37105)
+scale = Vector2(4.96456, -1.3634)
+energy = 7.7
+shadow_enabled = true
+shadow_filter = 1
+shadow_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_o87fl")
 
 [connection signal="area_entered" from="InteractionComponents/InteractionArea" to="." method="EnteredLoadingArea"]
 [connection signal="area_exited" from="InteractionComponents/InteractionArea" to="." method="ExitedLoadingArea"]
