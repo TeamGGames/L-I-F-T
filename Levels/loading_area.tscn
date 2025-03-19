@@ -1,16 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://cil3obdg4vsi4"]
 
 [ext_resource type="Script" path="res://Code/LoadingArea.cs" id="1_2ut1n"]
-[ext_resource type="Texture2D" uid="uid://bn7ut5nauq4vh" path="res://Assets/Test Graphics/loading-area-preset.png" id="1_eid88"]
+[ext_resource type="Texture2D" uid="uid://b37nlucetumyc" path="res://Assets/Dropzone_resized.png" id="2_isns1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ytwh"]
 size = Vector2(298, 299)
 
 [node name="LoadingArea" type="Node2D"]
+z_index = 1
 script = ExtResource("1_2ut1n")
 
 [node name="LoadingAreaAsset" type="Sprite2D" parent="."]
-texture = ExtResource("1_eid88")
+texture = ExtResource("2_isns1")
 
 [node name="RegisteringArea" type="Area2D" parent="."]
 collision_layer = 2

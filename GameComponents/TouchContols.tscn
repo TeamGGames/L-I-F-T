@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Code/TouchControls.cs" id="1_pca2y"]
 [ext_resource type="Script" path="res://Code/MovementSlider.cs" id="1_u2v5k"]
-[ext_resource type="Texture2D" uid="uid://xvjy6btwuma" path="res://Assets/icon.svg" id="3_bki8o"]
 [ext_resource type="Texture2D" uid="uid://2dwhxmhbycnm" path="res://Assets/leftArrowRescaled.png" id="3_cnf2h"]
 [ext_resource type="Texture2D" uid="uid://nbtp4m5pjj08" path="res://Assets/rightArrowRescaled.png" id="4_3pwxp"]
+[ext_resource type="Texture2D" uid="uid://csmxfjab21o7g" path="res://Assets/Grab_Release2.png" id="5_bqrci"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8ai3"]
 size = Vector2(125, 340)
@@ -55,9 +55,9 @@ shape = SubResource("RectangleShape2D_rd1wi")
 
 [node name="Grab_Release" type="TouchScreenButton" parent="."]
 z_index = 1
-position = Vector2(995, 439)
-scale = Vector2(1.85156, 0.914)
-texture_normal = ExtResource("3_bki8o")
+position = Vector2(1005, 448)
+scale = Vector2(1.13568, 0.876733)
+texture_normal = ExtResource("5_bqrci")
 
 [connection signal="pressed" from="LeftButton" to="." method="LeftButtonDown"]
 [connection signal="released" from="LeftButton" to="." method="LeftButtonUp"]

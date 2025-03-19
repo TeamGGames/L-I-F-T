@@ -17,6 +17,7 @@ size = Vector2(96, 90)
 gradient = SubResource("Gradient_hbwg2")
 
 [node name="Forklift" type="CharacterBody2D" node_paths=PackedStringArray("_stackedBoxesLabel")]
+z_index = 3
 material = SubResource("CanvasItemMaterial_vtdxb")
 script = ExtResource("1_g0d5j")
 _steeringAngle = 40.0

@@ -10,6 +10,7 @@ cull_mode = 1
 polygon = PackedVector2Array(-23, -6, 23, -6, 23, 6, -23, 6)
 
 [node name="Shelf (empty)" type="StaticBody2D"]
+z_index = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_gukfm")

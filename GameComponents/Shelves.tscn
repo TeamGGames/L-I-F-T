@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://rnev0gpmfjo0"]
+
+[ext_resource type="Texture2D" uid="uid://okmou00nv4vu" path="res://Assets/shelf_resized.png" id="1_tmb2n"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ldwk8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qddss"]
+texture = ExtResource("1_tmb2n")
+texture_region_size = Vector2i(21, 128)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -63, 10, -66, 7, 60, -9, 58)
+0:0/1 = 1
+0:0/1/transpose = true
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(64.75, -11.5, 65.5, 10.75, -65, 11.25, -65.7609, -12.0208)
+
+[sub_resource type="TileSet" id="TileSet_kr4a6"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_ldwk8")
+sources/0 = SubResource("TileSetAtlasSource_qddss")
+
+[node name="Shelves" type="TileMapLayer"]
+z_index = 2
+tile_set = SubResource("TileSet_kr4a6")
