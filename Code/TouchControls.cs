@@ -15,6 +15,7 @@ public partial class TouchControls : Control
 	private void RightButtonDown()
 	{
 		_forklift._rightButtonPressed = true;
+		GD.Print("right pressed");
 	}
 
 	private void RightButtonUp()

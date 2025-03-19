@@ -6,7 +6,7 @@
 size = Vector2(45, 11)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lqo2g"]
-cull_mode = 2
+cull_mode = 1
 polygon = PackedVector2Array(-23, -6, 23, -6, 23, 6, -23, 6)
 
 [node name="Shelf (empty)" type="StaticBody2D"]
@@ -20,5 +20,4 @@ scale = Vector2(0.0227733, 0.0164179)
 texture = ExtResource("1_37iqq")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-light_mask = 2
 occluder = SubResource("OccluderPolygon2D_lqo2g")

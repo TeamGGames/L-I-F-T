@@ -21,6 +21,7 @@ texture = ExtResource("7_wtiru")
 2:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_n85bb"]
+occlusion_layer_0/light_mask = 1
 sources/0 = SubResource("TileSetAtlasSource_s3yaa")
 
 [node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_ui", "_spawner", "_loadingArea")]

@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cha3wvlaa8s5v"]
+[gd_scene load_steps=8 format=3 uid="uid://cha3wvlaa8s5v"]
 
 [ext_resource type="Script" path="res://Code/TouchControls.cs" id="1_pca2y"]
 [ext_resource type="Script" path="res://Code/MovementSlider.cs" id="1_u2v5k"]
+[ext_resource type="Texture2D" uid="uid://xvjy6btwuma" path="res://Assets/icon.svg" id="3_bki8o"]
+[ext_resource type="Texture2D" uid="uid://2dwhxmhbycnm" path="res://Assets/leftArrowRescaled.png" id="3_cnf2h"]
+[ext_resource type="Texture2D" uid="uid://nbtp4m5pjj08" path="res://Assets/rightArrowRescaled.png" id="4_3pwxp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b8ai3"]
+size = Vector2(125, 340)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rd1wi"]
+size = Vector2(125, 340)
 
 [node name="TouchControls" type="Control"]
 layout_mode = 3
@@ -23,60 +32,36 @@ layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 0.5
 offset_left = 2.0
-offset_top = 116.0
+offset_top = 40.0
 offset_right = 193.0
-offset_bottom = 199.0
+offset_bottom = 118.0
 grow_vertical = 2
 min_value = -1.0
 max_value = 2.5
 step = 0.0
 script = ExtResource("1_u2v5k")
 
-[node name="LeftButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -326.0
-offset_top = -444.0
-offset_right = -214.0
-offset_bottom = -330.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="LeftButton" type="TouchScreenButton" parent="."]
+position = Vector2(977, 181)
+scale = Vector2(1.4, 1.3)
+texture_normal = ExtResource("3_cnf2h")
+shape = SubResource("RectangleShape2D_b8ai3")
 
-[node name="RightButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -175.0
-offset_top = -526.0
-offset_right = -57.0
-offset_bottom = -412.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="RightButton" type="TouchScreenButton" parent="."]
+position = Vector2(1153, 180)
+scale = Vector2(1.4, 1.3)
+texture_normal = ExtResource("4_3pwxp")
+shape = SubResource("RectangleShape2D_rd1wi")
 
-[node name="Grab_Release" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -252.0
-offset_top = -271.0
-offset_right = -134.0
-offset_bottom = -157.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="Grab_Release" type="TouchScreenButton" parent="."]
+z_index = 1
+position = Vector2(995, 439)
+scale = Vector2(1.85156, 0.914)
+texture_normal = ExtResource("3_bki8o")
 
-[connection signal="button_down" from="LeftButton" to="." method="LeftButtonDown"]
-[connection signal="button_up" from="LeftButton" to="." method="LeftButtonUp"]
-[connection signal="button_down" from="RightButton" to="." method="RightButtonDown"]
-[connection signal="button_up" from="RightButton" to="." method="RightButtonUp"]
-[connection signal="button_down" from="Grab_Release" to="." method="GrabReleaseButtonDown"]
-[connection signal="button_up" from="Grab_Release" to="." method="GrabReleaseButtonUp"]
+[connection signal="pressed" from="LeftButton" to="." method="LeftButtonDown"]
+[connection signal="released" from="LeftButton" to="." method="LeftButtonUp"]
+[connection signal="pressed" from="RightButton" to="." method="RightButtonDown"]
+[connection signal="released" from="RightButton" to="." method="RightButtonUp"]
+[connection signal="pressed" from="Grab_Release" to="." method="GrabReleaseButtonDown"]
+[connection signal="released" from="Grab_Release" to="." method="GrabReleaseButtonUp"]

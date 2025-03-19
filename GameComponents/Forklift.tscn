@@ -11,10 +11,10 @@ light_mode = 1
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0fe1"]
 size = Vector2(96, 90)
 
-[sub_resource type="Gradient" id="Gradient_2y4nq"]
+[sub_resource type="Gradient" id="Gradient_hbwg2"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_o87fl"]
-gradient = SubResource("Gradient_2y4nq")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6qksi"]
+gradient = SubResource("Gradient_hbwg2")
 
 [node name="Forklift" type="CharacterBody2D" node_paths=PackedStringArray("_stackedBoxesLabel")]
 material = SubResource("CanvasItemMaterial_vtdxb")
@@ -78,13 +78,17 @@ offset_right = 101.0
 offset_bottom = -1.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(114.134, -6.37105)
-scale = Vector2(4.96456, -1.3634)
-energy = 7.7
+visible = false
+position = Vector2(158, -2)
+scale = Vector2(6.8125, -1.35357)
+energy = 5.0
+blend_mode = 2
+range_item_cull_mask = 2
 shadow_enabled = true
+shadow_color = Color(0.562696, 0.108415, 0.233476, 0)
 shadow_filter = 1
 shadow_item_cull_mask = 2
-texture = SubResource("GradientTexture2D_o87fl")
+texture = SubResource("GradientTexture2D_6qksi")
 
 [connection signal="area_entered" from="InteractionComponents/InteractionArea" to="." method="EnteredLoadingArea"]
 [connection signal="area_exited" from="InteractionComponents/InteractionArea" to="." method="ExitedLoadingArea"]
