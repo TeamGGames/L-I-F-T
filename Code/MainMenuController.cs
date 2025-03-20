@@ -46,7 +46,7 @@ public partial class MainMenuController : Control
 		_nextLevel = GD.RandRange(0 ,_levels.Count - 1);
 		_spawner.fillSpawnerList(_nextLevel);
 		_mainMenuSceneTree.ChangeSceneToFile(_levels[_nextLevel]);
-		Save();
+		InitializeLevel();
 	}
 
 	private void OnSettingsPressed()
@@ -65,16 +65,21 @@ public partial class MainMenuController : Control
 		}
 	}
 
-	public void Save()
+
+
+	public void InitializeLevel()
 	{
-		Dictionary saveData = new Dictionary();
+		Godot.Collections.Dictionary saveData = new Godot.Collections.Dictionary();
 
 			saveData.Add("EnergyLeft", 30);
 			saveData.Add("NextLevel", _nextLevel);
+			saveData.Add("Score", 0);
 
-		string json = Json.Stringify(saveData);
 		string savePath = ProjectSettings.GlobalizePath("user://");
 		savePath = Path.Combine(savePath, Config.SaveFolder);
+
+		string json = Json.Stringify(saveData);
+
 
 		if (SaveToFile(savePath, Config.QuickSaveFile, json))
 		{
@@ -114,9 +119,6 @@ public partial class MainMenuController : Control
 			}
 		return true;
 	}
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+
 }
 }

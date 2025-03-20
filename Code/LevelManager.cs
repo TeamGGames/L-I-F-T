@@ -43,10 +43,15 @@ public partial class LevelManager : Node2D
 			}
 
 	private int _score = 0;
+	private int _highScore = 0;
 
 	public int Score {
 		get { return _score; }
 		set { _score = value; }
+	}
+	public int HighScore {
+		get { return _highScore; }
+		set { _highScore = value; }
 	}
 
 	private List<Box> _spawnedBoxes = new List<Box>();
@@ -55,6 +60,7 @@ public partial class LevelManager : Node2D
 
 	public int _nextLevel = 0;
 	public bool _isGameOver = false;
+	private ProgressUi _progressUi = null;
 
 
     public override void _Ready()
@@ -110,12 +116,13 @@ public partial class LevelManager : Node2D
 		{
 			GD.PrintErr("Load error");
 		}
+		_progressUi = GetNode<ProgressUi>("Forklift/UI/ProgressUI");
+		_progressUi.SetHighScoreLabel(_highScore);
 
 		_spawner.fillSpawnerList(_nextLevel);
 
 		_forklift.GlobalPosition = _loadingArea.SpawnPosition;
-		Score = 0;
-
+        _progressUi.SetScoreLabel(LevelManager.Current.Score);
 
 		DestroyBoxes();
 
@@ -252,16 +259,20 @@ public Vector2 CreateSpawnPoints()
 
 	public void Save()
 	{
-		Dictionary saveData = new Dictionary();
+		Godot.Collections.Dictionary saveData = new Godot.Collections.Dictionary();
 		if (_isGameOver)
 		{
 			saveData.Add("EnergyLeft", 30);
 			saveData.Add("NextLevel", 0);
+			saveData.Add("Score", 0);
+
 		}
 		else
 		{
-		saveData.Add("EnergyLeft", _timer.GetTimer);
-		saveData.Add("NextLevel", _nextLevel);
+			saveData.Add("EnergyLeft", _timer.GetTimer);
+			saveData.Add("NextLevel", _nextLevel);
+			saveData.Add("Score", _score);
+
 		}
 
 		string json = Json.Stringify(saveData);
@@ -294,10 +305,11 @@ public Vector2 CreateSpawnPoints()
 		}
 
 
-		Dictionary saveData = (Dictionary) jsonLoader.Data;
+		Godot.Collections.Dictionary saveData = (Godot.Collections.Dictionary) jsonLoader.Data;
 		_timer.GetTimer = (double)saveData["EnergyLeft"];
 		_nextLevel = (int)saveData["NextLevel"];
-		//score tänne
+
+		_score = (int)saveData["Score"];
 		return true;
 	}
 	#endregion public methods

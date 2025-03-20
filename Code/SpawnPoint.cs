@@ -40,7 +40,11 @@ public partial class SpawnPoint : Node2D
 			break;
 
 			case 1:
-			GD.Print("level 2: spawn points not yet released!");
+			_spawnerList.Insert(0, new Vector2 (429, 107));
+			_spawnerList.Insert(0, new Vector2 (436, 652));
+			_spawnerList.Insert(0, new Vector2 (127, 1158));
+			_spawnerList.Insert(0, new Vector2 (1290, 724));
+			_spawnerList.Insert(0, new Vector2 (2075, 156));
 			break;
 
 		}

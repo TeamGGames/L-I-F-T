@@ -35,7 +35,7 @@ public partial class Timer : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_progressBar = GetNode<TextureProgressBar>("../Forklift/UI/ProgressUI/ProgressBar");
+		_progressBar = GetNode<TextureProgressBar>("../Forklift/UI/ProgressUI/HBoxContainer/ProgressBar");
 
 		if (_progressBar == null)
 		{

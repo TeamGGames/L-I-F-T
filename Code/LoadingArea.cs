@@ -18,6 +18,7 @@ public partial class LoadingArea : Node2D
         get { return _spawnPosition; }
     }
     private List<Box> _boxesInTargetList = new List<Box>();
+    private ProgressUi _progressUi = null;
 
 
     public Box Box {
@@ -53,6 +54,8 @@ public partial class LoadingArea : Node2D
             _box = box;
             _boxesInTargetList.Insert(0, box);
             LevelManager.Current.Score += _box.ScoreAddUp;
+            _progressUi = GetNode<ProgressUi>("../Forklift/UI/ProgressUI");
+            _progressUi.SetScoreLabel(LevelManager.Current.Score);
             LevelManager.Current.PrintScore();
         }
 

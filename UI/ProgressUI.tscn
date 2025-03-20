@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Code/ProgressUi.cs" id="1_gk41f"]
 [ext_resource type="Texture2D" uid="uid://dtncqlqf31cfl" path="res://Assets/Battery.png" id="2_23l2y"]
 
-[node name="ProgressUI" type="Control" node_paths=PackedStringArray("_progressBar")]
+[node name="ProgressUI" type="Control" node_paths=PackedStringArray("_score", "_highScore")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,16 +11,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gk41f")
-_progressBar = NodePath("ProgressBar")
+_score = NodePath("HBoxContainer/Score")
+_highScore = NodePath("HBoxContainer/HighScore")
 
-[node name="ProgressBar" type="TextureProgressBar" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = 10
 anchor_right = 1.0
-offset_left = -335.0
-offset_bottom = 50.0
-grow_horizontal = 0
+offset_bottom = 99.0
+grow_horizontal = 2
+
+[node name="HighScore" type="Label" parent="HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+theme_override_colors/font_color = Color(0.799408, 0.622346, 7.70092e-07, 1)
+theme_override_font_sizes/font_size = 50
+text = "10000
+"
+
+[node name="Score" type="Label" parent="HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "1000"
+
+[node name="ProgressBar" type="TextureProgressBar" parent="HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
 max_value = 30.0
 step = 0.01
 value = 30.0
