@@ -71,7 +71,7 @@ public partial class MainMenuController : Control
 	{
 		Godot.Collections.Dictionary saveData = new Godot.Collections.Dictionary();
 
-			saveData.Add("EnergyLeft", 30);
+			saveData.Add("EnergyLeft", 60);
 			saveData.Add("NextLevel", _nextLevel);
 			saveData.Add("Score", 0);
 

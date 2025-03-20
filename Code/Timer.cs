@@ -48,7 +48,7 @@ public partial class Timer : Node
 	{
 		if (IsRunning && !IsComplete)
 		{
-			_timer -= delta; // TODO: animaatio, akku vähenee
+			_timer -= delta;
 			_progressBar.SetValueNoSignal(_timer);
 			GD.Print(_timer);
 
