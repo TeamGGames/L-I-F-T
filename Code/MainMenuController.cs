@@ -1,6 +1,9 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 
 namespace ForkliftGame
 {
@@ -19,6 +22,8 @@ public partial class MainMenuController : Control
 
 	private SceneTree _mainMenuSceneTree = null;
 	private int _nextLevel = 0;
+
+	private Timer _timer = null;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -41,6 +46,7 @@ public partial class MainMenuController : Control
 		_nextLevel = GD.RandRange(0 ,_levels.Count - 1);
 		_spawner.fillSpawnerList(_nextLevel);
 		_mainMenuSceneTree.ChangeSceneToFile(_levels[_nextLevel]);
+		Save();
 	}
 
 	private void OnSettingsPressed()
@@ -57,6 +63,56 @@ public partial class MainMenuController : Control
 		{
 			_instructionsWindow.Open();
 		}
+	}
+
+	public void Save()
+	{
+		Dictionary saveData = new Dictionary();
+
+			saveData.Add("EnergyLeft", 30);
+			saveData.Add("NextLevel", _nextLevel);
+
+		string json = Json.Stringify(saveData);
+		string savePath = ProjectSettings.GlobalizePath("user://");
+		savePath = Path.Combine(savePath, Config.SaveFolder);
+
+		if (SaveToFile(savePath, Config.QuickSaveFile, json))
+		{
+			GD.Print("Game data saved");
+		}
+
+		else
+		{
+			GD.Print("1 Error saving game data");
+		}
+	}
+	private bool SaveToFile(string path, string fileName, string json)
+	{
+		if ( !Directory.Exists(path))
+		{
+			try
+			{
+				Directory.CreateDirectory(path);
+			}
+			catch (Exception e)
+			{
+				GD.PrintErr($"Failed to save game data: {e.Message}");
+				return false;
+			}
+		}
+
+		path = Path.Combine(path, fileName);
+
+		try
+		{
+			File.WriteAllText(path, json);
+		}
+		catch (Exception e)
+			{
+				GD.PrintErr($"Failed to save game data: {e.Message}");
+				return false;
+			}
+		return true;
 	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)

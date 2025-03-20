@@ -1,7 +1,9 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 
 
 namespace ForkliftGame
@@ -52,15 +54,13 @@ public partial class LevelManager : Node2D
 	private List<string> _levels = new List<string> {Config.Level1, Config.Level2};
 
 	public int _nextLevel = 0;
+	public bool _isGameOver = false;
 
 
     public override void _Ready()
     {
-		_spawner.fillSpawnerList(_nextLevel);
         _current = this;
 		StartGame();
-
-		_timer.Reset(true);
     }
 
 	private Forklift CreateForklift()
@@ -104,6 +104,15 @@ public partial class LevelManager : Node2D
 		DestroyTimer();
 		_timer = CreateTimer();
 		AddChild(_timer);
+		_timer.Reset(true);
+
+		if(!Load())
+		{
+			GD.PrintErr("Load error");
+		}
+
+		_spawner.fillSpawnerList(_nextLevel);
+
 		_forklift.GlobalPosition = _loadingArea.SpawnPosition;
 		Score = 0;
 
@@ -238,12 +247,114 @@ public Vector2 CreateSpawnPoints()
 		_nextLevel = GD.RandRange(0 ,_levels.Count - 1);
 		_spawner.fillSpawnerList(_nextLevel);
 		_levelSceneTree.ChangeSceneToFile(_levels[_nextLevel]);
+		Save();
+	}
 
+	public void Save()
+	{
+		Dictionary saveData = new Dictionary();
+		if (_isGameOver)
+		{
+			saveData.Add("EnergyLeft", 30);
+			saveData.Add("NextLevel", 0);
+		}
+		else
+		{
+		saveData.Add("EnergyLeft", _timer.GetTimer);
+		saveData.Add("NextLevel", _nextLevel);
+		}
+
+		string json = Json.Stringify(saveData);
+		string savePath = ProjectSettings.GlobalizePath("user://");
+		savePath = Path.Combine(savePath, Config.SaveFolder);
+
+		if (SaveToFile(savePath, Config.QuickSaveFile, json))
+		{
+			GD.Print("Game data saved");
+		}
+
+		else
+		{
+			GD.Print("1 Error saving game data");
+		}
+	}
+
+	public bool Load()
+	{
+		string savePath = ProjectSettings.GlobalizePath("user://");
+		savePath = Path.Combine(savePath, Config.SaveFolder);
+		string loadedJson = LoadFromFile(savePath, Config.QuickSaveFile);
+
+		Json jsonLoader = new Json();
+		Error loadError = jsonLoader.Parse(loadedJson);
+		if (loadError != Error.Ok)
+		{
+			GD.PrintErr($"Error while loading game. Error: {loadError}");
+			return false;
+		}
+
+
+		Dictionary saveData = (Dictionary) jsonLoader.Data;
+		_timer.GetTimer = (double)saveData["EnergyLeft"];
+		_nextLevel = (int)saveData["NextLevel"];
+		//score tänne
+		return true;
 	}
 	#endregion public methods
+	private bool SaveToFile(string path, string fileName, string json)
+	{
+		if ( !Directory.Exists(path))
+		{
+			try
+			{
+				Directory.CreateDirectory(path);
+			}
+			catch (Exception e)
+			{
+				GD.PrintErr($"Failed to save game data: {e.Message}");
+				return false;
+			}
+		}
 
+		path = Path.Combine(path, fileName);
+
+		try
+		{
+			File.WriteAllText(path, json);
+		}
+		catch (Exception e)
+			{
+				GD.PrintErr($"Failed to save game data: {e.Message}");
+				return false;
+			}
+		return true;
+	}
+public string LoadFromFile (string path, string fileName)
+{
+	path = Path.Combine(path, fileName);
+
+	if (!File.Exists(path))
+	{
+		GD.PrintErr($"File {path} not  found");
+		return null;
+	}
+
+	try
+	{
+		return File.ReadAllText(path);
+	}
+
+	catch (Exception e)
+	{
+		GD.PrintErr($"Error loading file: {e.Message}");
+		return null;
+	}
+
+}
 	public void GameOver()
 	{
+		Save();
+		_isGameOver = false;
 		DestroyForklift();
 		DestroyBoxes();
 		ClearSpawnPoints();

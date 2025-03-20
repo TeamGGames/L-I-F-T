@@ -11,11 +11,15 @@ public partial class Timer : Node
 
 	// ajastimen aika tällä hetkellä
 	private double _timer = 0;
+
+	public double GetTimer {
+		get {return _timer;}
+		set {_timer = value; }
+	 	}
 	//onko käynnissä vai ei
 	private bool _isRunning = false;
 
 	private bool _isComplete = false;
-
 	public bool IsRunning {
 		get {return _isRunning;}
 	 	private set{_isRunning = value;}
@@ -55,6 +59,7 @@ public partial class Timer : Node
 				IsComplete = true;
 				Stop();
 				GD.Print("ajastin kului loppuun");
+				LevelManager.Current._isGameOver = true;
 				LevelManager.Current.GameOver();
 			}
 		}
