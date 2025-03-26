@@ -1,16 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://f27bdr3jfoha"]
+[gd_scene load_steps=8 format=3 uid="uid://f27bdr3jfoha"]
 
 [ext_resource type="FontFile" uid="uid://boggguosli71" path="res://Fonts/manrope/manrope-bold.otf" id="1_45v82"]
 [ext_resource type="Script" path="res://Code/MainMenuController.cs" id="1_m87ug"]
-[ext_resource type="PackedScene" uid="uid://cti7cqbbw8nut" path="res://UI/DialogWindow.tscn" id="3_3l5fd"]
+[ext_resource type="PackedScene" uid="uid://cti7cqbbw8nut" path="res://UI/SettingsWindow.tscn" id="3_3l5fd"]
 [ext_resource type="Texture2D" uid="uid://dggtbnrfjj0il" path="res://Assets/Settings_button.png" id="3_v7nq1"]
 [ext_resource type="PackedScene" uid="uid://30mo0njbrnjk" path="res://GameComponents/SpawnPoint.tscn" id="4_c6gjr"]
+[ext_resource type="Texture2D" uid="uid://bedkuj7rlu8qf" path="res://Assets/music_toggle.png" id="4_nss8d"]
 
 [sub_resource type="Theme" id="Theme_x2x72"]
 Button/font_sizes/font_size = 39
 Button/fonts/font = ExtResource("1_45v82")
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_settingsButton", "_instructionsButton", "_settingsWindow", "_spawner")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_settingsButton", "_soundButton", "_settingsWindow", "_spawner")]
 clip_contents = true
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
@@ -23,8 +24,8 @@ theme = SubResource("Theme_x2x72")
 script = ExtResource("1_m87ug")
 _startButton = NodePath("BackGround/ButtonContainer/StartButton")
 _settingsButton = NodePath("BackGround/HBoxContainer/SettingsButton")
-_instructionsButton = NodePath("BackGround/HBoxContainer/Button")
-_settingsWindow = NodePath("BackGround/DialogWindow")
+_soundButton = NodePath("BackGround/HBoxContainer/MusicToggle")
+_settingsWindow = NodePath("SettingsWindow")
 _spawner = NodePath("SpawnPoint")
 
 [node name="BackGround" type="Panel" parent="."]
@@ -72,8 +73,10 @@ text = "Start Game"
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 999.0
-offset_bottom = 100.0
+offset_left = 990.0
+offset_top = 36.0
+offset_right = -1.0
+offset_bottom = 155.0
 grow_horizontal = 2
 
 [node name="SettingsButton" type="Button" parent="BackGround/HBoxContainer"]
@@ -82,18 +85,20 @@ icon = ExtResource("3_v7nq1")
 
 [node name="Settings" type="Sprite2D" parent="BackGround/HBoxContainer/SettingsButton"]
 
-[node name="Button" type="Button" parent="BackGround/HBoxContainer"]
+[node name="MusicToggle" type="Button" parent="BackGround/HBoxContainer"]
 layout_mode = 2
-text = "III"
+icon = ExtResource("4_nss8d")
 
-[node name="InstructionsButton" type="Sprite2D" parent="BackGround/HBoxContainer/Button"]
-
-[node name="DialogWindow" parent="BackGround" instance=ExtResource("3_3l5fd")]
-layout_mode = 0
-offset_left = 553.0
-offset_top = 432.0
-offset_right = 734.0
-offset_bottom = 549.0
-_openOnStart = false
+[node name="SettingsWindow" parent="." instance=ExtResource("3_3l5fd")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_vertical = 2
 
 [node name="SpawnPoint" parent="." instance=ExtResource("4_c6gjr")]

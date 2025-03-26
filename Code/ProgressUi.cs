@@ -28,7 +28,6 @@ public partial class ProgressUi : Control
 	{
 		_highScore.Text = $"{score}";
 
-
 	}
 
 

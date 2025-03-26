@@ -1,42 +1,80 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhkj3eo7sf74c"]
+[gd_scene load_steps=3 format=3 uid="uid://dhkj3eo7sf74c"]
 
 [ext_resource type="Script" path="res://Code/Ui.cs" id="1_6tenn"]
+[ext_resource type="Script" path="res://Code/MainMenuController.cs" id="2_4nj08"]
 
-[node name="UI" type="Control" node_paths=PackedStringArray("_gameOverWindow", "_quitButton")]
+[node name="UI" type="Control" node_paths=PackedStringArray("_gameOverPanel", "_quitButton", "_restartButton", "_menuController")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_6tenn")
-_gameOverWindow = NodePath("GameOverWindow")
-_quitButton = NodePath("GameOverWindow/QuitButton")
-
-[node name="GameOverWindow" type="VBoxContainer" parent="."]
-visible = false
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -225.5
-offset_top = -75.0
-offset_right = 225.5
-offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6tenn")
+_gameOverPanel = NodePath("GameOverPanel")
+_quitButton = NodePath("GameOverPanel/GameOverBox/QuitButton")
+_restartButton = NodePath("GameOverPanel/GameOverBox/RestartButton")
+_menuController = NodePath("MainMenuController")
+
+[node name="GameOverPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverBox" type="VBoxContainer" parent="GameOverPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="GameOverText" type="Label" parent="GameOverWindow"]
+[node name="GameOverText" type="Label" parent="GameOverPanel/GameOverBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.686275, 0, 0, 1)
 theme_override_font_sizes/font_size = 75
 text = "GAME OVER!"
+horizontal_alignment = 1
 
-[node name="QuitButton" type="Button" parent="GameOverWindow"]
+[node name="QuitButton" type="Button" parent="GameOverPanel/GameOverBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "Quit
+text = "Main Menu
 "
+
+[node name="RestartButton" type="Button" parent="GameOverPanel/GameOverBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Restart
+"
+
+[node name="TEXT" type="Label" parent="GameOverPanel/GameOverBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "HIGH SCORES:"
+horizontal_alignment = 1
+
+[node name="1stHighScore" type="Label" parent="GameOverPanel/GameOverBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "1. ------------------------"
+
+[node name="2ndHighScore" type="Label" parent="GameOverPanel/GameOverBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "2. ------------------------"
+
+[node name="3rdHighScore" type="Label" parent="GameOverPanel/GameOverBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "3. ------------------------"
+
+[node name="MainMenuController" type="Control" parent="."]
+anchors_preset = 0
+script = ExtResource("2_4nj08")

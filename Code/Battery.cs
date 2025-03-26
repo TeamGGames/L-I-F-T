@@ -11,7 +11,7 @@ namespace ForkliftGame
 		{
 			_timer = GetNode<Timer>("../Timer");
 			_timer.AddTime(_addedTime);
-            GD.Print("time added");
+
 		}
 	}
 }

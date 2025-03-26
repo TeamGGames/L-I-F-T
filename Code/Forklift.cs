@@ -225,7 +225,7 @@ public partial class Forklift : CharacterBody2D
 		}
 		else if (SpeedInput == 0 && _leftButtonPressed)
 		{
-			RotationDegrees -= 1;
+			RotationDegrees -= 2;
 		}
 
 		if (SpeedInput > 2.15 && _rightButtonPressed)
@@ -242,7 +242,7 @@ public partial class Forklift : CharacterBody2D
 		}
 		else if (SpeedInput == 0 && _rightButtonPressed)
 		{
-			RotationDegrees += 1;
+			RotationDegrees += 2;
 		}
 
 		if (SpeedInput > 0)

@@ -61,8 +61,7 @@ public partial class LevelManager : Node2D
 	public bool _isGameOver = false;
 	private ProgressUi _progressUi = null;
 	private List<int> _highScoreList = new List<int>();
-
-	public int currentHigh = 0;
+	private double _maxEnergy;
 
     public override void _Ready()
     {
@@ -108,6 +107,7 @@ public partial class LevelManager : Node2D
 		DestroyTimer();
 		_timer = CreateTimer();
 		AddChild(_timer);
+		_maxEnergy = _timer.GetTimer;
 		_timer.Reset(true);
 
 		if(!Load())
@@ -123,9 +123,6 @@ public partial class LevelManager : Node2D
 		if (_highScoreList.Count != 0) {
 			_highScore = _highScoreList[0];
 			_progressUi.SetHighScoreLabel(_highScore);
-
-			////
-			GD.Print($"Tämä:::::{_highScore}");
 		}
 
 
@@ -256,7 +253,6 @@ public Vector2 CreateSpawnPoints()
 		AddChild(_spawnPoint);
 		_spawnPoint.GlobalPosition = _spawner.GetRandomPosition();
 		_spawnPoints.Insert(0, _spawnPoint);
-		GD.Print(_spawnPoint);
 		return _spawnPoint.GlobalPosition;
 }
 	public void GoToNextLevel()
@@ -273,7 +269,7 @@ public Vector2 CreateSpawnPoints()
 		Godot.Collections.Dictionary saveData = new Godot.Collections.Dictionary();
 		if (_isGameOver)
 		{
-			saveData.Add("EnergyLeft", 30);
+			saveData.Add("EnergyLeft", _maxEnergy);
 			saveData.Add("NextLevel", 0);
 			saveData.Add("Score", 0);
 

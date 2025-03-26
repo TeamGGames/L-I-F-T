@@ -12,13 +12,16 @@ public partial class MainMenuController : Control
 
 	[Export] private Button _startButton = null;
 	[Export] private Button _settingsButton = null;
-	[Export] private Button _instructionsButton = null;
+	[Export] private Button _soundButton = null;
 
-	[Export] private DialogWindow _settingsWindow = null;
-	[Export] private DialogWindow _instructionsWindow = null;
+	[Export] private SettingsWindow _settingsWindow = null;
+
 	[Export] private SpawnPoint _spawner = null;
+	[Export] private double _maxEnergy = 30;
 
 	private List<string> _levels = new List<string> {Config.Level1, Config.Level2};
+	private PackedScene _spawnPointScene = null;
+	private string _spawnPointScenePath = "res://GameComponents/SpawnPoint.tscn";
 
 	private SceneTree _mainMenuSceneTree = null;
 	private int _nextLevel = 0;
@@ -33,16 +36,19 @@ public partial class MainMenuController : Control
 			{
 				GD.PrintErr("Scene tree not found");
 			}
-
-			_startButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnStartPressed)));
-			_settingsButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnSettingsPressed)));
-			_instructionsButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnInstructionsPressed)));
-
+			if (_startButton != null && _settingsButton != null)
+			{
+				_startButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnStartPressed)));
+				_settingsButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnSettingsPressed)));
+			}
 	}
 
-	private void OnStartPressed()
+	public void OnStartPressed()
 	{
-		GD.Print("New game pressed");
+		if (_spawner == null)
+		{
+			AddSpawnPointChild();
+		}
 		_nextLevel = GD.RandRange(0 ,_levels.Count - 1);
 		_spawner.fillSpawnerList(_nextLevel);
 		_mainMenuSceneTree.ChangeSceneToFile(_levels[_nextLevel]);
@@ -57,21 +63,13 @@ public partial class MainMenuController : Control
 		}
 	}
 
-	private void OnInstructionsPressed()
-	{
-		if (_instructionsWindow != null)
-		{
-			_instructionsWindow.Open();
-		}
-	}
-
 
 
 	public void InitializeLevel()
 	{
 		Godot.Collections.Dictionary saveData = new Godot.Collections.Dictionary();
 
-			saveData.Add("EnergyLeft", 60);
+			saveData.Add("EnergyLeft", _maxEnergy);
 			saveData.Add("NextLevel", _nextLevel);
 			saveData.Add("Score", 0);
 
@@ -118,6 +116,21 @@ public partial class MainMenuController : Control
 				return false;
 			}
 		return true;
+	}
+
+	public void AddSpawnPointChild()
+	{
+
+		if (_spawnPointScene == null)
+		{
+			_spawnPointScene = ResourceLoader.Load<PackedScene>(_spawnPointScenePath);
+			if (_spawnPointScene == null)
+			{
+				GD.PrintErr("Spawn scene cannot be found!");
+			}
+		}
+		_spawner = _spawnPointScene.Instantiate<SpawnPoint>();
+		AddChild(_spawner);
 	}
 
 }
