@@ -50,7 +50,7 @@ public partial class Timer : Node
 		{
 			_timer -= delta;
 			_progressBar.SetValueNoSignal(_timer);
-			GD.Print(_timer);
+
 
 			if(_timer <= 0)
 			{
@@ -58,7 +58,7 @@ public partial class Timer : Node
 				_timer = 0;
 				IsComplete = true;
 				Stop();
-				GD.Print("ajastin kului loppuun");
+
 				LevelManager.Current._isGameOver = true;
 				LevelManager.Current.GameOver();
 			}

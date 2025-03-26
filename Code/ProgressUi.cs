@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ForkliftGame
 {
@@ -15,8 +16,10 @@ public partial class ProgressUi : Control
 	public void SetScoreLabel(int score)
 	{
 		_score.Text = $"{score}";
+
 		if (LevelManager.Current.HighScore <= score)
 		{
+			LevelManager.Current.HighScore = score;
 			SetHighScoreLabel(score);
 		}
 	}
@@ -24,6 +27,10 @@ public partial class ProgressUi : Control
 	public void SetHighScoreLabel(int score)
 	{
 		_highScore.Text = $"{score}";
+
+
 	}
+
+
 }
 }

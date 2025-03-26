@@ -42,12 +42,11 @@ public partial class LevelManager : Node2D
 				get { return _current; }
 			}
 
-	private int _score = 0;
 	private int _highScore = 0;
-
-	public int Score {
-		get { return _score; }
-		set { _score = value; }
+	private int _currentScore = 0;
+	public int CurrentScore {
+		get { return _currentScore; }
+		set { _currentScore = value; }
 	}
 	public int HighScore {
 		get { return _highScore; }
@@ -61,7 +60,9 @@ public partial class LevelManager : Node2D
 	public int _nextLevel = 0;
 	public bool _isGameOver = false;
 	private ProgressUi _progressUi = null;
+	private List<int> _highScoreList = new List<int>();
 
+	public int currentHigh = 0;
 
     public override void _Ready()
     {
@@ -97,10 +98,7 @@ public partial class LevelManager : Node2D
 	}
 
 	#region public methods
-    public void PrintScore()
-	{
-		GD.Print($"Score: {Score}");
-	}
+
 
 	public void StartGame()
 	{
@@ -117,12 +115,25 @@ public partial class LevelManager : Node2D
 			GD.PrintErr("Load error");
 		}
 		_progressUi = GetNode<ProgressUi>("Forklift/UI/ProgressUI");
-		_progressUi.SetHighScoreLabel(_highScore);
+		// highscore
+
+		HighScore highScore = new HighScore();
+		_highScoreList = highScore.GetScores();
+
+		if (_highScoreList.Count != 0) {
+			_highScore = _highScoreList[0];
+			_progressUi.SetHighScoreLabel(_highScore);
+
+			////
+			GD.Print($"Tämä:::::{_highScore}");
+		}
+
+
 
 		_spawner.fillSpawnerList(_nextLevel);
 
 		_forklift.GlobalPosition = _loadingArea.SpawnPosition;
-        _progressUi.SetScoreLabel(LevelManager.Current.Score);
+        _progressUi.SetScoreLabel(LevelManager.Current.CurrentScore);
 
 		DestroyBoxes();
 
@@ -271,7 +282,7 @@ public Vector2 CreateSpawnPoints()
 		{
 			saveData.Add("EnergyLeft", _timer.GetTimer);
 			saveData.Add("NextLevel", _nextLevel);
-			saveData.Add("Score", _score);
+			saveData.Add("Score", _currentScore);
 
 		}
 
@@ -309,7 +320,7 @@ public Vector2 CreateSpawnPoints()
 		_timer.GetTimer = (double)saveData["EnergyLeft"];
 		_nextLevel = (int)saveData["NextLevel"];
 
-		_score = (int)saveData["Score"];
+		_currentScore = (int)saveData["Score"];
 		return true;
 	}
 	#endregion public methods
@@ -366,6 +377,9 @@ public string LoadFromFile (string path, string fileName)
 	public void GameOver()
 	{
 		Save();
+		HighScore highScore = new HighScore();
+
+		highScore.AddScore(_highScore);
 		_isGameOver = false;
 		DestroyForklift();
 		DestroyBoxes();

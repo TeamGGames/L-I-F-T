@@ -53,10 +53,10 @@ public partial class LoadingArea : Node2D
         {
             _box = box;
             _boxesInTargetList.Insert(0, box);
-            LevelManager.Current.Score += _box.ScoreAddUp;
+            LevelManager.Current.CurrentScore += _box.ScoreAddUp;
             _progressUi = GetNode<ProgressUi>("../Forklift/UI/ProgressUI");
-            _progressUi.SetScoreLabel(LevelManager.Current.Score);
-            LevelManager.Current.PrintScore();
+            _progressUi.SetScoreLabel(LevelManager.Current.CurrentScore);
+
         }
 
         if (body is Forklift forklift)
