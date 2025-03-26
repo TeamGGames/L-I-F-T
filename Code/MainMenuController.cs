@@ -17,7 +17,7 @@ public partial class MainMenuController : Control
 	[Export] private SettingsWindow _settingsWindow = null;
 
 	[Export] private SpawnPoint _spawner = null;
-	[Export] private double _maxEnergy = 30;
+	[Export] private double _maxEnergy = 45;
 
 	private List<string> _levels = new List<string> {Config.Level1, Config.Level2};
 	private PackedScene _spawnPointScene = null;

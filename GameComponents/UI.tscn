@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Code/MainMenuController.cs" id="2_4nj08"]
 
 [node name="UI" type="Control" node_paths=PackedStringArray("_gameOverPanel", "_quitButton", "_restartButton", "_menuController", "_1stScore", "_2ndScore", "_3rdScore")]
+z_index = 10
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -22,6 +23,7 @@ _2ndScore = NodePath("GameOverPanel/GameOverBox/2ndHighScore")
 _3rdScore = NodePath("GameOverPanel/GameOverBox/3rdHighScore")
 
 [node name="GameOverPanel" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

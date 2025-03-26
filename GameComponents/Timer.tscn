@@ -4,4 +4,4 @@
 
 [node name="Timer" type="Node"]
 script = ExtResource("1_vytex")
-_time = 30.0
+_time = 45.0

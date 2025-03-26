@@ -32,19 +32,25 @@ public partial class SpawnPoint : Node2D
 		switch (level)
 		{
 			case 0:
-			_spawnerList.Insert(0, new Vector2 (429, 107));
-			_spawnerList.Insert(0, new Vector2 (436, 652));
-			_spawnerList.Insert(0, new Vector2 (127, 1158));
-			_spawnerList.Insert(0, new Vector2 (1290, 724));
-			_spawnerList.Insert(0, new Vector2 (2075, 156));
+			_spawnerList.Insert(0, new Vector2 (711, 1586));
+			_spawnerList.Insert(0, new Vector2 (182, 151));
+			_spawnerList.Insert(0, new Vector2 (1507, 1227));
+			_spawnerList.Insert(0, new Vector2 (1684, 566));
+			_spawnerList.Insert(0, new Vector2 (2620, 120));
+			_spawnerList.Insert(0, new Vector2 (2843, 1049));
+			_spawnerList.Insert(0, new Vector2 (2424, 2110));
+			_spawnerList.Insert(0, new Vector2 (1725, 2151));
 			break;
 
 			case 1:
-			_spawnerList.Insert(0, new Vector2 (429, 107));
-			_spawnerList.Insert(0, new Vector2 (436, 652));
-			_spawnerList.Insert(0, new Vector2 (127, 1158));
-			_spawnerList.Insert(0, new Vector2 (1290, 724));
-			_spawnerList.Insert(0, new Vector2 (2075, 156));
+			_spawnerList.Insert(0, new Vector2 (156, 723));
+			_spawnerList.Insert(0, new Vector2 (140, 2072));
+			_spawnerList.Insert(0, new Vector2 (1387, 1739));
+			_spawnerList.Insert(0, new Vector2 (2238, 773));
+			_spawnerList.Insert(0, new Vector2 (2990, 1767));
+			_spawnerList.Insert(0, new Vector2 (2923, 154));
+			_spawnerList.Insert(0, new Vector2 (1772, 468));
+			_spawnerList.Insert(0, new Vector2 (559, 2062));
 			break;
 
 		}

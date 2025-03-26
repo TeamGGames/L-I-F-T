@@ -39,7 +39,8 @@ text = "1000"
 [node name="ProgressBar" type="TextureProgressBar" parent="HBoxContainer"]
 layout_direction = 3
 layout_mode = 2
-max_value = 30.0
+max_value = 45.0
 step = 0.01
-value = 30.0
+value = 45.0
 texture_progress = ExtResource("3_2i2hi")
+texture_progress_offset = Vector2(0, 30)
