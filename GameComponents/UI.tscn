@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Code/Ui.cs" id="1_6tenn"]
 [ext_resource type="Script" path="res://Code/MainMenuController.cs" id="2_4nj08"]
 
-[node name="UI" type="Control" node_paths=PackedStringArray("_gameOverPanel", "_quitButton", "_restartButton", "_menuController")]
+[node name="UI" type="Control" node_paths=PackedStringArray("_gameOverPanel", "_quitButton", "_restartButton", "_menuController", "_1stScore", "_2ndScore", "_3rdScore")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -17,6 +17,9 @@ _gameOverPanel = NodePath("GameOverPanel")
 _quitButton = NodePath("GameOverPanel/GameOverBox/QuitButton")
 _restartButton = NodePath("GameOverPanel/GameOverBox/RestartButton")
 _menuController = NodePath("MainMenuController")
+_1stScore = NodePath("GameOverPanel/GameOverBox/1stHighScore")
+_2ndScore = NodePath("GameOverPanel/GameOverBox/2ndHighScore")
+_3rdScore = NodePath("GameOverPanel/GameOverBox/3rdHighScore")
 
 [node name="GameOverPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -56,7 +59,7 @@ text = "Restart
 
 [node name="TEXT" type="Label" parent="GameOverPanel/GameOverBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 31
 text = "HIGH SCORES:"
 horizontal_alignment = 1
 

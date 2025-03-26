@@ -9,6 +9,9 @@ public partial class Ui : Control
 	[Export] private Button _quitButton = null;
 	[Export] private Button _restartButton = null;
 	[Export] private MainMenuController _menuController = null;
+	[Export] private Label _1stScore = null;
+	[Export] private Label _2ndScore = null;
+	[Export] private Label _3rdScore = null;
 
 	private SceneTree _mainMenuSceneTree = null;
 	// Called when the node enters the scene tree for the first time.
@@ -37,5 +40,21 @@ public partial class Ui : Control
 	public void ToggleGameOver()
 	{
 		_gameOverPanel.Visible = true;
+	}
+
+	public void UpdateHighScores(int score1, int score2, int score3)
+	{
+		if (score1 != 0)
+		{
+			_1stScore.Text = $"1. {score1}";
+		}
+		if (score2 != 0)
+		{
+			_2ndScore.Text = $"2. {score2}";
+		}
+		if (score3 != 0)
+		{
+			_3rdScore.Text = $"3. {score3}";
+		}
 	}
 }

@@ -372,10 +372,37 @@ public string LoadFromFile (string path, string fileName)
 }
 	public void GameOver()
 	{
+		int csvScore1 = 0;
+		int csvScore2 = 0;
+		int csvScore3 = 0;
 		Save();
 		HighScore highScore = new HighScore();
 
-		highScore.AddScore(_highScore);
+		highScore.AddScore(_currentScore);
+		List<int> scores = highScore.LoadScore();
+		if (scores == null)
+		{
+			GD.PrintErr("BIG mistake!!!");
+		}
+		else {
+			for (int i = 0; i < scores.Count; i++)
+		{
+			switch (i)
+			{
+				case 0:
+					csvScore1 = scores[0];
+					break;
+				case 1:
+					csvScore2 = scores[1];
+					break;
+				case 2:
+					csvScore3 = scores[2];
+					break;
+			}
+		}
+		}
+
+		_ui.UpdateHighScores(csvScore1, csvScore2, csvScore3);
 		_isGameOver = false;
 		DestroyForklift();
 		DestroyBoxes();

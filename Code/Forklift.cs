@@ -44,10 +44,6 @@ public partial class Forklift : CharacterBody2D
 
 	public float StartAddedWeight { get { return _startAddedWeight; } }
 
-	// Reference to label which counts how many boxes are currently stacked and
-	// carried by the forklift.
-	[Export] public Label _stackedBoxesLabel = null;
-
 	// Distance from front wheel to rear wheel.
 	private float _wheelBase = 70.0f;
 
@@ -103,8 +99,6 @@ public partial class Forklift : CharacterBody2D
 		_stackedBoxes = new List<Box>();
 
 		// Initialise the counter of how many boxes carried by the forklift.
-
-		_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
 
 		// Initialise the _addedWeight to default value.
 
@@ -167,10 +161,6 @@ public partial class Forklift : CharacterBody2D
 						// Count the new value of _addedWeight. This will be used to reduce the speed of the forklift.
 
 						_addedWeight -= _reducedSpeedFromWeight;
-
-						// Update the amount of boxes carried shown on the label on the forklift.
-
-						_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
 					}
 				}
 			}
@@ -195,10 +185,6 @@ public partial class Forklift : CharacterBody2D
 						// _addedWeight variable would stack until the forklift cannot move even if empty.
 
 						_addedWeight = _startAddedWeight;
-
-						// Update the label with the new amount of carried boxes (= zero.)
-
-						_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
 
 						_readForRelease = false;
 				}
@@ -272,9 +258,6 @@ public partial class Forklift : CharacterBody2D
 
 			// Remove from the list.
 			_stackedBoxes.Remove(_stackedBoxes[0]);
-
-			// Update the label which tells how many boxes are carried.
-			_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
 
 			// Reset the _addedWeight factor. Otherwise it will keep on stacking
 			// and eventually the truck won't be able to move even when empty.
@@ -392,9 +375,6 @@ public partial class Forklift : CharacterBody2D
 
 					// Remove from the list.
 					_stackedBoxes.Remove(_stackedBoxes[0]);
-
-					// Update the label which tells how many boxes are carried.
-					_stackedBoxesLabel.Text = $"{_stackedBoxes.Count}";
 
 					// Reset the _addedWeight factor. Otherwise it will keep on stacking
 					// and eventually the truck won't be able to move even when empty.

@@ -16,7 +16,7 @@ size = Vector2(96, 90)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_6qksi"]
 gradient = SubResource("Gradient_hbwg2")
 
-[node name="Forklift" type="CharacterBody2D" node_paths=PackedStringArray("_stackedBoxesLabel")]
+[node name="Forklift" type="CharacterBody2D"]
 z_index = 3
 material = SubResource("CanvasItemMaterial_vtdxb")
 script = ExtResource("1_g0d5j")
@@ -26,7 +26,6 @@ _gearOne = 1.5
 _gearTwo = 2.25
 _gearThree = 3.0
 _reducedSpeedFromWeight = 0.15
-_stackedBoxesLabel = NodePath("StackedBoxesCount")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-0.78974, 3.57476)
