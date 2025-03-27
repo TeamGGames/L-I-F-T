@@ -1,18 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://cha3wvlaa8s5v"]
+[gd_scene load_steps=9 format=3 uid="uid://cha3wvlaa8s5v"]
 
 [ext_resource type="Script" path="res://Code/TouchControls.cs" id="1_pca2y"]
 [ext_resource type="Script" path="res://Code/MovementSlider.cs" id="1_u2v5k"]
 [ext_resource type="Texture2D" uid="uid://2dwhxmhbycnm" path="res://Assets/leftArrowRescaled.png" id="3_cnf2h"]
 [ext_resource type="Texture2D" uid="uid://nbtp4m5pjj08" path="res://Assets/rightArrowRescaled.png" id="4_3pwxp"]
 [ext_resource type="Texture2D" uid="uid://dggtbnrfjj0il" path="res://Assets/Settings_button.png" id="6_0oo6g"]
+[ext_resource type="Texture2D" uid="uid://bv3f0jjspnhyc" path="res://Assets/pausebutton_resized.png" id="6_sb7e6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8ai3"]
-size = Vector2(125, 340)
+size = Vector2(125, 275)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rd1wi"]
-size = Vector2(125, 340)
+size = Vector2(125, 275)
 
-[node name="TouchControls" type="Control"]
+[node name="TouchControls" type="Control" node_paths=PackedStringArray("_pauseScreen")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -26,6 +27,7 @@ offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pca2y")
+_pauseScreen = NodePath("Label")
 
 [node name="MovementSlider" type="VSlider" parent="."]
 layout_mode = 1
@@ -41,13 +43,13 @@ step = 0.0
 script = ExtResource("1_u2v5k")
 
 [node name="LeftButton" type="TouchScreenButton" parent="."]
-position = Vector2(977, 181)
+position = Vector2(973, 225)
 scale = Vector2(1.4, 1.3)
 texture_normal = ExtResource("3_cnf2h")
 shape = SubResource("RectangleShape2D_b8ai3")
 
 [node name="RightButton" type="TouchScreenButton" parent="."]
-position = Vector2(1153, 180)
+position = Vector2(1150, 225)
 scale = Vector2(1.4, 1.3)
 texture_normal = ExtResource("4_3pwxp")
 shape = SubResource("RectangleShape2D_rd1wi")
@@ -62,6 +64,24 @@ texture_normal = ExtResource("6_0oo6g")
 position = Vector2(34, 506)
 texture_normal = ExtResource("6_0oo6g")
 
+[node name="PauseButton" type="TouchScreenButton" parent="."]
+position = Vector2(1204, 15)
+scale = Vector2(0.664062, 0.593496)
+texture_normal = ExtResource("6_sb7e6")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="LeftButton" to="." method="LeftButtonDown"]
 [connection signal="released" from="LeftButton" to="." method="LeftButtonUp"]
 [connection signal="pressed" from="RightButton" to="." method="RightButtonDown"]
@@ -70,3 +90,4 @@ texture_normal = ExtResource("6_0oo6g")
 [connection signal="released" from="Grab_Release" to="." method="GrabReleaseButtonUp"]
 [connection signal="pressed" from="Reverse" to="." method="ReverseDown"]
 [connection signal="released" from="Reverse" to="." method="ReverseUp"]
+[connection signal="pressed" from="PauseButton" to="." method="PauseButtonDown"]

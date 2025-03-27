@@ -431,6 +431,25 @@ public string LoadFromFile (string path, string fileName)
 	}
 
 }
+
+	public void Pause()
+	{
+		if(_levelSceneTree == null)
+		{
+			_levelSceneTree = GetTree();
+		}
+		Engine.TimeScale = 0;
+	}
+	public void Resume()
+	{
+		if(_levelSceneTree == null)
+		{
+			_levelSceneTree = GetTree();
+		}
+		Engine.TimeScale = 1;
+	}
+
+
 	public void GameOver()
 	{
 		int csvScore1 = 0;

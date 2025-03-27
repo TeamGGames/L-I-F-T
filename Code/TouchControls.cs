@@ -5,6 +5,8 @@ namespace ForkliftGame;
 public partial class TouchControls : Control
 {
 	[Export] private Forklift _forklift;
+	[Export] private Label _pauseScreen;
+	public bool _pause = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -12,10 +14,26 @@ public partial class TouchControls : Control
 		_forklift = GetParent().GetParent<Forklift>();
 	}
 
+	private void PauseButtonDown()
+	{
+		if (!_pause) {
+			LevelManager.Current.Pause();
+			_pause = true;
+			_pauseScreen.Visible = true;
+		}
+		else
+		{
+			LevelManager.Current.Resume();
+			_pause = false;
+			_pauseScreen.Visible = false;
+		}
+
+	}
+
+
 	private void RightButtonDown()
 	{
 		_forklift._rightButtonPressed = true;
-		GD.Print("right pressed");
 	}
 
 	private void RightButtonUp()
