@@ -14,6 +14,7 @@ public partial class SpawnPoint : Node2D
 	}
 	public List<Vector2> _spawnerList = new List<Vector2>();
 	public List<Vector2> _loadingAreaSpawnerList = new List<Vector2>();
+	public int randomLoadingAreaIndex = 0;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -71,6 +72,7 @@ public partial class SpawnPoint : Node2D
 		{
 			case 0:
 			_loadingAreaSpawnerList.Insert(0, new Vector2 (1346, 158));
+
 			break;
 
 			case 1:
@@ -110,10 +112,12 @@ public partial class SpawnPoint : Node2D
 	}
 	public Vector2 GetRandomLoadingAreaPosition()
 	{
-		int randomIndex = GD.RandRange(0 ,_loadingAreaSpawnerList.Count - 1);
-		Vector2 spawnPoint = _loadingAreaSpawnerList[randomIndex];
-		_loadingAreaSpawnerList.RemoveAt(randomIndex);
+		randomLoadingAreaIndex = GD.RandRange(0 ,_loadingAreaSpawnerList.Count - 1);
+		Vector2 spawnPoint = _loadingAreaSpawnerList[randomLoadingAreaIndex];
+		_loadingAreaSpawnerList.RemoveAt(randomLoadingAreaIndex);
 		return spawnPoint;
 	}
+
+
 }
 }

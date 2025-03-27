@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cha3wvlaa8s5v"]
+[gd_scene load_steps=12 format=3 uid="uid://cha3wvlaa8s5v"]
 
 [ext_resource type="Script" path="res://Code/TouchControls.cs" id="1_pca2y"]
 [ext_resource type="Script" path="res://Code/MovementSlider.cs" id="1_u2v5k"]
 [ext_resource type="Texture2D" uid="uid://2dwhxmhbycnm" path="res://Assets/leftArrowRescaled.png" id="3_cnf2h"]
 [ext_resource type="Texture2D" uid="uid://nbtp4m5pjj08" path="res://Assets/rightArrowRescaled.png" id="4_3pwxp"]
-[ext_resource type="Texture2D" uid="uid://dggtbnrfjj0il" path="res://Assets/Settings_button.png" id="6_0oo6g"]
-[ext_resource type="Texture2D" uid="uid://bv3f0jjspnhyc" path="res://Assets/pausebutton_resized.png" id="6_sb7e6"]
+[ext_resource type="Texture2D" uid="uid://brdg5dbx3ow4h" path="res://Assets/NEWgrab&release2.png" id="5_j8pxa"]
+[ext_resource type="Texture2D" uid="uid://d0pa85jq0dond" path="res://Assets/reverse2.png" id="6_qpxqu"]
+[ext_resource type="Script" path="res://Code/MainMenuController.cs" id="7_o65wy"]
+[ext_resource type="Texture2D" uid="uid://b8tseurldlgib" path="res://Assets/NEWgrab&release.png" id="7_ultrd"]
+[ext_resource type="Texture2D" uid="uid://d1kiyirrfd1lt" path="res://Assets/pausebutton2.png" id="8_os1gf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8ai3"]
 size = Vector2(125, 275)
@@ -13,7 +16,7 @@ size = Vector2(125, 275)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rd1wi"]
 size = Vector2(125, 275)
 
-[node name="TouchControls" type="Control" node_paths=PackedStringArray("_pauseScreen")]
+[node name="TouchControls" type="Control" node_paths=PackedStringArray("_pauseScreen", "_mainMenuButton", "_restartButton", "_resumeButton", "_menuController")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -27,7 +30,11 @@ offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pca2y")
-_pauseScreen = NodePath("Label")
+_pauseScreen = NodePath("PauseBox")
+_mainMenuButton = NodePath("PauseBox/MainMenuButton")
+_restartButton = NodePath("PauseBox/RestartButton")
+_resumeButton = NodePath("PauseBox/ResumeButton")
+_menuController = NodePath("Node2D")
 
 [node name="MovementSlider" type="VSlider" parent="."]
 layout_mode = 1
@@ -56,20 +63,21 @@ shape = SubResource("RectangleShape2D_rd1wi")
 
 [node name="Grab_Release" type="TouchScreenButton" parent="."]
 z_index = 1
-position = Vector2(1033, 473)
-scale = Vector2(1.13568, 1.12613)
-texture_normal = ExtResource("6_0oo6g")
+position = Vector2(1035, 466)
+scale = Vector2(0.666667, 0.640777)
+texture_normal = ExtResource("5_j8pxa")
+texture_pressed = ExtResource("7_ultrd")
 
 [node name="Reverse" type="TouchScreenButton" parent="."]
 position = Vector2(34, 506)
-texture_normal = ExtResource("6_0oo6g")
+scale = Vector2(0.412141, 0.416667)
+texture_normal = ExtResource("6_qpxqu")
 
 [node name="PauseButton" type="TouchScreenButton" parent="."]
 position = Vector2(1204, 15)
-scale = Vector2(0.664062, 0.593496)
-texture_normal = ExtResource("6_sb7e6")
+texture_normal = ExtResource("8_os1gf")
 
-[node name="Label" type="Label" parent="."]
+[node name="PauseBox" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -77,10 +85,36 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+
+[node name="PauseMenu" type="Label" parent="PauseBox"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "PAUSED"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PauseBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Resume
+"
+
+[node name="RestartButton" type="Button" parent="PauseBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Restart Game
+"
+
+[node name="MainMenuButton" type="Button" parent="PauseBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Main Menu
+"
+
+[node name="Node2D" type="Control" parent="."]
+anchors_preset = 0
+script = ExtResource("7_o65wy")
 
 [connection signal="pressed" from="LeftButton" to="." method="LeftButtonDown"]
 [connection signal="released" from="LeftButton" to="." method="LeftButtonUp"]

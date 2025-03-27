@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://cyj0a1ui0divw"]
 
 [ext_resource type="Script" path="res://Code/Battery.cs" id="1_h4iu8"]
-[ext_resource type="Texture2D" uid="uid://dtncqlqf31cfl" path="res://Assets/Battery.png" id="1_oc8v1"]
+[ext_resource type="Texture2D" uid="uid://b38s7ebuivwmv" path="res://Assets/battery_powerup.png" id="2_yv5ya"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ckr51"]
-size = Vector2(100, 55)
+size = Vector2(76, 79)
 
 [node name="BatteryArea2D" type="Area2D"]
 z_index = 3
@@ -14,7 +14,7 @@ script = ExtResource("1_h4iu8")
 _addedTime = 15.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_oc8v1")
+texture = ExtResource("2_yv5ya")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)

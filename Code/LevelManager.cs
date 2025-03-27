@@ -23,6 +23,10 @@ public partial class LevelManager : Node2D
 
 	[Export] private Ui _ui = null;
 	[Export] private SpawnPoint _spawner = null;
+	[Export] private Node2D _signVariant1 = null;
+	[Export] private Node2D _signVariant2 = null;
+	[Export] private Node2D _signVariant3 = null;
+	private List<Node2D> _signVariantList = new List<Node2D>();
 
 	private SceneTree _levelSceneTree = null;
 	private PackedScene _forkliftScene = null;
@@ -69,6 +73,9 @@ public partial class LevelManager : Node2D
     public override void _Ready()
     {
         _current = this;
+		_signVariantList.Add(_signVariant3);
+		_signVariantList.Add(_signVariant2);
+		_signVariantList.Add(_signVariant1);
 		StartGame();
     }
 
@@ -155,9 +162,9 @@ public partial class LevelManager : Node2D
 
 
 		_spawner.fillSpawnerList(_nextLevel);
-
 		_forklift.GlobalPosition = _loadingArea.GlobalPosition;
         _progressUi.SetScoreLabel(LevelManager.Current.CurrentScore);
+
 
 		DestroyBoxes();
 
@@ -167,6 +174,8 @@ public partial class LevelManager : Node2D
 		}
 
 		SpawnBattery(CreateSpawnPoints());
+		GD.Print(_spawner.randomLoadingAreaIndex);
+		_signVariantList[_spawner.randomLoadingAreaIndex].Visible = true;
 	}
 
         private void DestroyLoadingArea()
@@ -452,6 +461,7 @@ public string LoadFromFile (string path, string fileName)
 
 	public void GameOver()
 	{
+		_signVariantList[_spawner.randomLoadingAreaIndex].Visible = false;
 		int csvScore1 = 0;
 		int csvScore2 = 0;
 		int csvScore3 = 0;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://cggl2h6jjg142"]
+[gd_scene load_steps=10 format=4 uid="uid://cggl2h6jjg142"]
 
 [ext_resource type="Script" path="res://Code/LevelManager.cs" id="1_raiq2"]
 [ext_resource type="PackedScene" uid="uid://dhkj3eo7sf74c" path="res://GameComponents/UI.tscn" id="3_04cg4"]
@@ -6,11 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://fesxsculso7w" path="res://GameComponents/Darkness.tscn" id="5_tw3ic"]
 [ext_resource type="PackedScene" uid="uid://rnev0gpmfjo0" path="res://GameComponents/Shelves.tscn" id="6_p06fa"]
 [ext_resource type="PackedScene" uid="uid://dqxe4j0vkyhma" path="res://GameComponents/FloorTiles.tscn" id="7_1jy7n"]
+[ext_resource type="Texture2D" uid="uid://di4ejrpin14ji" path="res://Assets/exitsignDOWN.png" id="7_ufyit"]
+[ext_resource type="Texture2D" uid="uid://b2t8jy5vxarkw" path="res://Assets/exitsignUP.png" id="9_1q7s1"]
+[ext_resource type="Texture2D" uid="uid://p3favlman7nk" path="res://Assets/exitsignLEFT.png" id="10_snbbh"]
 
-[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_ui", "_spawner")]
+[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_ui", "_spawner", "_signVariant1", "_signVariant2", "_signVariant3")]
 script = ExtResource("1_raiq2")
 _ui = NodePath("UI")
 _spawner = NodePath("SpawnPoint")
+_signVariant1 = NodePath("Signs/Variant1")
+_signVariant2 = NodePath("Signs/Variant2")
+_signVariant3 = NodePath("Signs/Variant3")
 
 [node name="UI" parent="." instance=ExtResource("3_04cg4")]
 offset_left = 374.4
@@ -72,3 +78,26 @@ theme_override_font_sizes/font_size = 42
 text = "Power ups will help you by 
 adding charge to your battery!
 Rest is for you to find out!"
+
+[node name="Signs" type="Node2D" parent="."]
+
+[node name="Variant1" type="Node2D" parent="Signs"]
+visible = false
+
+[node name="DOWN" type="Sprite2D" parent="Signs/Variant1"]
+position = Vector2(556, 361)
+texture = ExtResource("7_ufyit")
+
+[node name="UP" type="Sprite2D" parent="Signs/Variant1"]
+position = Vector2(1363, 630)
+texture = ExtResource("9_1q7s1")
+
+[node name="LEFT" type="Sprite2D" parent="Signs/Variant1"]
+position = Vector2(2370, 752)
+texture = ExtResource("10_snbbh")
+
+[node name="Variant2" type="Node2D" parent="Signs"]
+visible = false
+
+[node name="Variant3" type="Node2D" parent="Signs"]
+visible = false
