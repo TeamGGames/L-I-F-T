@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Code/MovementSlider.cs" id="1_u2v5k"]
 [ext_resource type="Texture2D" uid="uid://2dwhxmhbycnm" path="res://Assets/leftArrowRescaled.png" id="3_cnf2h"]
 [ext_resource type="Texture2D" uid="uid://nbtp4m5pjj08" path="res://Assets/rightArrowRescaled.png" id="4_3pwxp"]
-[ext_resource type="Texture2D" uid="uid://csmxfjab21o7g" path="res://Assets/Grab_Release2.png" id="5_bqrci"]
+[ext_resource type="Texture2D" uid="uid://dggtbnrfjj0il" path="res://Assets/Settings_button.png" id="6_0oo6g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8ai3"]
 size = Vector2(125, 340)
@@ -36,7 +36,6 @@ offset_top = 40.0
 offset_right = 193.0
 offset_bottom = 118.0
 grow_vertical = 2
-min_value = -1.0
 max_value = 2.5
 step = 0.0
 script = ExtResource("1_u2v5k")
@@ -55,9 +54,13 @@ shape = SubResource("RectangleShape2D_rd1wi")
 
 [node name="Grab_Release" type="TouchScreenButton" parent="."]
 z_index = 1
-position = Vector2(1005, 448)
-scale = Vector2(1.13568, 0.876733)
-texture_normal = ExtResource("5_bqrci")
+position = Vector2(1033, 473)
+scale = Vector2(1.13568, 1.12613)
+texture_normal = ExtResource("6_0oo6g")
+
+[node name="Reverse" type="TouchScreenButton" parent="."]
+position = Vector2(34, 506)
+texture_normal = ExtResource("6_0oo6g")
 
 [connection signal="pressed" from="LeftButton" to="." method="LeftButtonDown"]
 [connection signal="released" from="LeftButton" to="." method="LeftButtonUp"]
@@ -65,3 +68,5 @@ texture_normal = ExtResource("5_bqrci")
 [connection signal="released" from="RightButton" to="." method="RightButtonUp"]
 [connection signal="pressed" from="Grab_Release" to="." method="GrabReleaseButtonDown"]
 [connection signal="released" from="Grab_Release" to="." method="GrabReleaseButtonUp"]
+[connection signal="pressed" from="Reverse" to="." method="ReverseDown"]
+[connection signal="released" from="Reverse" to="." method="ReverseUp"]

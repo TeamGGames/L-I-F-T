@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dh6p7p856h1od"]
+[gd_scene load_steps=4 format=3 uid="uid://dh6p7p856h1od"]
 
 [ext_resource type="Script" path="res://Code/ProgressUi.cs" id="1_gk41f"]
+[ext_resource type="Texture2D" uid="uid://b4mi038pcjkr3" path="res://Assets/Battery2.png" id="2_bvcev"]
 [ext_resource type="Texture2D" uid="uid://cxb1vsglpv6ct" path="res://Assets/progressbar1.png" id="3_2i2hi"]
 
 [node name="ProgressUI" type="Control" node_paths=PackedStringArray("_score", "_highScore")]
@@ -18,9 +19,10 @@ _highScore = NodePath("HBoxContainer/HighScore")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 99.0
+offset_bottom = 135.0
 grow_horizontal = 2
 theme_override_constants/separation = 50
+alignment = 1
 
 [node name="HighScore" type="Label" parent="HBoxContainer"]
 layout_direction = 2
@@ -39,8 +41,11 @@ text = "1000"
 [node name="ProgressBar" type="TextureProgressBar" parent="HBoxContainer"]
 layout_direction = 3
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
 max_value = 45.0
 step = 0.01
 value = 45.0
+texture_under = ExtResource("2_bvcev")
 texture_progress = ExtResource("3_2i2hi")
-texture_progress_offset = Vector2(0, 30)

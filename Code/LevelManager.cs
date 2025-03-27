@@ -19,6 +19,7 @@ public partial class LevelManager : Node2D
 	[Export] private string _batteryScenePath = "res://GameComponents/BatteryPowerUp.tscn";
 	[Export] private string _spawnPointScenePath = "res://GameComponents/SpawnPoint.tscn";
 	[Export] private string _timerScenePath = "res://GameComponents/Timer.tscn";
+	[Export] private string _loadingAreaScenePath = "res://Levels/loading_area.tscn";
 
 	[Export] private Ui _ui = null;
 	[Export] private SpawnPoint _spawner = null;
@@ -29,13 +30,14 @@ public partial class LevelManager : Node2D
 	private PackedScene _batteryScene = null;
 	private PackedScene _spawnPointScene = null;
 	private PackedScene _timerScene = null;
+	private PackedScene _loadingAreaScene = null;
 	private static LevelManager _current = null;
 
 	private Forklift _forklift = null;
 	private Box _box = null;
 	private Timer _timer = null;
 	private SpawnPoint _spawnPoint = null;
-	[Export] private LoadingArea _loadingArea = null;
+	private LoadingArea _loadingArea = null;
 	private Battery _battery = null;
 			public static LevelManager Current
 			{
@@ -55,7 +57,8 @@ public partial class LevelManager : Node2D
 
 	private List<Box> _spawnedBoxes = new List<Box>();
 	private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
-	private List<string> _levels = new List<string> {Config.Level1, Config.Level2};
+	private List<SpawnPoint> _loadingAreaPoints = new List<SpawnPoint>();
+	private List<string> _levels = new List<string> {Config.Level0, Config.Level1, Config.Level2};
 
 	public int _nextLevel = 0;
 	public bool _isGameOver = false;
@@ -82,6 +85,26 @@ public partial class LevelManager : Node2D
 		}
 		return _forkliftScene.Instantiate<Forklift>();
 	}
+	private void CreateLoadingArea(Vector2 spawnPosition)
+	{
+
+		if (_loadingAreaScene == null)
+		{
+			_loadingAreaScene = ResourceLoader.Load<PackedScene>(_loadingAreaScenePath);
+			if (_loadingAreaScene == null)
+			{
+				GD.PrintErr("Box scene cannot be found!");
+			}
+		}
+		_loadingArea = _loadingAreaScene.Instantiate<LoadingArea>();
+
+
+		AddChild(_loadingArea);
+
+		_loadingArea.GlobalPosition = spawnPosition;
+
+	}
+
 	private Timer CreateTimer()
 	{
 		if (_timerScene == null)
@@ -114,6 +137,10 @@ public partial class LevelManager : Node2D
 		{
 			GD.PrintErr("Load error");
 		}
+		DestroyLoadingArea();
+
+		_spawner.fillLoadingAreaSpawnerList(_nextLevel);
+		CreateLoadingArea(CreateLoadingAreaSpawnPoint());
 		_progressUi = GetNode<ProgressUi>("Forklift/UI/ProgressUI");
 		// highscore
 
@@ -129,7 +156,7 @@ public partial class LevelManager : Node2D
 
 		_spawner.fillSpawnerList(_nextLevel);
 
-		_forklift.GlobalPosition = _loadingArea.SpawnPosition;
+		_forklift.GlobalPosition = _loadingArea.GlobalPosition;
         _progressUi.SetScoreLabel(LevelManager.Current.CurrentScore);
 
 		DestroyBoxes();
@@ -142,7 +169,40 @@ public partial class LevelManager : Node2D
 		SpawnBattery(CreateSpawnPoints());
 	}
 
-	public void DestroyForklift()
+        private void DestroyLoadingArea()
+        {
+            if (_loadingArea != null)
+		{
+			_loadingArea.QueueFree();
+
+			_loadingArea = null;
+		}
+		if (_loadingAreaPoints.Count > 0)
+		{
+			_loadingAreaPoints[0].QueueFree();
+		}
+		_loadingAreaPoints.Clear();
+        }
+
+        private Vector2 CreateLoadingAreaSpawnPoint()
+        {
+            if (_spawnPointScene == null)
+		{
+			_spawnPointScene = ResourceLoader.Load<PackedScene>(_spawnPointScenePath);
+			if (_spawnPointScene == null)
+			{
+				GD.PrintErr("Box scene cannot be found!");
+			}
+		}
+		_spawnPoint = _spawnPointScene.Instantiate<SpawnPoint>();
+
+		AddChild(_spawnPoint);
+		_spawnPoint.GlobalPosition = _spawner.GetRandomLoadingAreaPosition();
+		_loadingAreaPoints.Insert(0, _spawnPoint);
+		return _spawnPoint.GlobalPosition;
+        }
+
+        public void DestroyForklift()
 	{
 		if (_forklift != null)
 		{
@@ -236,6 +296,7 @@ public void ClearSpawnPoints()
 		}
 		_spawnPoints.Clear();
 		_spawner.ClearSpawnerList();
+		_spawner.ClearLoadingAreaSpawnerList();
 }
 
 public Vector2 CreateSpawnPoints()
@@ -258,7 +319,7 @@ public Vector2 CreateSpawnPoints()
 	public void GoToNextLevel()
 	{
 		_levelSceneTree = GetTree();
-		_nextLevel = GD.RandRange(0 ,_levels.Count - 1);
+		_nextLevel = GD.RandRange(1, _levels.Count - 1);
 		_spawner.fillSpawnerList(_nextLevel);
 		_levelSceneTree.ChangeSceneToFile(_levels[_nextLevel]);
 		Save();

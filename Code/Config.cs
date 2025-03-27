@@ -16,6 +16,7 @@ public static class Config
     public const string TurnRightAction = "right";
     public const string ReverseAction = "reverse";
     public const string ForwardAction = "forward";
+    public const string Level0 = "res://Levels/LEVEL0.tscn";
     public const string Level1 = "res://Levels/LEVEL1.tscn";
     public const string Level2 = "res://Levels/LEVEL2.tscn";
     public const string HighScoreFile = "user://highscore.csv";

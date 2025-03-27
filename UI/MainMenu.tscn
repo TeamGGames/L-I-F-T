@@ -11,7 +11,7 @@
 Button/font_sizes/font_size = 39
 Button/fonts/font = ExtResource("1_45v82")
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_settingsButton", "_soundButton", "_settingsWindow", "_spawner")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_tutorialButton", "_settingsButton", "_soundButton", "_settingsWindow", "_spawner")]
 clip_contents = true
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
@@ -23,6 +23,7 @@ grow_vertical = 2
 theme = SubResource("Theme_x2x72")
 script = ExtResource("1_m87ug")
 _startButton = NodePath("BackGround/ButtonContainer/StartButton")
+_tutorialButton = NodePath("BackGround/ButtonContainer/TutorialButton")
 _settingsButton = NodePath("BackGround/HBoxContainer/SettingsButton")
 _soundButton = NodePath("BackGround/HBoxContainer/MusicToggle")
 _settingsWindow = NodePath("SettingsWindow")
@@ -67,7 +68,11 @@ grow_vertical = 2
 
 [node name="StartButton" type="Button" parent="BackGround/ButtonContainer"]
 layout_mode = 2
-text = "Start Game"
+text = "PLAY"
+
+[node name="TutorialButton" type="Button" parent="BackGround/ButtonContainer"]
+layout_mode = 2
+text = "TUTORIAL"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BackGround"]
 layout_mode = 1

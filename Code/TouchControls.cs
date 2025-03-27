@@ -42,6 +42,15 @@ public partial class TouchControls : Control
 	{
 		_forklift._grabReleasePressed = false;
 	}
+	private void ReverseDown()
+	{
+		_forklift._reversePressed = true;
+	}
+
+	private void ReverseUp()
+	{
+		_forklift._reversePressed = false;
+	}
 
 
 

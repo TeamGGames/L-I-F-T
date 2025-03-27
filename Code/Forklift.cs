@@ -87,6 +87,7 @@ public partial class Forklift : CharacterBody2D
 	public bool _leftButtonPressed = false;
 	public bool _rightButtonPressed = false;
 	public bool _grabReleasePressed = false;
+	public bool _reversePressed = false;
 	public bool _inArea = false;
 	public bool _readForRelease = false;
 
@@ -235,7 +236,7 @@ public partial class Forklift : CharacterBody2D
 		{
 			_acceleration = Transform.X * _enginePower * (float)SpeedInput * _addedWeight;
 		}
-		else if (SpeedInput < 0)
+		else if (_reversePressed)
 		{
 			_acceleration =  Transform.X * _reversePower;
 		}

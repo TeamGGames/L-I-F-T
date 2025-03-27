@@ -11,6 +11,7 @@ public partial class MainMenuController : Control
 {
 
 	[Export] private Button _startButton = null;
+	[Export] private Button _tutorialButton = null;
 	[Export] private Button _settingsButton = null;
 	[Export] private Button _soundButton = null;
 
@@ -19,7 +20,7 @@ public partial class MainMenuController : Control
 	[Export] private SpawnPoint _spawner = null;
 	[Export] private double _maxEnergy = 45;
 
-	private List<string> _levels = new List<string> {Config.Level1, Config.Level2};
+	private List<string> _levels = new List<string> {Config.Level0, Config.Level1, Config.Level2};
 	private PackedScene _spawnPointScene = null;
 	private string _spawnPointScenePath = "res://GameComponents/SpawnPoint.tscn";
 
@@ -36,10 +37,11 @@ public partial class MainMenuController : Control
 			{
 				GD.PrintErr("Scene tree not found");
 			}
-			if (_startButton != null && _settingsButton != null)
+			if (_startButton != null && _settingsButton != null && _tutorialButton != null)
 			{
 				_startButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnStartPressed)));
 				_settingsButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnSettingsPressed)));
+				_tutorialButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnTutorialPressed)));
 			}
 	}
 
@@ -49,7 +51,18 @@ public partial class MainMenuController : Control
 		{
 			AddSpawnPointChild();
 		}
-		_nextLevel = GD.RandRange(0 ,_levels.Count - 1);
+		_nextLevel = GD.RandRange(1 ,_levels.Count - 1);
+		_spawner.fillSpawnerList(_nextLevel);
+		_mainMenuSceneTree.ChangeSceneToFile(_levels[_nextLevel]);
+		InitializeLevel();
+	}
+	public void OnTutorialPressed()
+	{
+		if (_spawner == null)
+		{
+			AddSpawnPointChild();
+		}
+		_nextLevel = 0;
 		_spawner.fillSpawnerList(_nextLevel);
 		_mainMenuSceneTree.ChangeSceneToFile(_levels[_nextLevel]);
 		InitializeLevel();
@@ -68,8 +81,14 @@ public partial class MainMenuController : Control
 	public void InitializeLevel()
 	{
 		Godot.Collections.Dictionary saveData = new Godot.Collections.Dictionary();
-
-			saveData.Add("EnergyLeft", _maxEnergy);
+			if (_nextLevel == 0)
+			{
+				saveData.Add("EnergyLeft", 100);
+			}
+			else
+			{
+				saveData.Add("EnergyLeft", _maxEnergy);
+			}
 			saveData.Add("NextLevel", _nextLevel);
 			saveData.Add("Score", 0);
 

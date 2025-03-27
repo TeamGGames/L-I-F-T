@@ -1,22 +1,16 @@
-[gd_scene load_steps=8 format=4 uid="uid://btoat5wy7dcfv"]
+[gd_scene load_steps=7 format=4 uid="uid://btoat5wy7dcfv"]
 
 [ext_resource type="Script" path="res://Code/LevelManager.cs" id="1_ij7g0"]
-[ext_resource type="PackedScene" uid="uid://cil3obdg4vsi4" path="res://Levels/loading_area.tscn" id="2_jjmj1"]
 [ext_resource type="PackedScene" uid="uid://dhkj3eo7sf74c" path="res://GameComponents/UI.tscn" id="3_5jfww"]
 [ext_resource type="PackedScene" uid="uid://30mo0njbrnjk" path="res://GameComponents/SpawnPoint.tscn" id="4_124d4"]
 [ext_resource type="PackedScene" uid="uid://fesxsculso7w" path="res://GameComponents/Darkness.tscn" id="5_di03n"]
 [ext_resource type="PackedScene" uid="uid://rnev0gpmfjo0" path="res://GameComponents/Shelves.tscn" id="6_5rueo"]
 [ext_resource type="PackedScene" uid="uid://dqxe4j0vkyhma" path="res://GameComponents/FloorTiles.tscn" id="7_tky5q"]
 
-[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_ui", "_spawner", "_loadingArea")]
+[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_ui", "_spawner")]
 script = ExtResource("1_ij7g0")
 _ui = NodePath("UI")
 _spawner = NodePath("SpawnPoint")
-_loadingArea = NodePath("LoadingArea")
-
-[node name="LoadingArea" parent="." instance=ExtResource("2_jjmj1")]
-z_index = 2
-position = Vector2(159, 2073)
 
 [node name="UI" parent="." instance=ExtResource("3_5jfww")]
 offset_left = 374.4

@@ -13,6 +13,7 @@ public partial class SpawnPoint : Node2D
 		get { return _spawningPoint; }
 	}
 	public List<Vector2> _spawnerList = new List<Vector2>();
+	public List<Vector2> _loadingAreaSpawnerList = new List<Vector2>();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -32,6 +33,14 @@ public partial class SpawnPoint : Node2D
 		switch (level)
 		{
 			case 0:
+			_spawnerList.Insert(0, new Vector2 (1406, 587));
+			_spawnerList.Insert(0, new Vector2 (2076, 604));
+			_spawnerList.Insert(0, new Vector2 (976, 407));
+			_spawnerList.Insert(0, new Vector2 (124, 584));
+			_spawnerList.Insert(0, new Vector2 (1743, 379));
+			break;
+
+			case 1:
 			_spawnerList.Insert(0, new Vector2 (711, 1586));
 			_spawnerList.Insert(0, new Vector2 (182, 151));
 			_spawnerList.Insert(0, new Vector2 (1507, 1227));
@@ -42,7 +51,7 @@ public partial class SpawnPoint : Node2D
 			_spawnerList.Insert(0, new Vector2 (1725, 2151));
 			break;
 
-			case 1:
+			case 2:
 			_spawnerList.Insert(0, new Vector2 (156, 723));
 			_spawnerList.Insert(0, new Vector2 (140, 2072));
 			_spawnerList.Insert(0, new Vector2 (1387, 1739));
@@ -56,6 +65,30 @@ public partial class SpawnPoint : Node2D
 		}
 	}
 
+	public void fillLoadingAreaSpawnerList(int level)
+	{
+		switch (level)
+		{
+			case 0:
+			_loadingAreaSpawnerList.Insert(0, new Vector2 (1346, 158));
+			break;
+
+			case 1:
+			_loadingAreaSpawnerList.Insert(0, new Vector2 (159, 2073));
+			_loadingAreaSpawnerList.Insert(0, new Vector2 (1351, 161));
+			_loadingAreaSpawnerList.Insert(0, new Vector2 (173, 716));
+			break;
+
+			case 2:
+			_loadingAreaSpawnerList.Insert(0, new Vector2 (1346, 158));
+			_loadingAreaSpawnerList.Insert(0, new Vector2 (162, 1442));
+			_loadingAreaSpawnerList.Insert(0, new Vector2 (2555, 2079));
+			break;
+		}
+	}
+
+
+
 	public void ClearSpawnerList()
 	{
 
@@ -63,11 +96,23 @@ public partial class SpawnPoint : Node2D
 
 	}
 
+	public void ClearLoadingAreaSpawnerList()
+	{
+		_loadingAreaSpawnerList.Clear();
+	}
+
 	public Vector2 GetRandomPosition()
 	{
 		int randomIndex = GD.RandRange(0 ,_spawnerList.Count - 1);
 		Vector2 spawnPoint = _spawnerList[randomIndex];
 		_spawnerList.RemoveAt(randomIndex);
+		return spawnPoint;
+	}
+	public Vector2 GetRandomLoadingAreaPosition()
+	{
+		int randomIndex = GD.RandRange(0 ,_loadingAreaSpawnerList.Count - 1);
+		Vector2 spawnPoint = _loadingAreaSpawnerList[randomIndex];
+		_loadingAreaSpawnerList.RemoveAt(randomIndex);
 		return spawnPoint;
 	}
 }
