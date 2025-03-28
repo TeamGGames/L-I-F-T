@@ -1,0 +1,192 @@
+
+body {
+    background-image: url("SOLOCAT.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  .footertext {
+    text-align: center;
+  }
+
+.bigheading {
+    font-size: 125px;
+    text-align: center;
+}
+.maintext {
+    text-align: center;
+    background-color: rgba(255, 0, 0, 0.4);
+
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+@media all and (max-width: 750px) {
+  .maintext{
+    margin: 15px;
+  }
+     .navbar {
+
+        background-color: green;
+
+
+        }
+        .navbar .burgerMenu
+        {
+
+            float: right;
+
+        }
+
+        .navbar a {
+            color: blueviolet;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            display: block;
+            text-align: right;
+
+        }
+        #mySiteMap ul li {
+            list-style-type: none;
+
+
+        }
+        .bar1, .bar2, .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .change .bar1 {
+            -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+            transform: rotate(-45deg) translate(-9px, 6px);
+        }
+
+        .change .bar2 {
+            opacity: 0;
+        }
+
+        .change .bar3 {
+            -webkit-transform: rotate(45deg) translate(-8px, -8px);
+            transform: rotate(45deg) translate(-8px, -8px);
+        }
+.palkki {
+    display: none;
+}
+
+}
+
+@media all and (min-width: 751px)
+
+{
+  .container {
+    display: grid;
+    grid-template-areas:
+      "header header header"
+      "sidearealeft maincontent sidearearight"
+      "footer footer footer";
+    grid-template-columns: 1fr 10fr 1fr;
+  }
+
+  div.header {
+    grid-area: header;
+    background-color: rgb(185, 237, 14);
+  }
+  .sidearealeft {
+    background-color: rgb(101, 147, 227);
+    grid-area: sidearealeft;
+  }
+  .sidearearight {
+    grid-area: sidearearight;
+    background-color: rgb(101, 147, 227);
+  }
+  .maincontent {
+    grid-area: maincontent;
+    background-color: rgb(197, 30, 172);
+  }
+  .footer {
+    grid-area: footer;
+    background-color: rgb(14, 128, 138);
+  }
+
+    .navbar  {
+        display: none;
+    }
+
+
+/* Linkkinappulan taustan tyyli */
+.palkki {
+
+    border-radius: 1%;
+
+    background-color:#cc0e0e;
+    padding: 10px;
+
+  }
+.alasvalikko{
+    float: right;
+  }
+
+/* valitsinpalkin yksittäisen otsakkeen tyyli */
+.palkin-valitsin {
+
+    margin: 5px;
+    font-size: 16px;
+    color: rgb(163, 163, 172);
+    background-color: rgb(70, 70, 84);
+    box-shadow: 3px 3px black;
+  }
+
+/* palkin-valitsimen avaaman alaspäin aukeavan listan taustan tyyli */
+  .alasvalikkolista {
+    display: none; /*valikko ei sulkeudu automaattisesti ilman tätä */
+    position: absolute; /*tarvitaan jotta ei hyppäytä sisältöä alaspäin kun lista aukeaa alaspäin vaan menee muun sisällön päälle*/
+    background-color: #939599; /*taustaväri*/
+    padding: 5px;
+
+  }
+
+  /* palkin-valitsimen avaaman alaspäin aukeavan listan tyyli, käytännössä nollataan mahdolliset sijoitteluun
+    vaikuttavat tyylit */
+  ul {
+    list-style-type: none;
+    text-align: left;
+    margin: 0px;
+    padding: 0px;
+
+  }
+
+  /* palkin-valitsimen avaaman alaspäin aukeavan listan yksittäisten linkkien tyyli*/
+  .alasvalikkolista a {
+    float: none;
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+    color: rgb(72, 75, 74);
+  }
+
+  /* palkin-valitsimen avaaman alaspäin aukeavan listan yksittäisten linkkien hover-tyyli*/
+
+  .alasvalikkolista a:hover {
+    background-color: #a2a6aa;
+  }
+
+
+/* ylikirjoitetaan aiemmat arvot lopuksi, muuten näkyy erikoisesti
+  Yritin muuttaa näitä, mutta ilman meni täysin sekaisin koodi.
+  Tässä apuna käytetty w3schoolsin esimerkkejä*/
+
+.alasvalikko:hover .alasvalikkolista{
+
+  display: block;
+  }
+/* footerin tyyli, sisältää vain vähän tekstiä toistaiseksi*/
+
+
+}
