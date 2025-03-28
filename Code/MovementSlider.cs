@@ -44,7 +44,7 @@ public partial class MovementSlider : VSlider
 		}
     }
 
-    private void ResetSlider()
+    public void ResetSlider()
     {
         Value = 0;
     }

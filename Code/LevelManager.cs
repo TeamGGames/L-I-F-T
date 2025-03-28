@@ -20,12 +20,14 @@ public partial class LevelManager : Node2D
 	[Export] private string _spawnPointScenePath = "res://GameComponents/SpawnPoint.tscn";
 	[Export] private string _timerScenePath = "res://GameComponents/Timer.tscn";
 	[Export] private string _loadingAreaScenePath = "res://Levels/loading_area.tscn";
+	[Export] private string _pointsPowerUpScenePath = "res://GameComponents/PointsPowerUp.tscn";
 
 	[Export] private Ui _ui = null;
 	[Export] private SpawnPoint _spawner = null;
 	[Export] private Node2D _signVariant1 = null;
 	[Export] private Node2D _signVariant2 = null;
 	[Export] private Node2D _signVariant3 = null;
+	[Export] private int _addedScore = 50;
 	private List<Node2D> _signVariantList = new List<Node2D>();
 
 	private SceneTree _levelSceneTree = null;
@@ -34,6 +36,7 @@ public partial class LevelManager : Node2D
 	private PackedScene _batteryScene = null;
 	private PackedScene _spawnPointScene = null;
 	private PackedScene _timerScene = null;
+	private PackedScene _pointsPowerUpScene = null;
 	private PackedScene _loadingAreaScene = null;
 	private static LevelManager _current = null;
 
@@ -43,6 +46,8 @@ public partial class LevelManager : Node2D
 	private SpawnPoint _spawnPoint = null;
 	private LoadingArea _loadingArea = null;
 	private Battery _battery = null;
+	private MovementSlider _movementSlider = null;
+	private PointsPowerUp _pointsPowerUp = null;
 			public static LevelManager Current
 			{
 				get { return _current; }
@@ -70,7 +75,7 @@ public partial class LevelManager : Node2D
 	private List<int> _highScoreList = new List<int>();
 	private double _maxEnergy;
 
-    public override void _Ready()
+        public override void _Ready()
     {
         _current = this;
 		_signVariantList.Add(_signVariant3);
@@ -134,6 +139,8 @@ public partial class LevelManager : Node2D
 		DestroyForklift();
 		_forklift = CreateForklift();
 		AddChild(_forklift);
+		_movementSlider = GetNode<MovementSlider>("Forklift/UI/TouchControls/MovementSlider");
+		_movementSlider.ResetSlider();
 		DestroyTimer();
 		_timer = CreateTimer();
 		AddChild(_timer);
@@ -173,8 +180,10 @@ public partial class LevelManager : Node2D
 			SpawnBox(CreateSpawnPoints());
 		}
 
+		DestroyBattery();
+		DestroyPointsPowerUp();
 		SpawnBattery(CreateSpawnPoints());
-		GD.Print(_spawner.randomLoadingAreaIndex);
+		SpawnPointsPowerUp(CreateSpawnPoints());
 		_signVariantList[_spawner.randomLoadingAreaIndex].Visible = true;
 	}
 
@@ -289,6 +298,32 @@ public partial class LevelManager : Node2D
 			_battery = null;
 		}
 	}
+	public void SpawnPointsPowerUp(Vector2 position)
+	{
+		if (_pointsPowerUpScene == null)
+		{
+			_pointsPowerUpScene = ResourceLoader.Load<PackedScene>(_pointsPowerUpScenePath);
+			if (_pointsPowerUpScene == null)
+			{
+				GD.PrintErr("PointsPowerUp scene cannot be found!");
+			}
+		}
+		_pointsPowerUp =_pointsPowerUpScene.Instantiate<PointsPowerUp>();
+		_pointsPowerUp.SetCollisionLayerValue(1, true);
+		_pointsPowerUp.SetCollisionMaskValue(1, true);
+		AddChild(_pointsPowerUp);
+		_pointsPowerUp.GlobalPosition = position;
+	}
+
+	public void DestroyPointsPowerUp()
+	{
+		if (_pointsPowerUp != null)
+		{
+			_pointsPowerUp.QueueFree();
+
+			_pointsPowerUp = null;
+		}
+	}
 
 public void ClearSpawnPoints()
 {
@@ -327,6 +362,7 @@ public Vector2 CreateSpawnPoints()
 }
 	public void GoToNextLevel()
 	{
+		CurrentScore += _addedScore;
 		_levelSceneTree = GetTree();
 		_nextLevel = GD.RandRange(1, _levels.Count - 1);
 		_spawner.fillSpawnerList(_nextLevel);
