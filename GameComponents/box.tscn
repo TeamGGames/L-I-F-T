@@ -4,7 +4,6 @@
 [ext_resource type="Script" path="res://Code/Box.cs" id="1_ub5t1"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hloj5"]
-cull_mode = 2
 polygon = PackedVector2Array(-34, -34, 33, -35, 35, 31, -35, 34)
 
 [node name="Box" type="RigidBody2D"]
