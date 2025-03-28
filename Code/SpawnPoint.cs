@@ -14,7 +14,23 @@ public partial class SpawnPoint : Node2D
 	}
 	public List<Vector2> _spawnerList = new List<Vector2>();
 	public List<Vector2> _loadingAreaSpawnerList = new List<Vector2>();
+	public List<Vector2> _boxOnTruckList = new List<Vector2>();
 	public int randomLoadingAreaIndex = 0;
+	Vector2[,] levelZero = {
+		{new Vector2(1429, -295), new Vector2(1429, -189), new Vector2(1429, -77)},
+		{new Vector2(1429, -295), new Vector2(1429, -189), new Vector2(1429, -77)},
+		{new Vector2(1429, -295), new Vector2(1429, -189), new Vector2(1429, -77)}
+	};
+	Vector2[,] levelOne = {
+		{new Vector2(-162, 764), new Vector2(-270, 764), new Vector2(-432, 764)},
+		{new Vector2(1382, -151), new Vector2(1382, -268), new Vector2(1382, -394)},
+		{new Vector2(-172, 2129), new Vector2(-322, 2129), new Vector2(-500, 2129)}
+	};
+	Vector2[,] levelTwo = {
+		{new Vector2(2510, 2392), new Vector2(2510, 2504), new Vector2(2510, 2660)},
+		{new Vector2(-187, 1397), new Vector2(-284, 1397), new Vector2(-451, 1397)},
+		{new Vector2(1394, -155), new Vector2(1394, -267), new Vector2(1394, -412)}
+	};
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -88,6 +104,33 @@ public partial class SpawnPoint : Node2D
 			break;
 		}
 	}
+
+	public void fillTruckSpawnerList(int level, int randomLoadingAreaIndex)
+	{
+		switch (level)
+		{
+			case 0:
+				_boxOnTruckList.Insert(0, levelZero[randomLoadingAreaIndex, 0]);
+				_boxOnTruckList.Insert(0, levelZero[randomLoadingAreaIndex, 1]);
+				_boxOnTruckList.Insert(0, levelZero[randomLoadingAreaIndex, 2]);
+
+				break;
+
+			case 1:
+				_boxOnTruckList.Insert(0, levelOne[randomLoadingAreaIndex, 0]);
+				_boxOnTruckList.Insert(0, levelOne[randomLoadingAreaIndex, 1]);
+				_boxOnTruckList.Insert(0, levelOne[randomLoadingAreaIndex, 2]);
+				break;
+
+			case 2:
+				_boxOnTruckList.Insert(0, levelTwo[randomLoadingAreaIndex, 0]);
+				_boxOnTruckList.Insert(0, levelTwo[randomLoadingAreaIndex, 1]);
+				_boxOnTruckList.Insert(0, levelTwo[randomLoadingAreaIndex, 2]);
+				break;
+		}
+	}
+
+
 
 
 

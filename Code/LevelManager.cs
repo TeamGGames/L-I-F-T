@@ -185,6 +185,7 @@ public partial class LevelManager : Node2D
 		SpawnBattery(CreateSpawnPoints());
 		SpawnPointsPowerUp(CreateSpawnPoints());
 		_signVariantList[_spawner.randomLoadingAreaIndex].Visible = true;
+		_spawner.fillTruckSpawnerList(_nextLevel, _spawner.randomLoadingAreaIndex);
 	}
 
         private void DestroyLoadingArea()
@@ -341,6 +342,7 @@ public void ClearSpawnPoints()
 		_spawnPoints.Clear();
 		_spawner.ClearSpawnerList();
 		_spawner.ClearLoadingAreaSpawnerList();
+		_spawner._boxOnTruckList.Clear();
 }
 
 public Vector2 CreateSpawnPoints()

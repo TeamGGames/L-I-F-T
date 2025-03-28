@@ -12,6 +12,7 @@ public partial class LoadingArea : Node2D
 {
 
 	private Box _box = null;
+    private SpawnPoint _spawner = null;
     private int _score = 10;
     private Vector2 _spawnPosition;
     public Vector2 SpawnPosition {
@@ -51,7 +52,13 @@ public partial class LoadingArea : Node2D
     {
         if (body is Box box)
         {
+            if (_spawner == null)
+            {
+                _spawner = GetNode<SpawnPoint>("../SpawnPoint");
+            }
             _box = box;
+            _box.GlobalPosition = _spawner._boxOnTruckList[0];
+            _spawner._boxOnTruckList.RemoveAt(0);
             _boxesInTargetList.Insert(0, box);
             LevelManager.Current.CurrentScore += _box.ScoreAddUp;
             _progressUi = GetNode<ProgressUi>("../Forklift/UI/ProgressUI");

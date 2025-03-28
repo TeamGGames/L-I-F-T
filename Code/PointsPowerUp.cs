@@ -12,7 +12,7 @@ namespace ForkliftGame
             _progressUi = GetNode<ProgressUi>("../Forklift/UI/ProgressUI");
 
         LevelManager.Current.CurrentScore += _pointsAdded;
-        _progressUi.SetScoreLabel(_pointsAdded);
+        _progressUi.SetScoreLabel(LevelManager.Current.CurrentScore);
 
 		}
 	}
