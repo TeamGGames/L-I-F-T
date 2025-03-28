@@ -25,11 +25,11 @@ offset_top = 372.6
 offset_right = 414.4
 offset_bottom = 412.6
 
+[node name="CanvasModulate" parent="." instance=ExtResource("5_jyerk")]
+visible = true
+
 [node name="SpawnPoint" parent="." instance=ExtResource("4_bvx6h")]
 position = Vector2(108, -168)
-
-[node name="CanvasModulate" parent="." instance=ExtResource("5_jyerk")]
-color = Color(0.680939, 0.71332, 0.820318, 1)
 
 [node name="Shelves" parent="." instance=ExtResource("6_e4lv1")]
 scale = Vector2(1.25, 1.25)

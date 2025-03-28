@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cyj0a1ui0divw"]
+[gd_scene load_steps=5 format=3 uid="uid://cyj0a1ui0divw"]
 
 [ext_resource type="Script" path="res://Code/Battery.cs" id="1_h4iu8"]
 [ext_resource type="Texture2D" uid="uid://b38s7ebuivwmv" path="res://Assets/battery_powerup.png" id="2_yv5ya"]
+[ext_resource type="PackedScene" uid="uid://bax38opyasm7m" path="res://GameComponents/glow.tscn" id="3_24y4k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ckr51"]
 size = Vector2(76, 79)
@@ -19,3 +20,9 @@ texture = ExtResource("2_yv5ya")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_ckr51")
+
+[node name="Glow" parent="." instance=ExtResource("3_24y4k")]
+position = Vector2(-0.690302, 0.28378)
+rotation = 0.741765
+scale = Vector2(1.2533, 1.65625)
+color = Color(0.493545, 0.493546, 0.493546, 1)

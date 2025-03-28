@@ -8,6 +8,8 @@ public partial class Box : RigidBody2D
 	// The amount of points awarses per box. Adjust in Godot.
 	[Export] private int _scoreAddUp = 10;
 
+	[Export] private PointLight2D _glow = null;
+
 	// At the moment _isGrabbed is not used anywhere in code
 	private bool _isGrabbed = false;
 
@@ -74,8 +76,10 @@ public partial class Box : RigidBody2D
 	/// </summary>
 	public void Grab()
 	{
+		_glow.Visible = false;
 		// Remove the box from its parent
 		GetParent().RemoveChild(this);
+
 
 		// Add the box as a child of the forklift
 		_forklift.AddChild(this);
@@ -95,6 +99,7 @@ public partial class Box : RigidBody2D
 	/// </summary>
 	public void Release()
 	{
+
 		// The box is reparented to its original tree defined in the Godot Scene
 		Reparent(GetTree().Root);
 
