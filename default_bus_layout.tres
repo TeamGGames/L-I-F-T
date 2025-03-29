@@ -1,6 +1,12 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://bea0elbnt8gag"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://bea0elbnt8gag"]
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_ofniy"]
+resource_name = "HighPassFilter"
+cutoff_hz = 20.0
 
 [resource]
+bus/0/effect/0/effect = SubResource("AudioEffectHighPassFilter_ofniy")
+bus/0/effect/0/enabled = true
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false

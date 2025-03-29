@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dggtbnrfjj0il" path="res://Assets/Settings_button.png" id="3_v7nq1"]
 [ext_resource type="PackedScene" uid="uid://30mo0njbrnjk" path="res://GameComponents/SpawnPoint.tscn" id="4_c6gjr"]
 [ext_resource type="Texture2D" uid="uid://bedkuj7rlu8qf" path="res://Assets/music_toggle.png" id="4_nss8d"]
-[ext_resource type="AudioStream" uid="uid://bn8evp2a075tt" path="res://Sounds/032925menumusic.mp3" id="7_c4toc"]
+[ext_resource type="AudioStream" uid="uid://bn8evp2a075tt" path="res://Sounds/music/032925menumusic.mp3" id="7_c4toc"]
 
 [sub_resource type="Theme" id="Theme_x2x72"]
 Button/font_sizes/font_size = 39
@@ -113,3 +113,4 @@ grow_vertical = 2
 stream = ExtResource("7_c4toc")
 volume_db = -10.0
 autoplay = true
+bus = &"Music"
