@@ -53,6 +53,7 @@ public partial class MainMenuController : Control
 		}
 		_nextLevel = GD.RandRange(1 ,_levels.Count - 1);
 		_spawner.fillSpawnerList(_nextLevel);
+		LevelMusic.Instance.PlayMusic();
 		_mainMenuSceneTree.ChangeSceneToFile(_levels[_nextLevel]);
 		InitializeLevel();
 	}
@@ -64,6 +65,7 @@ public partial class MainMenuController : Control
 		}
 		_nextLevel = 0;
 		_spawner.fillSpawnerList(_nextLevel);
+		LevelMusic.Instance.PlayMusic();
 		_mainMenuSceneTree.ChangeSceneToFile(_levels[_nextLevel]);
 		InitializeLevel();
 	}

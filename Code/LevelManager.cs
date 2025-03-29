@@ -499,6 +499,7 @@ public string LoadFromFile (string path, string fileName)
 
 	public void GameOver()
 	{
+		LevelMusic.Instance.StopMusic();
 		_signVariantList[_spawner.randomLoadingAreaIndex].Visible = false;
 		int csvScore1 = 0;
 		int csvScore2 = 0;

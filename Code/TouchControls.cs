@@ -33,6 +33,7 @@ public partial class TouchControls : Control
 	}
 	private void OnMainMenuPressed()
 	{
+		LevelMusic.Instance.StopMusic();
 		_mainMenuSceneTree.ChangeSceneToFile("res://UI/MainMenu.tscn");
 		LevelManager.Current.Resume();
 			_pause = false;
@@ -40,6 +41,8 @@ public partial class TouchControls : Control
 	}
 	private void OnRestartPressed()
 	{
+		LevelMusic.Instance.StopMusic();
+		LevelMusic.Instance.PlayMusic();
 		_menuController.OnStartPressed();
 		LevelManager.Current.Resume();
 			_pause = false;
