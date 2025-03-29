@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://cggl2h6jjg142"]
+[gd_scene load_steps=13 format=4 uid="uid://cggl2h6jjg142"]
 
 [ext_resource type="Script" path="res://Code/LevelManager.cs" id="1_raiq2"]
 [ext_resource type="PackedScene" uid="uid://dhkj3eo7sf74c" path="res://GameComponents/UI.tscn" id="3_04cg4"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://b2t8jy5vxarkw" path="res://Assets/exitsignUP.png" id="9_1q7s1"]
 [ext_resource type="PackedScene" uid="uid://fkrp2jd2xamr" path="res://truck.tscn" id="10_e8nkw"]
 [ext_resource type="Texture2D" uid="uid://p3favlman7nk" path="res://Assets/exitsignLEFT.png" id="10_snbbh"]
+[ext_resource type="PackedScene" uid="uid://bjed55anxnsdd" path="res://GameComponents/Music.tscn" id="11_igxpo"]
+[ext_resource type="AudioStream" uid="uid://pqacmcma2ect" path="res://Sounds/lift_theme.mp3" id="11_msj26"]
 
 [node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_ui", "_spawner", "_signVariant1", "_signVariant2", "_signVariant3")]
 script = ExtResource("1_raiq2")
@@ -141,3 +143,8 @@ texture = ExtResource("10_snbbh")
 z_index = 2
 position = Vector2(1424, -292)
 rotation = 1.5708
+
+[node name="GameMusic" parent="." instance=ExtResource("11_igxpo")]
+stream = ExtResource("11_msj26")
+
+[editable path="GameMusic"]

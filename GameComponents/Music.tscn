@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bjed55anxnsdd"]
+
+[node name="GameMusic" type="AudioStreamPlayer"]
+volume_db = -5.0
+autoplay = true
+bus = &"Music"

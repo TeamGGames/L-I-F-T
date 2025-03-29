@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cti7cqbbw8nut"]
+[gd_scene load_steps=4 format=3 uid="uid://cti7cqbbw8nut"]
 
 [ext_resource type="Script" path="res://Code/SettingsWindow.cs" id="1_l43fp"]
+[ext_resource type="PackedScene" uid="uid://butaqd57sv5ds" path="res://GameComponents/AudioControl.tscn" id="2_gjm6m"]
 [ext_resource type="Texture2D" uid="uid://dggtbnrfjj0il" path="res://Assets/Settings_button.png" id="2_ol5td"]
 
 [node name="SettingsWindow" type="Panel" node_paths=PackedStringArray("_exitButton")]
@@ -37,52 +38,50 @@ horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = 202.0
+offset_left = -261.5
+offset_top = 188.0
+offset_right = 255.5
+offset_bottom = -192.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 45
+theme_override_constants/separation = 25
 
-[node name="MasterVolume" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-alignment = 1
+text = "AUDIO"
+horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/MasterVolume"]
+[node name="MasterVolume" parent="VBoxContainer" node_paths=PackedStringArray("_volumeSlider", "_settingsWindow") instance=ExtResource("2_gjm6m")]
 layout_mode = 2
-text = "Master Volume:"
+_volumeSlider = NodePath("HSlider")
+_settingsWindow = NodePath("../..")
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/MasterVolume"]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-value = 100.0
+[node name="Label" parent="VBoxContainer/MasterVolume" index="0"]
+text = "Master
+"
 
-[node name="MusicVolume" type="HBoxContainer" parent="VBoxContainer"]
+[node name="MusicVolume" parent="VBoxContainer" node_paths=PackedStringArray("_volumeSlider", "_settingsWindow") instance=ExtResource("2_gjm6m")]
 layout_mode = 2
-alignment = 1
+_volumeSlider = NodePath("HSlider")
+_busName = "Music"
+_settingsWindow = NodePath("../..")
 
-[node name="Label" type="Label" parent="VBoxContainer/MusicVolume"]
-layout_mode = 2
-text = "Music Volume:"
+[node name="Label" parent="VBoxContainer/MusicVolume" index="0"]
+text = "Music"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/MusicVolume"]
-custom_minimum_size = Vector2(400, 0)
+[node name="SFXVolume" parent="VBoxContainer" node_paths=PackedStringArray("_volumeSlider", "_settingsWindow") instance=ExtResource("2_gjm6m")]
 layout_mode = 2
-value = 100.0
+_volumeSlider = NodePath("HSlider")
+_busName = "SFX"
+_settingsWindow = NodePath("../..")
 
-[node name="SfxVolume" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="VBoxContainer/SfxVolume"]
-layout_mode = 2
-text = "SFX Volume:"
-
-[node name="HSlider" type="HSlider" parent="VBoxContainer/SfxVolume"]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-value = 100.0
+[node name="Label" parent="VBoxContainer/SFXVolume" index="0"]
+text = "SFX
+"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -90,3 +89,7 @@ layout_mode = 2
 [node name="ExitButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("2_ol5td")
+
+[editable path="VBoxContainer/MasterVolume"]
+[editable path="VBoxContainer/MusicVolume"]
+[editable path="VBoxContainer/SFXVolume"]
