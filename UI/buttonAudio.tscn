@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://nb5jwfmhymur"]
+
+[ext_resource type="AudioStream" uid="uid://pmi4y5csnbws" path="res://Sounds/sfx/menu-button-sound.mp3" id="1_ckyjr"]
+
+[node name="buttonAudio" type="AudioStreamPlayer"]
+stream = ExtResource("1_ckyjr")

@@ -9,6 +9,7 @@ namespace ForkliftGame
 		[Export] private AudioControl _musicAudioControl = null;
 		[Export] private AudioControl _effectsAudioControl = null;
 		[Export] private TextureButton _exitButton = null;
+		[Export] private AudioStreamPlayer _buttonAudio = null;
 
 		private SettingsData _data = null;
 
@@ -38,6 +39,7 @@ namespace ForkliftGame
 
 		protected virtual void OnExitButtonPressed()
 		{
+			_buttonAudio.Play();
 			SaveSettings();
 			// Handle Cancel button press logic here
 			Close();

@@ -11,6 +11,7 @@ public partial class TouchControls : Control
 	[Export] private Button _resumeButton = null;
 
 	[Export] private MainMenuController _menuController = null;
+	[Export] private AudioStreamPlayer _buttonAudio = null;
 
 	private SceneTree _mainMenuSceneTree = null;
 	public bool _pause = false;
@@ -27,20 +28,23 @@ public partial class TouchControls : Control
 
 	private void OnResumePressed()
 	{
-			LevelManager.Current.Resume();
-			_pause = false;
-			_pauseScreen.Visible = false;
-	}
+		_buttonAudio.Play();
+		LevelManager.Current.Resume();
+		_pause = false;
+		_pauseScreen.Visible = false;
+}
 	private void OnMainMenuPressed()
 	{
+		_buttonAudio.Play();
 		LevelMusic.Instance.StopMusic();
 		_mainMenuSceneTree.ChangeSceneToFile("res://UI/MainMenu.tscn");
 		LevelManager.Current.Resume();
-			_pause = false;
-			_pauseScreen.Visible = false;
+		_pause = false;
+		_pauseScreen.Visible = false;
 	}
 	private void OnRestartPressed()
 	{
+		_buttonAudio.Play();
 		LevelMusic.Instance.StopMusic();
 		LevelMusic.Instance.PlayMusic();
 		_menuController.OnStartPressed();
@@ -50,6 +54,7 @@ public partial class TouchControls : Control
 	}
 	private void PauseButtonDown()
 	{
+		_buttonAudio.Play();
 		if (!_pause) {
 			LevelManager.Current.Pause();
 			_pause = true;

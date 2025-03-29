@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dh6p7p856h1od" path="res://UI/ProgressUI.tscn" id="4_02cgl"]
 [ext_resource type="PackedScene" uid="uid://bax38opyasm7m" path="res://GameComponents/glow.tscn" id="5_gt0wh"]
 [ext_resource type="Texture2D" uid="uid://b8f3ljcsuhfa5" path="res://Assets/headlight_halo_resized.png" id="5_mmcd2"]
-[ext_resource type="AudioStream" uid="uid://iowmv74i4j3c" path="res://Sounds/sfx/electric-sfx.mp3" id="7_iumuk"]
+[ext_resource type="AudioStream" uid="uid://d1g6wh6fdqb6f" path="res://Sounds/sfx/electric-sfx-reverb.mp3" id="7_yxro4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vtdxb"]
 light_mode = 1
@@ -101,7 +101,7 @@ scale = Vector2(1.23438, 1.10938)
 [node name="Audio" type="Node" parent="."]
 
 [node name="Engine" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("7_iumuk")
+stream = ExtResource("7_yxro4")
 volume_db = -5.0
 autoplay = true
 bus = &"SFX"
