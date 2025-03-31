@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cti7cqbbw8nut"]
+[gd_scene load_steps=5 format=3 uid="uid://cti7cqbbw8nut"]
 
 [ext_resource type="Script" path="res://Code/SettingsWindow.cs" id="1_l43fp"]
+[ext_resource type="Theme" uid="uid://mhajft3v8s22" path="res://UI/MainTheme.tres" id="1_mp45t"]
 [ext_resource type="PackedScene" uid="uid://butaqd57sv5ds" path="res://GameComponents/AudioControl.tscn" id="2_gjm6m"]
 [ext_resource type="Texture2D" uid="uid://dggtbnrfjj0il" path="res://Assets/Settings_button.png" id="2_ol5td"]
 
@@ -12,6 +13,7 @@ offset_left = -443.0
 offset_right = 444.0
 offset_bottom = 715.0
 grow_horizontal = 2
+theme = ExtResource("1_mp45t")
 script = ExtResource("1_l43fp")
 _exitButton = NodePath("VBoxContainer/HBoxContainer/ExitButton")
 

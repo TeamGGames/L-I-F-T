@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://fkrp2jd2xamr"]
+[gd_scene load_steps=4 format=3 uid="uid://fkrp2jd2xamr"]
 
 [ext_resource type="Texture2D" uid="uid://tjjctum5hnmv" path="res://Assets/Truck_Right.png" id="1_h7w0i"]
+[ext_resource type="PackedScene" uid="uid://bax38opyasm7m" path="res://GameComponents/glow.tscn" id="2_u21pd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_die5v"]
 size = Vector2(20.75, 238)
 
 [node name="Truck" type="StaticBody2D"]
+z_index = 11
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2.17065, 2.31926)
@@ -15,3 +17,19 @@ texture = ExtResource("1_h7w0i")
 z_index = 2
 position = Vector2(-280.375, 0)
 shape = SubResource("RectangleShape2D_die5v")
+
+[node name="BacklightGlow1" parent="." instance=ExtResource("2_u21pd")]
+position = Vector2(-310, 63)
+color = Color(0.870588, 0, 0.0156863, 1)
+energy = 1.5
+
+[node name="BacklightGlow2" parent="." instance=ExtResource("2_u21pd")]
+position = Vector2(-310, -56)
+color = Color(0.870331, 0, 0.0161677, 1)
+energy = 1.5
+
+[node name="Glow3" parent="." instance=ExtResource("2_u21pd")]
+position = Vector2(164.547, 0.250002)
+scale = Vector2(2.79687, 2.17969)
+color = Color(0.554411, 0.167935, 0, 1)
+offset = Vector2(15, 0)

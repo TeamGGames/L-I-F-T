@@ -22,7 +22,8 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_ckr51")
 
 [node name="Glow" parent="." instance=ExtResource("3_24y4k")]
-position = Vector2(-0.690302, 0.28378)
+position = Vector2(-0.180162, 0.132949)
 rotation = 0.741765
-scale = Vector2(1.2533, 1.65625)
+scale = Vector2(0.912611, 1.78238)
 color = Color(0.493545, 0.493546, 0.493546, 1)
+energy = 1.25

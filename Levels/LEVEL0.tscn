@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=4 uid="uid://cggl2h6jjg142"]
+[gd_scene load_steps=13 format=4 uid="uid://cggl2h6jjg142"]
 
 [ext_resource type="Script" path="res://Code/LevelManager.cs" id="1_raiq2"]
+[ext_resource type="Theme" uid="uid://mhajft3v8s22" path="res://UI/MainTheme.tres" id="2_da2pp"]
 [ext_resource type="PackedScene" uid="uid://dhkj3eo7sf74c" path="res://GameComponents/UI.tscn" id="3_04cg4"]
 [ext_resource type="PackedScene" uid="uid://30mo0njbrnjk" path="res://GameComponents/SpawnPoint.tscn" id="4_2o3k6"]
 [ext_resource type="PackedScene" uid="uid://fesxsculso7w" path="res://GameComponents/Darkness.tscn" id="5_tw3ic"]
@@ -26,7 +27,7 @@ offset_left = 1522.0
 offset_top = 62.0
 offset_right = 1913.0
 offset_bottom = 242.0
-theme_override_font_sizes/font_size = 42
+theme = ExtResource("2_da2pp")
 text = "Collect 3 boxes and
 bring them back to
 loading area!"
@@ -37,7 +38,7 @@ offset_left = 631.0
 offset_top = 705.0
 offset_right = 1208.0
 offset_bottom = 814.0
-theme_override_font_sizes/font_size = 42
+theme = ExtResource("2_da2pp")
 text = "Battery is running out"
 
 [node name="Label3" type="Label" parent="."]
@@ -46,7 +47,7 @@ offset_left = 2489.0
 offset_top = 346.0
 offset_right = 3083.0
 offset_bottom = 465.0
-theme_override_font_sizes/font_size = 42
+theme = ExtResource("2_da2pp")
 text = "Try to beat you high score
 in this never ending madness"
 
@@ -56,16 +57,10 @@ offset_left = 76.0
 offset_top = 43.0
 offset_right = 763.0
 offset_bottom = 284.0
-theme_override_font_sizes/font_size = 42
+theme = ExtResource("2_da2pp")
 text = "Power ups will help you by 
 adding charge to your battery!
 Rest is for you to find out!"
-
-[node name="UI" parent="." instance=ExtResource("3_04cg4")]
-offset_left = 374.4
-offset_top = 372.6
-offset_right = 414.4
-offset_bottom = 412.6
 
 [node name="CanvasModulate" parent="." instance=ExtResource("5_tw3ic")]
 visible = true
@@ -144,5 +139,11 @@ position = Vector2(1424, -292)
 rotation = 4.71239
 
 [node name="GameMusic" parent="." instance=ExtResource("11_igxpo")]
+
+[node name="UI" parent="." instance=ExtResource("3_04cg4")]
+offset_left = 374.4
+offset_top = 372.6
+offset_right = 414.4
+offset_bottom = 412.6
 
 [editable path="GameMusic"]

@@ -1,3 +1,12 @@
-[gd_resource type="Theme" format=3 uid="uid://mhajft3v8s22"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://mhajft3v8s22"]
+
+[ext_resource type="FontFile" uid="uid://dnrvpp82sm72u" path="res://Fonts/Audiowide/Audiowide-Regular.ttf" id="1_ec3ef"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dtd2x"]
+bg_color = Color(0.454571, 0.0266564, 0.0134971, 1)
 
 [resource]
+default_font = ExtResource("1_ec3ef")
+Button/font_sizes/font_size = 36
+Button/styles/normal = SubResource("StyleBoxFlat_dtd2x")
+Label/font_sizes/font_size = 32

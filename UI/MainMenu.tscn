@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://f27bdr3jfoha"]
+[gd_scene load_steps=12 format=3 uid="uid://f27bdr3jfoha"]
 
-[ext_resource type="FontFile" uid="uid://boggguosli71" path="res://Fonts/manrope/manrope-bold.otf" id="1_45v82"]
+[ext_resource type="Theme" uid="uid://mhajft3v8s22" path="res://UI/MainTheme.tres" id="1_iy7t7"]
 [ext_resource type="Script" path="res://Code/MainMenuController.cs" id="1_m87ug"]
 [ext_resource type="PackedScene" uid="uid://cti7cqbbw8nut" path="res://UI/SettingsWindow.tscn" id="3_3l5fd"]
 [ext_resource type="Texture2D" uid="uid://dl3ywxqew4mlp" path="res://Assets/menu/MenuBG.png" id="3_6r2fn"]
@@ -12,10 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://nb5jwfmhymur" path="res://UI/buttonAudio.tscn" id="8_dl3cx"]
 [ext_resource type="AudioStream" uid="uid://cbutx7luhbwl6" path="res://Sounds/music/032925menumusic2.mp3" id="10_lcm10"]
 
-[sub_resource type="Theme" id="Theme_x2x72"]
-Button/font_sizes/font_size = 39
-Button/fonts/font = ExtResource("1_45v82")
-
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_tutorialButton", "_settingsButton", "_soundButton", "_settingsWindow", "_spawner", "_buttonAudio")]
 clip_contents = true
 custom_minimum_size = Vector2(1280, 720)
@@ -25,7 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_x2x72")
+theme = ExtResource("1_iy7t7")
 script = ExtResource("1_m87ug")
 _startButton = NodePath("BackGround/ButtonContainer/StartButton")
 _tutorialButton = NodePath("BackGround/ButtonContainer/TutorialButton")
@@ -71,6 +67,7 @@ grow_vertical = 2
 [node name="StartButton" type="Button" parent="BackGround/ButtonContainer"]
 layout_mode = 2
 icon = ExtResource("4_2gvbt")
+flat = true
 icon_alignment = 1
 
 [node name="TutorialButton" type="Button" parent="BackGround/ButtonContainer"]
@@ -90,12 +87,14 @@ grow_horizontal = 2
 [node name="SettingsButton" type="Button" parent="BackGround/HBoxContainer"]
 layout_mode = 2
 icon = ExtResource("3_v7nq1")
+flat = true
 
 [node name="Settings" type="Sprite2D" parent="BackGround/HBoxContainer/SettingsButton"]
 
 [node name="MusicToggle" type="Button" parent="BackGround/HBoxContainer"]
 layout_mode = 2
 icon = ExtResource("4_nss8d")
+flat = true
 
 [node name="SettingsWindow" parent="." node_paths=PackedStringArray("_buttonAudio") instance=ExtResource("3_3l5fd")]
 visible = false
