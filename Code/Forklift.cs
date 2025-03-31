@@ -482,8 +482,11 @@ public partial class Forklift : CharacterBody2D
 
 	private void PitchAccelerationSound()
 	{
-		_engineSound.PitchScale = (float)(1 + (1.75 - 1) * SpeedInput / 2.5);
-	}
+
+			_engineSound.PitchScale = (float)(1 + (1.75 - 1) * SpeedInput / 2.5);
+
+		}
+
 
 	/// <summary>
 	/// If the Interactionarea of the forklift and the box meet, this method will

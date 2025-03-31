@@ -72,7 +72,7 @@ texture = ExtResource("10_4m83t")
 [node name="Truck" parent="Signs/Variant1" instance=ExtResource("10_xjy83")]
 z_index = 2
 position = Vector2(1404, -288)
-rotation = 1.5708
+rotation = 4.71239
 
 [node name="Variant2" type="Node2D" parent="Signs"]
 visible = false
@@ -104,6 +104,7 @@ texture = ExtResource("10_4m83t")
 [node name="Truck" parent="Signs/Variant2" instance=ExtResource("10_xjy83")]
 z_index = 2
 position = Vector2(-286, 1392)
+rotation = 3.14159
 
 [node name="Variant3" type="Node2D" parent="Signs"]
 visible = false

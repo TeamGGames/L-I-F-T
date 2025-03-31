@@ -17,7 +17,7 @@ size = Vector2(125, 275)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rd1wi"]
 size = Vector2(125, 275)
 
-[node name="TouchControls" type="Control" node_paths=PackedStringArray("_pauseScreen", "_mainMenuButton", "_restartButton", "_resumeButton", "_menuController", "_buttonAudio")]
+[node name="TouchControls" type="Control" node_paths=PackedStringArray("_pauseScreen", "_mainMenuButton", "_restartButton", "_resumeButton", "_menuController")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -36,7 +36,6 @@ _mainMenuButton = NodePath("PauseBox/MainMenuButton")
 _restartButton = NodePath("PauseBox/RestartButton")
 _resumeButton = NodePath("PauseBox/ResumeButton")
 _menuController = NodePath("Node2D")
-_buttonAudio = NodePath("buttonAudio")
 
 [node name="MovementSlider" type="VSlider" parent="."]
 layout_mode = 1

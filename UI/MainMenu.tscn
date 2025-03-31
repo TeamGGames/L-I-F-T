@@ -49,6 +49,11 @@ scale = Vector2(0.55, 0.55)
 texture = ExtResource("3_6r2fn")
 centered = false
 
+[node name="Logo" type="Sprite2D" parent="BackGround/BackgroundSprite"]
+position = Vector2(1232.73, 241.818)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_ie6d2")
+
 [node name="ButtonContainer" type="VBoxContainer" parent="BackGround"]
 layout_mode = 1
 anchors_preset = 8
@@ -62,11 +67,6 @@ offset_right = 127.0
 offset_bottom = 99.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Logo" type="Sprite2D" parent="BackGround/ButtonContainer"]
-position = Vector2(145, -82)
-scale = Vector2(0.33, 0.33)
-texture = ExtResource("4_ie6d2")
 
 [node name="StartButton" type="Button" parent="BackGround/ButtonContainer"]
 layout_mode = 2

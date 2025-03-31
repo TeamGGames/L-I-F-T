@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://fkrp2jd2xamr"]
 
-[ext_resource type="Texture2D" uid="uid://xvjy6btwuma" path="res://Assets/icon.svg" id="1_kj81g"]
+[ext_resource type="Texture2D" uid="uid://tjjctum5hnmv" path="res://Assets/Truck_Right.png" id="1_h7w0i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_die5v"]
 size = Vector2(20.75, 238)
@@ -8,8 +8,8 @@ size = Vector2(20.75, 238)
 [node name="Truck" type="StaticBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(4.44922, 1.84375)
-texture = ExtResource("1_kj81g")
+scale = Vector2(2.17065, 2.31926)
+texture = ExtResource("1_h7w0i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2

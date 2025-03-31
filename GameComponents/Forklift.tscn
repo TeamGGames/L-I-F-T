@@ -70,11 +70,12 @@ offset_top = -361.0
 offset_right = -539.0
 offset_bottom = -361.0
 
-[node name="TouchControls" parent="UI" instance=ExtResource("3_idbqy")]
+[node name="TouchControls" parent="UI" node_paths=PackedStringArray("_buttonAudio") instance=ExtResource("3_idbqy")]
 offset_left = -1179.0
 offset_top = -721.0
 offset_right = 101.0
 offset_bottom = -1.0
+_buttonAudio = NodePath("../../Audio/Engine")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(95, 0)
