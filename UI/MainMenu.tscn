@@ -1,17 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://f27bdr3jfoha"]
+[gd_scene load_steps=13 format=3 uid="uid://f27bdr3jfoha"]
 
 [ext_resource type="FontFile" uid="uid://boggguosli71" path="res://Fonts/manrope/manrope-bold.otf" id="1_45v82"]
 [ext_resource type="Script" path="res://Code/MainMenuController.cs" id="1_m87ug"]
 [ext_resource type="PackedScene" uid="uid://cti7cqbbw8nut" path="res://UI/SettingsWindow.tscn" id="3_3l5fd"]
+[ext_resource type="Texture2D" uid="uid://dl3ywxqew4mlp" path="res://Assets/menu/MenuBG.png" id="3_6r2fn"]
 [ext_resource type="Texture2D" uid="uid://dggtbnrfjj0il" path="res://Assets/Settings_button.png" id="3_v7nq1"]
+[ext_resource type="Texture2D" uid="uid://jl8mi6chobu2" path="res://Assets/menu/PlayButton.png" id="4_2gvbt"]
 [ext_resource type="PackedScene" uid="uid://30mo0njbrnjk" path="res://GameComponents/SpawnPoint.tscn" id="4_c6gjr"]
+[ext_resource type="Texture2D" uid="uid://c3kc0hpqtcmyl" path="res://Assets/menu/Logo.png" id="4_ie6d2"]
 [ext_resource type="Texture2D" uid="uid://bedkuj7rlu8qf" path="res://Assets/music_toggle.png" id="4_nss8d"]
+[ext_resource type="PackedScene" uid="uid://nb5jwfmhymur" path="res://UI/buttonAudio.tscn" id="8_dl3cx"]
+[ext_resource type="AudioStream" uid="uid://cbutx7luhbwl6" path="res://Sounds/music/032925menumusic2.mp3" id="10_lcm10"]
 
 [sub_resource type="Theme" id="Theme_x2x72"]
 Button/font_sizes/font_size = 39
 Button/fonts/font = ExtResource("1_45v82")
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_tutorialButton", "_settingsButton", "_soundButton", "_settingsWindow", "_spawner")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_tutorialButton", "_settingsButton", "_soundButton", "_settingsWindow", "_spawner", "_buttonAudio")]
 clip_contents = true
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
@@ -28,6 +33,7 @@ _settingsButton = NodePath("BackGround/HBoxContainer/SettingsButton")
 _soundButton = NodePath("BackGround/HBoxContainer/MusicToggle")
 _settingsWindow = NodePath("SettingsWindow")
 _spawner = NodePath("SpawnPoint")
+_buttonAudio = NodePath("buttonAudio")
 
 [node name="BackGround" type="Panel" parent="."]
 layout_mode = 1
@@ -37,20 +43,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="BackGround"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -139.0
-offset_top = 50.0
-offset_right = 140.0
-offset_bottom = 121.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("1_45v82")
-theme_override_font_sizes/font_size = 80
-text = "L I F T"
-horizontal_alignment = 1
+[node name="BackgroundSprite" type="Sprite2D" parent="BackGround"]
+position = Vector2(-40, -30)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("3_6r2fn")
+centered = false
 
 [node name="ButtonContainer" type="VBoxContainer" parent="BackGround"]
 layout_mode = 1
@@ -66,9 +63,15 @@ offset_bottom = 99.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Logo" type="Sprite2D" parent="BackGround/ButtonContainer"]
+position = Vector2(145, -82)
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("4_ie6d2")
+
 [node name="StartButton" type="Button" parent="BackGround/ButtonContainer"]
 layout_mode = 2
-text = "PLAY"
+icon = ExtResource("4_2gvbt")
+icon_alignment = 1
 
 [node name="TutorialButton" type="Button" parent="BackGround/ButtonContainer"]
 layout_mode = 2
@@ -94,7 +97,7 @@ icon = ExtResource("3_v7nq1")
 layout_mode = 2
 icon = ExtResource("4_nss8d")
 
-[node name="SettingsWindow" parent="." instance=ExtResource("3_3l5fd")]
+[node name="SettingsWindow" parent="." node_paths=PackedStringArray("_buttonAudio") instance=ExtResource("3_3l5fd")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -105,5 +108,16 @@ offset_left = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
 grow_vertical = 2
+_buttonAudio = NodePath("../buttonAudio")
 
 [node name="SpawnPoint" parent="." instance=ExtResource("4_c6gjr")]
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_lcm10")
+volume_db = -10.0
+autoplay = true
+bus = &"Music"
+
+[node name="buttonAudio" parent="." instance=ExtResource("8_dl3cx")]
+
+[connection signal="pressed" from="BackGround/HBoxContainer/MusicToggle" to="." method="OnSoundButtonPressed"]

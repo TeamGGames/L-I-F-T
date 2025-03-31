@@ -35,6 +35,7 @@ public partial class Ui : Control
 	}
 	private void OnRestartPressed()
 	{
+		LevelMusic.Instance.PlayMusic();
 		_menuController.OnStartPressed();
 	}
 	public void ToggleGameOver()

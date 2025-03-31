@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cha3wvlaa8s5v"]
+[gd_scene load_steps=13 format=3 uid="uid://cha3wvlaa8s5v"]
 
 [ext_resource type="Script" path="res://Code/TouchControls.cs" id="1_pca2y"]
 [ext_resource type="Script" path="res://Code/MovementSlider.cs" id="1_u2v5k"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Code/MainMenuController.cs" id="7_o65wy"]
 [ext_resource type="Texture2D" uid="uid://b8tseurldlgib" path="res://Assets/NEWgrab&release.png" id="7_ultrd"]
 [ext_resource type="Texture2D" uid="uid://d1kiyirrfd1lt" path="res://Assets/pausebutton2.png" id="8_os1gf"]
+[ext_resource type="PackedScene" uid="uid://nb5jwfmhymur" path="res://UI/buttonAudio.tscn" id="10_27tdr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8ai3"]
 size = Vector2(125, 275)
@@ -16,7 +17,7 @@ size = Vector2(125, 275)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rd1wi"]
 size = Vector2(125, 275)
 
-[node name="TouchControls" type="Control" node_paths=PackedStringArray("_pauseScreen", "_mainMenuButton", "_restartButton", "_resumeButton", "_menuController")]
+[node name="TouchControls" type="Control" node_paths=PackedStringArray("_pauseScreen", "_mainMenuButton", "_restartButton", "_resumeButton", "_menuController", "_buttonAudio")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -35,6 +36,7 @@ _mainMenuButton = NodePath("PauseBox/MainMenuButton")
 _restartButton = NodePath("PauseBox/RestartButton")
 _resumeButton = NodePath("PauseBox/ResumeButton")
 _menuController = NodePath("Node2D")
+_buttonAudio = NodePath("buttonAudio")
 
 [node name="MovementSlider" type="VSlider" parent="."]
 layout_mode = 1
@@ -115,6 +117,8 @@ text = "Main Menu
 [node name="Node2D" type="Control" parent="."]
 anchors_preset = 0
 script = ExtResource("7_o65wy")
+
+[node name="buttonAudio" parent="." instance=ExtResource("10_27tdr")]
 
 [connection signal="pressed" from="LeftButton" to="." method="LeftButtonDown"]
 [connection signal="released" from="LeftButton" to="." method="LeftButtonUp"]

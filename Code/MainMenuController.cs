@@ -19,6 +19,7 @@ public partial class MainMenuController : Control
 
 	[Export] private SpawnPoint _spawner = null;
 	[Export] private double _maxEnergy = 45;
+	[Export] private AudioStreamPlayer _buttonAudio = null;
 
 	private List<string> _levels = new List<string> {Config.Level0, Config.Level1, Config.Level2};
 	private PackedScene _spawnPointScene = null;
@@ -47,29 +48,52 @@ public partial class MainMenuController : Control
 
 	public void OnStartPressed()
 	{
+		if (_buttonAudio != null)
+		{
+			_buttonAudio.Play();
+		}
 		if (_spawner == null)
 		{
 			AddSpawnPointChild();
 		}
 		_nextLevel = GD.RandRange(1 ,_levels.Count - 1);
 		_spawner.fillSpawnerList(_nextLevel);
+		LevelMusic.Instance.PlayMusic();
 		_mainMenuSceneTree.ChangeSceneToFile(_levels[_nextLevel]);
 		InitializeLevel();
 	}
 	public void OnTutorialPressed()
 	{
+		_buttonAudio.Play();
 		if (_spawner == null)
 		{
 			AddSpawnPointChild();
 		}
 		_nextLevel = 0;
 		_spawner.fillSpawnerList(_nextLevel);
+		LevelMusic.Instance.PlayMusic();
 		_mainMenuSceneTree.ChangeSceneToFile(_levels[_nextLevel]);
 		InitializeLevel();
 	}
 
+	public void OnSoundButtonPressed()
+	{
+		_settingsWindow.GetVolume("Master", out float volumeDB);
+		if (volumeDB != -80)
+		{
+			_settingsWindow.SetVolume("Master", -80);
+		}
+		else
+		{
+			_settingsWindow.SetVolume("Master", -6);
+		}
+
+		_settingsWindow.SaveSettings();
+	}
+
 	private void OnSettingsPressed()
 	{
+		_buttonAudio.Play();
 		if (_settingsWindow != null)
 		{
 			_settingsWindow.Open();

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjed55anxnsdd"]
+
+[ext_resource type="AudioStream" uid="uid://pqacmcma2ect" path="res://Sounds/music/lift_theme.mp3" id="1_303ay"]
+[ext_resource type="Script" path="res://Code/LevelMusic.cs" id="2_yhxrs"]
+
+[node name="LevelMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_303ay")
+volume_db = -15.0
+bus = &"Music"
+script = ExtResource("2_yhxrs")

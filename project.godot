@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.3", "C#", "Mobile")
 run/max_fps=60
 config/icon="res://Assets/icon.svg"
 
+[autoload]
+
+LevelMusic="*res://GameComponents/LevelMusic.tscn"
+
 [display]
 
 window/size/viewport_width=1280
