@@ -21,16 +21,32 @@ _signVariant1 = NodePath("Signs/Variant1")
 _signVariant2 = NodePath("Signs/Variant2")
 _signVariant3 = NodePath("Signs/Variant3")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label1" type="Label" parent="."]
 z_index = 10
 offset_left = 1522.0
 offset_top = 62.0
 offset_right = 1913.0
-offset_bottom = 242.0
+offset_bottom = 119.0
 theme = ExtResource("2_da2pp")
-text = "Collect 3 boxes and
-bring them back to
-loading area!"
+text = "TUTORIAL_TEXT_1"
+
+[node name="Label1a" type="Label" parent="."]
+z_index = 10
+offset_left = 1514.0
+offset_top = 136.0
+offset_right = 1905.0
+offset_bottom = 193.0
+theme = ExtResource("2_da2pp")
+text = "TUTORIAL_TEXT_1A"
+
+[node name="Label1b" type="Label" parent="."]
+z_index = 10
+offset_left = 1518.0
+offset_top = 202.0
+offset_right = 1909.0
+offset_bottom = 259.0
+theme = ExtResource("2_da2pp")
+text = "TUTORIAL_TEXT_1B"
 
 [node name="Label2" type="Label" parent="."]
 z_index = 10
@@ -39,28 +55,34 @@ offset_top = 705.0
 offset_right = 1208.0
 offset_bottom = 814.0
 theme = ExtResource("2_da2pp")
-text = "Battery is running out"
+text = "TUTORIAL_TEXT_2"
 
 [node name="Label3" type="Label" parent="."]
 z_index = 10
-offset_left = 2489.0
-offset_top = 346.0
-offset_right = 3083.0
-offset_bottom = 465.0
+offset_left = 2425.0
+offset_top = 331.0
+offset_right = 3019.0
+offset_bottom = 450.0
 theme = ExtResource("2_da2pp")
-text = "Try to beat you high score
-in this never ending madness"
+text = "TUTORIAL_TEXT_3"
+
+[node name="Label3a" type="Label" parent="."]
+z_index = 10
+offset_left = 2416.0
+offset_top = 386.0
+offset_right = 3010.0
+offset_bottom = 473.0
+theme = ExtResource("2_da2pp")
+text = "TUTORIAL_TEXT_3A"
 
 [node name="Label4" type="Label" parent="."]
 z_index = 10
-offset_left = 76.0
-offset_top = 43.0
-offset_right = 763.0
-offset_bottom = 284.0
+offset_left = 30.0
+offset_top = 19.0
+offset_right = 717.0
+offset_bottom = 260.0
 theme = ExtResource("2_da2pp")
-text = "Power ups will help you by 
-adding charge to your battery!
-Rest is for you to find out!"
+text = "TUTORIAL_TEXT_4"
 
 [node name="CanvasModulate" parent="." instance=ExtResource("5_tw3ic")]
 visible = true

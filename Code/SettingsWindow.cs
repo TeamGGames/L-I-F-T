@@ -9,6 +9,8 @@ namespace ForkliftGame
 		[Export] private AudioControl _musicAudioControl = null;
 		[Export] private AudioControl _effectsAudioControl = null;
 		[Export] private TextureButton _exitButton = null;
+		[Export] private TextureButton _fiButton = null;
+		[Export] private TextureButton _enButton = null;
 		[Export] private AudioStreamPlayer _buttonAudio = null;
 
 		private SettingsData _data = null;
@@ -22,6 +24,16 @@ namespace ForkliftGame
 			{
 				_exitButton.Connect(Button.SignalName.Pressed,
 					new Callable(this, nameof(OnExitButtonPressed)));
+			}
+			if (_fiButton != null)
+			{
+				_fiButton.Connect(Button.SignalName.Pressed,
+					new Callable(this, nameof(OnFiButtonPressed)));
+			}
+			if (_enButton != null)
+			{
+				_enButton.Connect(Button.SignalName.Pressed,
+					new Callable(this, nameof(OnEnButtonPressed)));
 			}
 		}
 
@@ -44,6 +56,27 @@ namespace ForkliftGame
 			// Handle Cancel button press logic here
 			Close();
 		}
+		private void OnFiButtonPressed()
+		{
+			_buttonAudio.Play();
+			ChangeLanguage("fi");
+			SaveSettings();
+			// Handle Cancel button press logic here
+			Close();
+		}
+		private void OnEnButtonPressed()
+		{
+			_buttonAudio.Play();
+			ChangeLanguage("en");
+			SaveSettings();
+			// Handle Cancel button press logic here
+			Close();
+		}
+
+		private void ChangeLanguage(string langCode)
+		{
+			TranslationServer.SetLocale(langCode);
+		}
 
 		private void ApplyData(SettingsData data)
 		{
@@ -65,6 +98,7 @@ namespace ForkliftGame
 			{
 				data = new SettingsData
 				{
+					LangCode = (string)settingsConfig.GetValue("Localization", "LangCode", "en"),
 					MasterVolume = (float)settingsConfig.GetValue("Audio", "MasterVolume", -6.0f),
 					MusicVolume = (float)settingsConfig.GetValue("Audio", "MusicVolume", -6.0f),
 					SfxVolume = (float)settingsConfig.GetValue("Audio", "SfxVolume", -6.0f)
@@ -86,6 +120,7 @@ namespace ForkliftGame
 			}
 
 			ConfigFile settingsConfig = new ConfigFile();
+			settingsConfig.SetValue("Localization", "LangCode", _data.LangCode);
 			settingsConfig.SetValue("Audio", "MasterVolume", _data.MasterVolume);
 			settingsConfig.SetValue("Audio", "MusicVolume", _data.MusicVolume);
 			settingsConfig.SetValue("Audio", "SfxVolume", _data.SfxVolume);

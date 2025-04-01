@@ -1,20 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://cti7cqbbw8nut"]
+[gd_scene load_steps=7 format=3 uid="uid://cti7cqbbw8nut"]
 
 [ext_resource type="Script" path="res://Code/SettingsWindow.cs" id="1_l43fp"]
 [ext_resource type="Theme" uid="uid://mhajft3v8s22" path="res://UI/MainTheme.tres" id="1_mp45t"]
 [ext_resource type="PackedScene" uid="uid://butaqd57sv5ds" path="res://GameComponents/AudioControl.tscn" id="2_gjm6m"]
 [ext_resource type="Texture2D" uid="uid://dggtbnrfjj0il" path="res://Assets/Settings_button.png" id="2_ol5td"]
+[ext_resource type="Texture2D" uid="uid://qan6vlcvx72v" path="res://Assets/ENGflag.png" id="4_8wv0y"]
+[ext_resource type="Texture2D" uid="uid://rc72pvpgfkfk" path="res://Assets/FINflag.png" id="5_8koon"]
 
-[node name="SettingsWindow" type="Panel" node_paths=PackedStringArray("_exitButton")]
+[node name="SettingsWindow" type="Panel" node_paths=PackedStringArray("_exitButton", "_fiButton", "_enButton")]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -6.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_mp45t")
 script = ExtResource("1_l43fp")
-_exitButton = NodePath("VBoxContainer/HBoxContainer/ExitButton")
+_exitButton = NodePath("Panel/ExitButton")
+_fiButton = NodePath("Panel/VBoxContainer/LanguageSettings/HBoxContainer/FIButton")
+_enButton = NodePath("Panel/VBoxContainer/LanguageSettings/HBoxContainer/ENButton")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -22,7 +28,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
+offset_top = 10.0
 offset_right = -4.0
+offset_bottom = 117.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -37,58 +45,83 @@ theme_override_font_sizes/font_size = 51
 text = "SETTINGS"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
-anchors_preset = 13
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -261.5
-offset_top = 188.0
-offset_right = 255.5
-offset_bottom = -192.0
+anchor_bottom = 0.5
+offset_left = -432.0
+offset_top = -288.5
+offset_right = 317.0
+offset_bottom = 397.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 25
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "AUDIO"
 horizontal_alignment = 1
 
-[node name="MasterVolume" parent="VBoxContainer" node_paths=PackedStringArray("_volumeSlider", "_settingsWindow") instance=ExtResource("2_gjm6m")]
+[node name="MasterVolume" parent="Panel/VBoxContainer" node_paths=PackedStringArray("_volumeSlider", "_settingsWindow") instance=ExtResource("2_gjm6m")]
 layout_mode = 2
 _volumeSlider = NodePath("HSlider")
-_settingsWindow = NodePath("../..")
+_settingsWindow = NodePath("../../..")
 
-[node name="Label" parent="VBoxContainer/MasterVolume" index="0"]
+[node name="Label" parent="Panel/VBoxContainer/MasterVolume" index="0"]
 text = "MASTER_VOLUME"
 
-[node name="MusicVolume" parent="VBoxContainer" node_paths=PackedStringArray("_volumeSlider", "_settingsWindow") instance=ExtResource("2_gjm6m")]
+[node name="MusicVolume" parent="Panel/VBoxContainer" node_paths=PackedStringArray("_volumeSlider", "_settingsWindow") instance=ExtResource("2_gjm6m")]
 layout_mode = 2
 _volumeSlider = NodePath("HSlider")
 _busName = "Music"
-_settingsWindow = NodePath("../..")
+_settingsWindow = NodePath("../../..")
 
-[node name="Label" parent="VBoxContainer/MusicVolume" index="0"]
+[node name="Label" parent="Panel/VBoxContainer/MusicVolume" index="0"]
 text = "MUSIC"
 
-[node name="SFXVolume" parent="VBoxContainer" node_paths=PackedStringArray("_volumeSlider", "_settingsWindow") instance=ExtResource("2_gjm6m")]
+[node name="SFXVolume" parent="Panel/VBoxContainer" node_paths=PackedStringArray("_volumeSlider", "_settingsWindow") instance=ExtResource("2_gjm6m")]
 layout_mode = 2
 _volumeSlider = NodePath("HSlider")
 _busName = "SFX"
-_settingsWindow = NodePath("../..")
+_settingsWindow = NodePath("../../..")
 
-[node name="Label" parent="VBoxContainer/SFXVolume" index="0"]
+[node name="Label" parent="Panel/VBoxContainer/SFXVolume" index="0"]
 text = "SFX"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="LanguageSettings" type="VBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="ExitButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+[node name="Language" type="Label" parent="Panel/VBoxContainer/LanguageSettings"]
 layout_mode = 2
+text = "LANGUAGE"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/LanguageSettings"]
+layout_mode = 2
+alignment = 1
+
+[node name="ENButton" type="TextureButton" parent="Panel/VBoxContainer/LanguageSettings/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_8wv0y")
+
+[node name="FIButton" type="TextureButton" parent="Panel/VBoxContainer/LanguageSettings/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_8koon")
+
+[node name="ExitButton" type="TextureButton" parent="Panel"]
+layout_mode = 2
+offset_left = 93.0
+offset_top = 498.0
+offset_right = 221.0
+offset_bottom = 609.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 texture_normal = ExtResource("2_ol5td")
 
-[editable path="VBoxContainer/MasterVolume"]
-[editable path="VBoxContainer/MusicVolume"]
-[editable path="VBoxContainer/SFXVolume"]
+[editable path="Panel/VBoxContainer/MasterVolume"]
+[editable path="Panel/VBoxContainer/MusicVolume"]
+[editable path="Panel/VBoxContainer/SFXVolume"]

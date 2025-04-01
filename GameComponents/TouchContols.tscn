@@ -99,27 +99,24 @@ alignment = 1
 [node name="PauseMenu" type="Label" parent="PauseBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = "PAUSED"
+text = "PAUSE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="PauseBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "Resume
-"
+text = "RESUME"
 
 [node name="RestartButton" type="Button" parent="PauseBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "Restart Game
-"
+text = "RESTART"
 
 [node name="MainMenuButton" type="Button" parent="PauseBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "Main Menu
-"
+text = "MAINMENU"
 
 [node name="Node2D" type="Control" parent="."]
 anchors_preset = 0

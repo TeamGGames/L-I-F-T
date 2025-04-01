@@ -1,5 +1,5 @@
 keys,en,fi
-TUTORIAL,Play Tutorial,Pelaa tutoriaalitaso
+TUTORIAL,Tutorial,Harjoittele peliä
 SETTINGS,Settings,Asetukset
 AUDIO,Audio,Ääniasetukset
 MASTER_VOLUME,Master,Äänet
@@ -7,5 +7,16 @@ MUSIC,Music,Musiikki
 SFX,SFX,Efektit
 GAMEOVER,Game Over,Peli päättyi
 MAINMENU,Main Menu,Päävalikko
-RESTART,Restart,Aloita uusi Peli
+LANGUAGE,Language,Kieli
+RESTART,Restart,Aloita uusi peli
 HIGHSCORES,High Scores,Parhaat tulokset
+TUTORIAL_TEXT_1,Collect 3 boxes and,Kerää 3 laatikkoa
+TUTORIAL_TEXT_1A,bring them back to,ja tuo ne
+TUTORIAL_TEXT_1B,the loading area!, lähtöpisteeseen!
+TUTORIAL_TEXT_2,Battery is running out!,Akku loppuu kohta!
+TUTORIAL_TEXT_3,Try to beat the high score,Yritä saada paras tulos
+TUTORIAL_TEXT_3A,in this never ending madness!,Tässä loputtomassa pelissä!
+TUTORIAL_TEXT_4,Power ups will help you by adding charge to your battery!,Kerättävät esineet lataavat akkuasi ja antavat pisteitä!
+PAUSE,Paused,Peli pysäytetty
+RESUME,Resume,Palaa peliin
+MAINMENU,Main Menu,Päävälikko
