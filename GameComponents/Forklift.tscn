@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c8waskkpj52xw"]
 
 [ext_resource type="Script" path="res://Code/Forklift.cs" id="1_g0d5j"]
-[ext_resource type="Texture2D" uid="uid://cb8do3wtwdi8j" path="res://Assets/Forklift.png" id="2_8pni1"]
+[ext_resource type="Texture2D" uid="uid://ckb4g578luspj" path="res://Assets/ForkliftSpriteSheet.png" id="2_l8r3c"]
 [ext_resource type="PackedScene" uid="uid://cha3wvlaa8s5v" path="res://GameComponents/TouchContols.tscn" id="3_idbqy"]
 [ext_resource type="PackedScene" uid="uid://dh6p7p856h1od" path="res://UI/ProgressUI.tscn" id="4_02cgl"]
 [ext_resource type="PackedScene" uid="uid://bax38opyasm7m" path="res://GameComponents/glow.tscn" id="5_gt0wh"]
@@ -27,15 +27,18 @@ _reducedSpeedFromWeight = 0.15
 _engineSound = NodePath("Audio/Engine")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-0.78974, 3.57476)
+position = Vector2(73, -82)
 rotation = 1.5708
 scale = Vector2(1.33185, 1.18071)
-texture = ExtResource("2_8pni1")
+texture = ExtResource("2_l8r3c")
+centered = false
+hframes = 4
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2(-1.5, -0.999901)
 rotation = 1.5708
-polygon = PackedVector2Array(-46.0002, -22.4998, -58.0002, -22.4998, -59.0001, -8.49979, -52.0001, -3.49981, -53.9999, 59.5002, -45.9999, 65.5002, -9.99986, 65.5, -8.99983, 73.5, 11.0002, 74.5, 15.0002, 70.4999, 15.0001, 66.4999, 26.0001, 64.4999, 39.0001, 63.4999, 47.0001, 62.4998, 56.0001, 55.4998, 53.9999, 0.499805, 60.9999, -6.50022, 60.9998, -26.5002, 65.9998, -27.5002, 69.9998, -34.5003, 69.9997, -59.5003, 65.9997, -64.5002, 57.9997, -64.5002, 50.9997, -62.5002, 47.9997, -58.5002, 39.9997, -57.5001, 39.9999, -1.50014, 30.9999, -1.50011, 29.9998, -17.5001, -33.0002, -16.4999, -34.0001, 0.500123, -39.0001, 1.50014, -39.0003, -53.4999, -45.0003, -55.4998, -49.0003, -61.4998, -57.0003, -65.4998, -64.0003, -64.4998, -68.0003, -58.4998, -69.0003, -51.4998, -68.0003, -40.4998, -65.0002, -29.4998, -61.0002, -27.4998, -56.0002, -27.4998, -50.0002, -30.4998)
+polygon = PackedVector2Array(-46.0002, -22.4998, -62.0002, -21.4998, -62.0001, -7.49978, -58.0001, 0.50021, -56.9999, 66.5002, -44.9998, 69.5002, -13.9998, 70.5001, -9.99982, 77.5, 9.00019, 79.5, 18.0002, 72.4999, 15.0001, 66.4999, 26.0002, 70.4999, 40.0002, 70.4999, 57.0001, 66.4998, 61.0001, 56.4998, 61.9999, 2.49978, 60.9999, -6.50022, 66.9998, -22.5002, 70.9998, -27.5003, 72.9998, -36.5003, 71.9997, -59.5003, 66.9997, -65.5002, 59.9997, -65.5002, 50.9997, -64.5002, 44.9997, -62.5002, 39.9997, -57.5001, 39.9999, -1.50014, 30.9999, -1.50011, 29.9998, -17.5001, -33.0002, -16.4999, -34.0001, 0.500123, -39.0001, 1.50014, -39.0003, -53.4999, -45.0003, -55.4998, -50.0003, -63.4998, -56.0003, -65.4998, -61.0003, -64.4998, -68.0003, -61.4998, -71.0003, -52.4997, -70.0003, -40.4997, -69.0002, -29.4998, -61.0002, -27.4998, -56.0002, -27.4998, -50.0002, -30.4998)
 
 [node name="InteractionComponents" type="Node2D" parent="."]
 

@@ -2,4 +2,4 @@
 
 [node name="CanvasModulate" type="CanvasModulate"]
 visible = false
-color = Color(0.306923, 0.306923, 0.306922, 1)
+color = Color(0.162066, 0.162066, 0.162065, 1)

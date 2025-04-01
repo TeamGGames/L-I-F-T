@@ -13,12 +13,14 @@
 [ext_resource type="AudioStream" uid="uid://cbutx7luhbwl6" path="res://Sounds/music/032925menumusic2.mp3" id="10_lcm10"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_tutorialButton", "_settingsButton", "_soundButton", "_settingsWindow", "_spawner", "_buttonAudio")]
-clip_contents = true
-custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 10.0
+offset_right = 30.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_iy7t7")
@@ -78,11 +80,12 @@ text = "TUTORIAL"
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 990.0
-offset_top = 36.0
-offset_right = -1.0
-offset_bottom = 155.0
+offset_left = 1005.0
+offset_top = -24.0
+offset_right = 1.0
+offset_bottom = 105.0
 grow_horizontal = 2
+alignment = 2
 
 [node name="SettingsButton" type="Button" parent="BackGround/HBoxContainer"]
 layout_mode = 2
@@ -97,16 +100,7 @@ icon = ExtResource("4_nss8d")
 flat = true
 
 [node name="SettingsWindow" parent="." node_paths=PackedStringArray("_buttonAudio") instance=ExtResource("3_3l5fd")]
-visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_left = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_vertical = 2
 _buttonAudio = NodePath("../buttonAudio")
 
 [node name="SpawnPoint" parent="." instance=ExtResource("4_c6gjr")]

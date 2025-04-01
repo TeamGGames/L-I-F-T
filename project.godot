@@ -88,6 +88,10 @@ gearThree={
 
 pointing/emulate_touch_from_mouse=true
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Translations/translations.en.translation", "res://Translations/translations.fi.translation")
+
 [layer_names]
 
 2d_physics/layer_1="Forklift"

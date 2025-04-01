@@ -6,13 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://dggtbnrfjj0il" path="res://Assets/Settings_button.png" id="2_ol5td"]
 
 [node name="SettingsWindow" type="Panel" node_paths=PackedStringArray("_exitButton")]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -443.0
-offset_right = 444.0
-offset_bottom = 715.0
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_mp45t")
 script = ExtResource("1_l43fp")
 _exitButton = NodePath("VBoxContainer/HBoxContainer/ExitButton")
@@ -63,8 +62,7 @@ _volumeSlider = NodePath("HSlider")
 _settingsWindow = NodePath("../..")
 
 [node name="Label" parent="VBoxContainer/MasterVolume" index="0"]
-text = "Master
-"
+text = "MASTER_VOLUME"
 
 [node name="MusicVolume" parent="VBoxContainer" node_paths=PackedStringArray("_volumeSlider", "_settingsWindow") instance=ExtResource("2_gjm6m")]
 layout_mode = 2
@@ -73,7 +71,7 @@ _busName = "Music"
 _settingsWindow = NodePath("../..")
 
 [node name="Label" parent="VBoxContainer/MusicVolume" index="0"]
-text = "Music"
+text = "MUSIC"
 
 [node name="SFXVolume" parent="VBoxContainer" node_paths=PackedStringArray("_volumeSlider", "_settingsWindow") instance=ExtResource("2_gjm6m")]
 layout_mode = 2
@@ -82,8 +80,7 @@ _busName = "SFX"
 _settingsWindow = NodePath("../..")
 
 [node name="Label" parent="VBoxContainer/SFXVolume" index="0"]
-text = "SFX
-"
+text = "SFX"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Code/MainMenuController.cs" id="2_4nj08"]
 
 [node name="UI" type="Control" node_paths=PackedStringArray("_gameOverPanel", "_quitButton", "_restartButton", "_menuController", "_1stScore", "_2ndScore", "_3rdScore")]
-z_index = 10
+custom_minimum_size = Vector2(12, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,73 +14,80 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_3j8a7")
 script = ExtResource("1_6tenn")
-_gameOverPanel = NodePath("GameOverPanel")
-_quitButton = NodePath("GameOverPanel/GameOverBox/QuitButton")
-_restartButton = NodePath("GameOverPanel/GameOverBox/RestartButton")
+_gameOverPanel = NodePath("CanvasLayer/GameOverPanel")
+_quitButton = NodePath("CanvasLayer/GameOverPanel/GameOverBox/QuitButton")
+_restartButton = NodePath("CanvasLayer/GameOverPanel/GameOverBox/RestartButton")
 _menuController = NodePath("MainMenuController")
-_1stScore = NodePath("GameOverPanel/GameOverBox/1stHighScore")
-_2ndScore = NodePath("GameOverPanel/GameOverBox/2ndHighScore")
-_3rdScore = NodePath("GameOverPanel/GameOverBox/3rdHighScore")
-
-[node name="GameOverPanel" type="Panel" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_3j8a7")
-
-[node name="GameOverBox" type="VBoxContainer" parent="GameOverPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="GameOverText" type="Label" parent="GameOverPanel/GameOverBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.686275, 0, 0, 1)
-theme_override_font_sizes/font_size = 75
-text = "GAME OVER!"
-horizontal_alignment = 1
-
-[node name="QuitButton" type="Button" parent="GameOverPanel/GameOverBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "Main Menu
-"
-
-[node name="RestartButton" type="Button" parent="GameOverPanel/GameOverBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "Restart
-"
-
-[node name="TEXT" type="Label" parent="GameOverPanel/GameOverBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 31
-text = "HIGH SCORES:"
-horizontal_alignment = 1
-
-[node name="1stHighScore" type="Label" parent="GameOverPanel/GameOverBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "1. ------------------------"
-
-[node name="2ndHighScore" type="Label" parent="GameOverPanel/GameOverBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "2. ------------------------"
-
-[node name="3rdHighScore" type="Label" parent="GameOverPanel/GameOverBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "3. ------------------------"
+_1stScore = NodePath("CanvasLayer/GameOverPanel/GameOverBox/1stHighScore")
+_2ndScore = NodePath("CanvasLayer/GameOverPanel/GameOverBox/2ndHighScore")
+_3rdScore = NodePath("CanvasLayer/GameOverPanel/GameOverBox/3rdHighScore")
 
 [node name="MainMenuController" type="Control" parent="."]
 anchors_preset = 0
 script = ExtResource("2_4nj08")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOverPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+z_index = 12
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_3j8a7")
+
+[node name="GameOverBox" type="VBoxContainer" parent="CanvasLayer/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 360.0
+offset_top = 225.0
+offset_right = 897.0
+offset_bottom = 530.0
+grow_vertical = 2
+alignment = 1
+
+[node name="GameOverText" type="Label" parent="CanvasLayer/GameOverPanel/GameOverBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.686275, 0, 0, 1)
+theme_override_font_sizes/font_size = 75
+text = "GAMEOVER"
+horizontal_alignment = 1
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/GameOverPanel/GameOverBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "MAINMENU"
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/GameOverPanel/GameOverBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "RESTART"
+
+[node name="TEXT" type="Label" parent="CanvasLayer/GameOverPanel/GameOverBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "HIGHSCORES"
+horizontal_alignment = 1
+
+[node name="1stHighScore" type="Label" parent="CanvasLayer/GameOverPanel/GameOverBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "1. -----------"
+horizontal_alignment = 1
+
+[node name="2ndHighScore" type="Label" parent="CanvasLayer/GameOverPanel/GameOverBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "2. -----------"
+horizontal_alignment = 1
+
+[node name="3rdHighScore" type="Label" parent="CanvasLayer/GameOverPanel/GameOverBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "3. -----------"
+horizontal_alignment = 1
