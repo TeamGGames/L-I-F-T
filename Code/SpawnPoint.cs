@@ -60,6 +60,8 @@ public partial class SpawnPoint : Node2D
 			_spawnerList.Insert(0, new Vector2 (976, 407));
 			_spawnerList.Insert(0, new Vector2 (124, 584));
 			_spawnerList.Insert(0, new Vector2 (1743, 379));
+			_spawnerList.Insert(0, new Vector2 (1784, 785));
+			_spawnerList.Insert(0, new Vector2 (2992, 756));
 			break;
 
 			case 1:

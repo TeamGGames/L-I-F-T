@@ -85,6 +85,7 @@ theme = ExtResource("2_da2pp")
 text = "TUTORIAL_TEXT_4"
 
 [node name="TutorialDarkness" parent="." instance=ExtResource("5_tw3ic")]
+visible = true
 color = Color(0.314316, 0.314316, 0.314315, 1)
 
 [node name="SpawnPoint" parent="." instance=ExtResource("4_2o3k6")]
@@ -101,6 +102,7 @@ tile_map_data = PackedByteArray("AAACAEMAAQAAAAAAAAACAEcAAQAAAAAAAAACAEsAAQAAAAA
 [node name="Signs" type="Node2D" parent="."]
 
 [node name="Variant1" type="Node2D" parent="Signs"]
+visible = false
 
 [node name="DOWN" type="Sprite2D" parent="Signs/Variant1"]
 position = Vector2(556, 361)
@@ -120,6 +122,7 @@ position = Vector2(1365, -293)
 rotation = 4.71239
 
 [node name="Variant2" type="Node2D" parent="Signs"]
+visible = false
 
 [node name="DOWN" type="Sprite2D" parent="Signs/Variant2"]
 position = Vector2(556, 361)
@@ -139,10 +142,7 @@ position = Vector2(1365, -293)
 rotation = 4.71239
 
 [node name="Variant3" type="Node2D" parent="Signs"]
-
-[node name="DOWN" type="Sprite2D" parent="Signs/Variant3"]
-position = Vector2(556, 361)
-texture = ExtResource("7_ufyit")
+visible = false
 
 [node name="UP" type="Sprite2D" parent="Signs/Variant3"]
 position = Vector2(1363, 630)
@@ -160,9 +160,6 @@ rotation = 4.71239
 [node name="GameMusic" parent="." instance=ExtResource("11_igxpo")]
 
 [node name="UI" parent="." instance=ExtResource("3_04cg4")]
-offset_left = 374.4
-offset_top = 372.6
-offset_right = 414.4
-offset_bottom = 412.6
+custom_minimum_size = Vector2(0, 0)
 
 [editable path="GameMusic"]

@@ -27,7 +27,7 @@ public partial class LevelManager : Node2D
 	[Export] private Node2D _signVariant1 = null;
 	[Export] private Node2D _signVariant2 = null;
 	[Export] private Node2D _signVariant3 = null;
-	[Export] private int _addedScore = 50;
+	[Export] private int _addedScore = 500;
 	private List<Node2D> _signVariantList = new List<Node2D>();
 
 	private SceneTree _levelSceneTree = null;
@@ -183,7 +183,12 @@ public partial class LevelManager : Node2D
 
 		DestroyBattery();
 		DestroyPointsPowerUp();
-		SpawnBattery(CreateSpawnPoints());
+
+		for (int i = 0; i < 2; i++)
+		{
+			SpawnBattery(CreateSpawnPoints());
+		}
+
 		SpawnPointsPowerUp(CreateSpawnPoints());
 		_signVariantList[_spawner.randomLoadingAreaIndex].Visible = true;
 		_spawner.fillTruckSpawnerList(_nextLevel, _spawner.randomLoadingAreaIndex);
