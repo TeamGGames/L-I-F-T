@@ -107,7 +107,7 @@ _buttonAudio = NodePath("../buttonAudio")
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_lcm10")
-volume_db = -10.0
+volume_db = -3.0
 autoplay = true
 bus = &"Music"
 

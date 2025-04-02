@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bax38opyasm7m" path="res://GameComponents/glow.tscn" id="2_u21pd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_die5v"]
-size = Vector2(20.75, 238)
+size = Vector2(20.75, 484)
 
 [node name="Truck" type="StaticBody2D"]
 z_index = 11
