@@ -106,7 +106,7 @@ scale = Vector2(1.23438, 1.10938)
 
 [node name="Engine" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("7_yxro4")
-volume_db = -5.0
+volume_db = 5.0
 autoplay = true
 bus = &"SFX"
 

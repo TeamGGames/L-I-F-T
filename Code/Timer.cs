@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace ForkliftGame
@@ -8,6 +10,7 @@ public partial class Timer : Node
 {
 	// ajastimen aloitusaika
 	[Export] private double _time = 1;
+	[Export] private AudioStreamPlayer _heartBeat = null;
 
 	// ajastimen aika tällä hetkellä
 	private double _timer = 0;
@@ -31,15 +34,22 @@ public partial class Timer : Node
 		}
 
 	private TextureProgressBar _progressBar = null;
+	private TextureRect _progressBlood = null;
+	private bool _isPlaying = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_progressBar = GetNode<TextureProgressBar>("../Forklift/UI/ProgressUI/HBoxContainer/ProgressBar");
+		_progressBlood = GetNode<TextureRect>("../Forklift/UI/ProgressUI/Blood");
 
 		if (_progressBar == null)
 		{
 			GD.PrintErr("Progress bar not found");
+		}
+		if (_progressBlood == null)
+		{
+			GD.PrintErr("ProgressBlood not found");
 		}
 	}
 
@@ -51,13 +61,23 @@ public partial class Timer : Node
 			_timer -= delta;
 			_progressBar.SetValueNoSignal(_timer);
 
-
+			if (_timer < 10)
+			{
+				_progressBlood.Visible = true;
+				if (!_isPlaying)
+				{
+					_heartBeat.Play();
+					_isPlaying = true;
+				}
+			}
 			if(_timer <= 0)
 			{
 				//ajastin päättyi
 				_timer = 0;
 				IsComplete = true;
 				Stop();
+				_heartBeat.Stop();
+				_isPlaying = false;
 
 				LevelManager.Current._isGameOver = true;
 				LevelManager.Current.GameOver();
