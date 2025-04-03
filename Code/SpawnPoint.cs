@@ -16,25 +16,30 @@ public partial class SpawnPoint : Node2D
 	public List<Vector2> _loadingAreaSpawnerList = new List<Vector2>();
 	public List<Vector2> _boxOnTruckList = new List<Vector2>();
 	public int randomLoadingAreaIndex = 0;
+
+	// Spawn points of boxes on the truck
 	Vector2[,] levelZero = {
 		{new Vector2(1367, -82), new Vector2(1367, -200), new Vector2(1367, -316)},
 		{new Vector2(1367, -82), new Vector2(1367, -200), new Vector2(1367, -316)},
 		{new Vector2(1367, -82), new Vector2(1367, -200), new Vector2(1367, -316)}
 	};
 	Vector2[,] levelOne = {
-		{new Vector2(-87, 718), new Vector2(-203, 718), new Vector2(-331, 718)},
+		{new Vector2(-90, 2072), new Vector2(-208, 2072), new Vector2(-335, 2072)},
 		{new Vector2(1418, -86), new Vector2(1418, -204), new Vector2(1418, -331)},
-		{new Vector2(-90, 2072), new Vector2(-208, 2072), new Vector2(-335, 2072)}
+		{new Vector2(-87, 718), new Vector2(-203, 718), new Vector2(-331, 718)}
+
 	};
 	Vector2[,] levelTwo = {
-		{new Vector2(2565, 2324), new Vector2(2565, 2449), new Vector2(2565, 2582)},
+		{new Vector2(1370, -327), new Vector2(1370, -198), new Vector2(1370, -81)},
 		{new Vector2(-89, 1437), new Vector2(-211, 1437), new Vector2(-339, 1437)},
-		{new Vector2(1370, -327), new Vector2(1370, -198), new Vector2(1370, -81)}
+		{new Vector2(2565, 2324), new Vector2(2565, 2449), new Vector2(2565, 2582)}
+
 	};
 	Vector2[,] levelThree = {
-		{new Vector2(2647, 2316), new Vector2(2647, 2450), new Vector2(2647, 2577)},
+		{new Vector2(-86, 2080), new Vector2(-216, 2080), new Vector2(-345, 2080)},
 		{new Vector2(1438, -90), new Vector2(1438, -217), new Vector2(1438, -351)},
-		{new Vector2(-86, 2080), new Vector2(-216, 2080), new Vector2(-345, 2080)}
+		{new Vector2(2647, 2316), new Vector2(2647, 2450), new Vector2(2647, 2577)}
+
 	};
 
 	// Called when the node enters the scene tree for the first time.
@@ -160,6 +165,12 @@ public partial class SpawnPoint : Node2D
 				_boxOnTruckList.Insert(0, levelTwo[randomLoadingAreaIndex, 0]);
 				_boxOnTruckList.Insert(0, levelTwo[randomLoadingAreaIndex, 1]);
 				_boxOnTruckList.Insert(0, levelTwo[randomLoadingAreaIndex, 2]);
+				break;
+
+			case 3:
+				_boxOnTruckList.Insert(0, levelThree[randomLoadingAreaIndex, 0]);
+				_boxOnTruckList.Insert(0, levelThree[randomLoadingAreaIndex, 1]);
+				_boxOnTruckList.Insert(0, levelThree[randomLoadingAreaIndex, 2]);
 				break;
 		}
 	}

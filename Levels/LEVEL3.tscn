@@ -21,7 +21,6 @@ _signVariant2 = NodePath("Signs/Variant2")
 _signVariant3 = NodePath("Signs/Variant3")
 
 [node name="CanvasModulate" parent="." instance=ExtResource("2_dhswl")]
-visible = true
 
 [node name="UI" parent="." instance=ExtResource("3_qlsc8")]
 offset_left = 374.4
@@ -66,7 +65,6 @@ position = Vector2(2564, 1344)
 texture = ExtResource("8_yx8b1")
 
 [node name="Truck" parent="Signs/Variant1" instance=ExtResource("9_23csw")]
-visible = false
 z_index = 2
 position = Vector2(-297, 2082)
 rotation = 3.14159
@@ -146,3 +144,28 @@ tile_map_data = PackedByteArray("AAD+/xgAAQACAAAAAAD+/xkAAQACAAAAAAD+/xoAAQACAAA
 [node name="RIGHT" type="Sprite2D" parent="Signs/Variant3"]
 position = Vector2(1787, 1375)
 texture = ExtResource("10_ekaxa")
+
+[node name="Label" type="Label" parent="."]
+z_index = 15
+offset_left = 382.0
+offset_top = 2120.0
+offset_right = 501.0
+offset_bottom = 2143.0
+text = "Level3 Variant1
+"
+
+[node name="Label2" type="Label" parent="."]
+z_index = 15
+offset_left = 1366.0
+offset_top = 279.0
+offset_right = 1485.0
+offset_bottom = 302.0
+text = "Level3 Variant2"
+
+[node name="Label3" type="Label" parent="."]
+z_index = 15
+offset_left = 2534.0
+offset_top = 2050.0
+offset_right = 2653.0
+offset_bottom = 2073.0
+text = "Level3 Variant3"

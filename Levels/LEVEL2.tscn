@@ -21,7 +21,6 @@ _signVariant2 = NodePath("Signs/Variant2")
 _signVariant3 = NodePath("Signs/Variant3")
 
 [node name="CanvasModulate" parent="." instance=ExtResource("5_jyerk")]
-visible = true
 
 [node name="UI" parent="." instance=ExtResource("3_swr02")]
 offset_left = 374.4
@@ -148,3 +147,28 @@ rotation = 1.5708
 [node name="Shelves" parent="Signs/Variant3" instance=ExtResource("6_e4lv1")]
 scale = Vector2(1.25, 1.25)
 tile_map_data = PackedByteArray("AAD+/xAAAQABAAAAAAD+/xEAAQABAAAAAAD+/xIAAQABAAAAAAD+/xMAAQABAAAAAAD//xAAAQABAAAAAAD//xEAAQABAAAAAAD//xIAAQABAAAAAAD//xMAAQABAAAAAAAPAP7/AQACAAAAAwAPAP//AQACAAAAAwAQAP7/AQACAAAAAwAQAP//AQACAAAAAwARAP7/AQACAAAAAwARAP//AQACAAAAAwASAP7/AQACAAAAAwASAP//AQACAAAAAwA=")
+
+[node name="Label" type="Label" parent="."]
+z_index = 15
+offset_left = 1334.0
+offset_top = 266.0
+offset_right = 1453.0
+offset_bottom = 289.0
+text = "Level2 Variant1
+"
+
+[node name="Label2" type="Label" parent="."]
+z_index = 15
+offset_left = 286.0
+offset_top = 1380.0
+offset_right = 405.0
+offset_bottom = 1403.0
+text = "Level2 Variant2"
+
+[node name="Label3" type="Label" parent="."]
+z_index = 15
+offset_left = 2792.0
+offset_top = 2094.0
+offset_right = 2911.0
+offset_bottom = 2117.0
+text = "Level2 Variant3"
