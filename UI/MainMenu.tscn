@@ -71,10 +71,6 @@ position = Vector2(149, -303.5)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_ie6d2")
 
-[node name="SettingsWindow" parent="." node_paths=PackedStringArray("_buttonAudio") instance=ExtResource("3_3l5fd")]
-layout_mode = 1
-_buttonAudio = NodePath("../buttonAudio")
-
 [node name="SpawnPoint" parent="." instance=ExtResource("4_c6gjr")]
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
@@ -105,5 +101,10 @@ flat = true
 layout_mode = 2
 icon = ExtResource("4_nss8d")
 flat = true
+
+[node name="SettingsWindow" parent="." node_paths=PackedStringArray("_buttonAudio") instance=ExtResource("3_3l5fd")]
+layout_mode = 2
+anchors_preset = 0
+_buttonAudio = NodePath("../buttonAudio")
 
 [connection signal="pressed" from="HBoxContainer/MusicToggle" to="." method="OnSoundButtonPressed"]

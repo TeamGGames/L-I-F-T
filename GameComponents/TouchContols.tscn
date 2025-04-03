@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bieopvt4fc5qb" path="res://Assets/NEWturnLeft.png" id="4_2c18q"]
 [ext_resource type="Texture2D" uid="uid://bagu5v2117s0j" path="res://Assets/NEWturnRight.png" id="5_boadp"]
 [ext_resource type="Texture2D" uid="uid://bmx26iri8bghp" path="res://Assets/NEWgrab.png" id="6_p6mpc"]
-[ext_resource type="Texture2D" uid="uid://d0pa85jq0dond" path="res://Assets/reverse2.png" id="6_qpxqu"]
+[ext_resource type="Texture2D" uid="uid://dx0soq3u41ung" path="res://Assets/reverse.png" id="7_e8haw"]
 [ext_resource type="Script" path="res://Code/MainMenuController.cs" id="7_o65wy"]
 [ext_resource type="Texture2D" uid="uid://t78xtx52lnby" path="res://Assets/pausebutton.png" id="8_yfky5"]
 [ext_resource type="PackedScene" uid="uid://nb5jwfmhymur" path="res://UI/buttonAudio.tscn" id="10_27tdr"]
@@ -42,10 +42,10 @@ _menuController = NodePath("Node2D")
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 0.5
-offset_left = 31.0
-offset_top = 45.0
-offset_right = 281.0
-offset_bottom = 135.0
+offset_left = 81.0
+offset_top = 97.0
+offset_right = 331.0
+offset_bottom = 187.0
 grow_vertical = 2
 max_value = 2.5
 step = 0.0
@@ -70,9 +70,9 @@ scale = Vector2(0.765625, 0.640777)
 texture_normal = ExtResource("6_p6mpc")
 
 [node name="Reverse" type="TouchScreenButton" parent="."]
-position = Vector2(210, 523)
+position = Vector2(274, 559)
 scale = Vector2(0.412141, 0.416667)
-texture_normal = ExtResource("6_qpxqu")
+texture_normal = ExtResource("7_e8haw")
 
 [node name="PauseButton" type="TouchScreenButton" parent="."]
 position = Vector2(1174, -1)
