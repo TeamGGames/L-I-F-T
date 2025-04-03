@@ -102,10 +102,6 @@ shadow_item_cull_mask = 2
 texture = ExtResource("5_mmcd2")
 offset = Vector2(60, -5)
 
-[node name="Glow" parent="." instance=ExtResource("5_gt0wh")]
-position = Vector2(-23.5, -0.499999)
-scale = Vector2(1.23438, 1.10938)
-
 [node name="Audio" type="Node" parent="."]
 
 [node name="Engine" type="AudioStreamPlayer" parent="Audio"]
@@ -127,6 +123,11 @@ shape = SubResource("RectangleShape2D_5bydl")
 
 [node name="CollisionSound" type="AudioStreamPlayer" parent="SoundDetectorArea"]
 volume_db = -5.0
+
+[node name="Glow" parent="." instance=ExtResource("5_gt0wh")]
+z_index = 5
+position = Vector2(-23.5, -0.499999)
+scale = Vector2(1.23438, 1.10938)
 
 [connection signal="area_entered" from="InteractionComponents/InteractionArea" to="." method="EnteredLoadingArea"]
 [connection signal="area_exited" from="InteractionComponents/InteractionArea" to="." method="ExitedLoadingArea"]
