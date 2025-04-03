@@ -1,7 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://b370xr7v0ishw"]
+[gd_scene load_steps=3 format=3 uid="uid://b370xr7v0ishw"]
 
 [ext_resource type="Script" path="res://Code/Timer.cs" id="1_vytex"]
+[ext_resource type="AudioStream" uid="uid://cj2jdmflpwapp" path="res://Sounds/sfx/heartbeat.wav" id="2_acl5y"]
 
-[node name="Timer" type="Node"]
+[node name="Timer" type="Node" node_paths=PackedStringArray("_heartBeat")]
 script = ExtResource("1_vytex")
 _time = 45.0
+_heartBeat = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_acl5y")

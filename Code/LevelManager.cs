@@ -247,18 +247,18 @@ public partial class LevelManager : Node2D
 
 	public void DestroyBoxes()
 	{
+		for (int i = 0; i < _spawnedBoxes.Count; i++)
+		{
+			_spawnedBoxes[i].QueueFree();
+		}
+		_spawnedBoxes.Clear();
+
 		if (_box != null)
 		{
 			_box.QueueFree();
 
 			_box = null;
 		}
-
-		for (int i = 0; i < _spawnedBoxes.Count; i++)
-		{
-			_spawnedBoxes[i].QueueFree();
-		}
-		_spawnedBoxes.Clear();
 	}
 	public void SpawnBox(Vector2 spawnPosition)
 	{
