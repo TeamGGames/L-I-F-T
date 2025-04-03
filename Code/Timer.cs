@@ -61,14 +61,18 @@ public partial class Timer : Node
 			_timer -= delta;
 			_progressBar.SetValueNoSignal(_timer);
 
-			if (_timer < 10)
+			if (_timer < 10 && !_isPlaying)
 			{
 				_progressBlood.Visible = true;
-				if (!_isPlaying)
-				{
 					_heartBeat.Play();
 					_isPlaying = true;
-				}
+
+			}
+			if (_timer > 10 && _isPlaying)
+			{
+				_progressBlood.Visible = false;
+				_heartBeat.Stop();
+				_isPlaying = false;
 			}
 			if(_timer <= 0)
 			{
