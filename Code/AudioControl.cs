@@ -6,7 +6,7 @@ namespace ForkliftGame
 	public partial class AudioControl : Control
 	{
 		[Export] private Slider _volumeSlider = null;
-		[Export] private string _busName = "Master";
+		[Export] private string _busName = null;
 		private float _originalVolume = 0.0f;
         [Export] private SettingsWindow _settingsWindow = null;
 
@@ -20,7 +20,7 @@ namespace ForkliftGame
 
 		public void Initialize()
 		{
-			if (_settingsWindow.GetVolume(_busName, out _originalVolume))
+			if (!_settingsWindow.GetVolume(_busName, out _originalVolume))
 			{
 				GD.PrintErr("Äänenvoimakkuuden alustus epäonnistui.");
 			}

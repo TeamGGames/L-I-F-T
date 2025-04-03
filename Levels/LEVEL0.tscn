@@ -85,9 +85,11 @@ theme = ExtResource("2_da2pp")
 text = "TUTORIAL_TEXT_4"
 
 [node name="TutorialDarkness" parent="." instance=ExtResource("5_tw3ic")]
+visible = true
 color = Color(0.314316, 0.314316, 0.314315, 1)
 
 [node name="SpawnPoint" parent="." instance=ExtResource("4_2o3k6")]
+visible = false
 position = Vector2(108, -168)
 
 [node name="Shelves" parent="." instance=ExtResource("6_p06fa")]

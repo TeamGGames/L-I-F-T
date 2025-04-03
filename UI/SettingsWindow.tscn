@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://qan6vlcvx72v" path="res://Assets/ENGflag.png" id="4_8wv0y"]
 [ext_resource type="Texture2D" uid="uid://rc72pvpgfkfk" path="res://Assets/FINflag.png" id="5_8koon"]
 
-[node name="SettingsWindow" type="Panel" node_paths=PackedStringArray("_exitButton", "_fiButton", "_enButton")]
+[node name="SettingsWindow" type="Panel" node_paths=PackedStringArray("_masterAudioControl", "_musicAudioControl", "_effectsAudioControl", "_exitButton", "_fiButton", "_enButton")]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,6 +18,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_mp45t")
 script = ExtResource("1_l43fp")
+_masterAudioControl = NodePath("Panel/VBoxContainer/MasterVolume")
+_musicAudioControl = NodePath("Panel/VBoxContainer/MusicVolume")
+_effectsAudioControl = NodePath("Panel/VBoxContainer/SFXVolume")
 _exitButton = NodePath("Panel/ExitButton")
 _fiButton = NodePath("Panel/VBoxContainer/LanguageSettings/HBoxContainer/FIButton")
 _enButton = NodePath("Panel/VBoxContainer/LanguageSettings/HBoxContainer/ENButton")
@@ -68,6 +71,7 @@ horizontal_alignment = 1
 [node name="MasterVolume" parent="Panel/VBoxContainer" node_paths=PackedStringArray("_volumeSlider", "_settingsWindow") instance=ExtResource("2_gjm6m")]
 layout_mode = 2
 _volumeSlider = NodePath("HSlider")
+_busName = "Master"
 _settingsWindow = NodePath("../../..")
 
 [node name="Label" parent="Panel/VBoxContainer/MasterVolume" index="0"]

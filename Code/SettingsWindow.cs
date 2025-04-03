@@ -63,7 +63,7 @@ namespace ForkliftGame
 			ChangeLanguage("fi");
 			_data.LangCode = "fi";
 			SaveSettings();
-			//Close();
+
 		}
 		private void OnEnButtonPressed()
 		{
@@ -71,7 +71,7 @@ namespace ForkliftGame
 			ChangeLanguage("en");
 			_data.LangCode = "en";
 			SaveSettings();
-			//Close();
+
 		}
 
 		private void ChangeLanguage(string langCode)
@@ -110,6 +110,8 @@ namespace ForkliftGame
 			{
 				data = SettingsData.CreateDefaults();
 			}
+
+			Initialize();
 
 			return data;
 		}
