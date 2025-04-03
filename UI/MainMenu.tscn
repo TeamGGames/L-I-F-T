@@ -17,40 +17,30 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 30.0
-offset_top = 10.0
-offset_right = 30.0
-offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_iy7t7")
 script = ExtResource("1_m87ug")
 _startButton = NodePath("BackGround/ButtonContainer/StartButton")
 _tutorialButton = NodePath("BackGround/ButtonContainer/TutorialButton")
-_settingsButton = NodePath("BackGround/HBoxContainer/SettingsButton")
-_soundButton = NodePath("BackGround/HBoxContainer/MusicToggle")
+_settingsButton = NodePath("HBoxContainer/SettingsButton")
+_soundButton = NodePath("HBoxContainer/MusicToggle")
 _settingsWindow = NodePath("SettingsWindow")
 _spawner = NodePath("SpawnPoint")
 _buttonAudio = NodePath("buttonAudio")
 
 [node name="BackGround" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BackgroundSprite" type="Sprite2D" parent="BackGround"]
-position = Vector2(-40, -30)
-scale = Vector2(0.55, 0.55)
 texture = ExtResource("3_6r2fn")
-centered = false
-
-[node name="Logo" type="Sprite2D" parent="BackGround/BackgroundSprite"]
-position = Vector2(1232.73, 241.818)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("4_ie6d2")
 
 [node name="ButtonContainer" type="VBoxContainer" parent="BackGround"]
 layout_mode = 1
@@ -76,28 +66,10 @@ icon_alignment = 1
 layout_mode = 2
 text = "TUTORIAL"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BackGround"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 1005.0
-offset_top = -24.0
-offset_right = 1.0
-offset_bottom = 105.0
-grow_horizontal = 2
-alignment = 2
-
-[node name="SettingsButton" type="Button" parent="BackGround/HBoxContainer"]
-layout_mode = 2
-icon = ExtResource("3_v7nq1")
-flat = true
-
-[node name="Settings" type="Sprite2D" parent="BackGround/HBoxContainer/SettingsButton"]
-
-[node name="MusicToggle" type="Button" parent="BackGround/HBoxContainer"]
-layout_mode = 2
-icon = ExtResource("4_nss8d")
-flat = true
+[node name="Logo" type="Sprite2D" parent="BackGround/ButtonContainer/TutorialButton"]
+position = Vector2(149, -303.5)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_ie6d2")
 
 [node name="SettingsWindow" parent="." node_paths=PackedStringArray("_buttonAudio") instance=ExtResource("3_3l5fd")]
 layout_mode = 1
@@ -107,10 +79,31 @@ _buttonAudio = NodePath("../buttonAudio")
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_lcm10")
-volume_db = -10.0
 autoplay = true
 bus = &"Music"
 
 [node name="buttonAudio" parent="." instance=ExtResource("8_dl3cx")]
 
-[connection signal="pressed" from="BackGround/HBoxContainer/MusicToggle" to="." method="OnSoundButtonPressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -260.0
+offset_bottom = 129.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="SettingsButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_v7nq1")
+flat = true
+
+[node name="Settings" type="Sprite2D" parent="HBoxContainer/SettingsButton"]
+
+[node name="MusicToggle" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("4_nss8d")
+flat = true
+
+[connection signal="pressed" from="HBoxContainer/MusicToggle" to="." method="OnSoundButtonPressed"]

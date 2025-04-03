@@ -18,7 +18,8 @@ namespace ForkliftGame
 		public override void _Ready()
 		{
 			_data = LoadSettings();
-			ApplyData(_data);
+			ApplySettingsData(_data);
+
 
 			if (_exitButton != null)
 			{
@@ -40,7 +41,7 @@ namespace ForkliftGame
 		public virtual void Open()
 		{
 			_data = LoadSettings();
-    		ApplyData(_data);
+    		ApplySettingsData(_data);
     		Show();
 		}
 
@@ -60,17 +61,17 @@ namespace ForkliftGame
 		{
 			_buttonAudio.Play();
 			ChangeLanguage("fi");
+			_data.LangCode = "fi";
 			SaveSettings();
-			// Handle Cancel button press logic here
-			Close();
+			//Close();
 		}
 		private void OnEnButtonPressed()
 		{
 			_buttonAudio.Play();
 			ChangeLanguage("en");
+			_data.LangCode = "en";
 			SaveSettings();
-			// Handle Cancel button press logic here
-			Close();
+			//Close();
 		}
 
 		private void ChangeLanguage(string langCode)
@@ -78,7 +79,7 @@ namespace ForkliftGame
 			TranslationServer.SetLocale(langCode);
 		}
 
-		private void ApplyData(SettingsData data)
+		private void ApplySettingsData(SettingsData data)
 		{
 			if (data == null)
 			{
@@ -88,6 +89,7 @@ namespace ForkliftGame
 			SetVolume("Master", data.MasterVolume);
 			SetVolume("Music", data.MusicVolume);
 			SetVolume("SFX", data.SfxVolume);
+			ChangeLanguage(data.LangCode);
 		}
 
 		private SettingsData LoadSettings()

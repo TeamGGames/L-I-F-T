@@ -21,7 +21,7 @@ public partial class MainMenuController : Control
 	[Export] private double _maxEnergy = 45;
 	[Export] private AudioStreamPlayer _buttonAudio = null;
 
-	private List<string> _levels = new List<string> {Config.Level0, Config.Level1, Config.Level2};
+	private List<string> _levels = new List<string> {Config.Level0, Config.Level1, Config.Level2, Config.Level3};
 	private PackedScene _spawnPointScene = null;
 	private string _spawnPointScenePath = "res://GameComponents/SpawnPoint.tscn";
 

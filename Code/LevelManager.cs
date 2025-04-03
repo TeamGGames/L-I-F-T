@@ -27,7 +27,7 @@ public partial class LevelManager : Node2D
 	[Export] private Node2D _signVariant1 = null;
 	[Export] private Node2D _signVariant2 = null;
 	[Export] private Node2D _signVariant3 = null;
-	[Export] private int _addedScore = 50;
+	[Export] private int _addedScore = 500;
 	private List<Node2D> _signVariantList = new List<Node2D>();
 
 	private SceneTree _levelSceneTree = null;
@@ -67,7 +67,7 @@ public partial class LevelManager : Node2D
 	private List<Box> _spawnedBoxes = new List<Box>();
 	private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
 	private List<SpawnPoint> _loadingAreaPoints = new List<SpawnPoint>();
-	private List<string> _levels = new List<string> {Config.Level0, Config.Level1, Config.Level2};
+	private List<string> _levels = new List<string> {Config.Level0, Config.Level1, Config.Level2, Config.Level3};
 
 	public int _nextLevel = 0;
 	public bool _isGameOver = false;
@@ -78,9 +78,10 @@ public partial class LevelManager : Node2D
         public override void _Ready()
     {
         _current = this;
-		_signVariantList.Add(_signVariant3);
-		_signVariantList.Add(_signVariant2);
 		_signVariantList.Add(_signVariant1);
+		_signVariantList.Add(_signVariant2);
+		_signVariantList.Add(_signVariant3);
+
 		StartGame();
     }
 
@@ -182,7 +183,12 @@ public partial class LevelManager : Node2D
 
 		DestroyBattery();
 		DestroyPointsPowerUp();
-		SpawnBattery(CreateSpawnPoints());
+
+		for (int i = 0; i < 2; i++)
+		{
+			SpawnBattery(CreateSpawnPoints());
+		}
+
 		SpawnPointsPowerUp(CreateSpawnPoints());
 		_signVariantList[_spawner.randomLoadingAreaIndex].Visible = true;
 		_spawner.fillTruckSpawnerList(_nextLevel, _spawner.randomLoadingAreaIndex);
