@@ -52,20 +52,20 @@ step = 0.0
 script = ExtResource("1_u2v5k")
 
 [node name="LeftButton" type="TouchScreenButton" parent="."]
-position = Vector2(953, 260)
+position = Vector2(906, 224)
 scale = Vector2(1.4, 1.3)
 texture_normal = ExtResource("4_2c18q")
 shape = SubResource("RectangleShape2D_b8ai3")
 
 [node name="RightButton" type="TouchScreenButton" parent="."]
-position = Vector2(1127, 232)
+position = Vector2(1094, 208)
 scale = Vector2(1.4, 1.3)
 texture_normal = ExtResource("5_boadp")
 shape = SubResource("RectangleShape2D_rd1wi")
 
 [node name="Grab_Release" type="TouchScreenButton" parent="."]
 z_index = 1
-position = Vector2(1094, 540)
+position = Vector2(1025, 509)
 scale = Vector2(0.765625, 0.640777)
 texture_normal = ExtResource("6_p6mpc")
 
