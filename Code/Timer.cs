@@ -34,14 +34,14 @@ public partial class Timer : Node
 		}
 
 	private TextureProgressBar _progressBar = null;
-	private TextureRect _progressBlood = null;
+	private PointLight2D _progressBlood = null;
 	private bool _isPlaying = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_progressBar = GetNode<TextureProgressBar>("../Forklift/UI/ProgressUI/HBoxContainer/ProgressBar");
-		_progressBlood = GetNode<TextureRect>("../Forklift/UI/ProgressUI/Blood");
+		_progressBlood = GetNode<PointLight2D>("../Forklift/UI/ProgressUI/Blood");
 
 		if (_progressBar == null)
 		{
@@ -61,14 +61,18 @@ public partial class Timer : Node
 			_timer -= delta;
 			_progressBar.SetValueNoSignal(_timer);
 
-			if (_timer < 10)
+			if (_timer < 10 && !_isPlaying)
 			{
 				_progressBlood.Visible = true;
-				if (!_isPlaying)
-				{
 					_heartBeat.Play();
 					_isPlaying = true;
-				}
+
+			}
+			if (_timer > 10 && _isPlaying)
+			{
+				_progressBlood.Visible = false;
+				_heartBeat.Stop();
+				_isPlaying = false;
 			}
 			if(_timer <= 0)
 			{

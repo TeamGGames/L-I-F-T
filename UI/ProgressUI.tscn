@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dh6p7p856h1od"]
+[gd_scene load_steps=8 format=3 uid="uid://dh6p7p856h1od"]
 
 [ext_resource type="Script" path="res://Code/ProgressUi.cs" id="1_gk41f"]
 [ext_resource type="Texture2D" uid="uid://b4mi038pcjkr3" path="res://Assets/Battery2.png" id="2_bvcev"]
 [ext_resource type="Texture2D" uid="uid://cxb1vsglpv6ct" path="res://Assets/progressbar1.png" id="3_2i2hi"]
 [ext_resource type="Theme" uid="uid://mhajft3v8s22" path="res://UI/MainTheme.tres" id="4_ng868"]
+[ext_resource type="PackedScene" uid="uid://bax38opyasm7m" path="res://GameComponents/glow.tscn" id="5_y0ner"]
 
 [sub_resource type="Gradient" id="Gradient_s2exl"]
 offsets = PackedFloat32Array(0.649351, 1)
@@ -70,12 +71,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "1000"
 
-[node name="Blood" type="TextureRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Blood" parent="." instance=ExtResource("5_y0ner")]
+position = Vector2(687.5, 399)
+scale = Vector2(22.4844, 13.4688)
+energy = 4.0
 texture = SubResource("GradientTexture2D_vhu6s")
