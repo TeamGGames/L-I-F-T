@@ -13,13 +13,15 @@ public partial class MainMenuController : Control
 	[Export] private Button _startButton = null;
 	[Export] private Button _tutorialButton = null;
 	[Export] private Button _settingsButton = null;
-	[Export] private Button _soundButton = null;
+	[Export] private TextureButton _musicToggle = null;
 
 	[Export] private SettingsWindow _settingsWindow = null;
 
 	[Export] private SpawnPoint _spawner = null;
 	[Export] private double _maxEnergy = 45;
 	[Export] private AudioStreamPlayer _buttonAudio = null;
+	[Export] private Texture2D _audioONTexture = null;
+	[Export] private Texture2D _audioOFFTexture = null;
 
 	private List<string> _levels = new List<string> {Config.Level0, Config.Level1, Config.Level2, Config.Level3};
 	private PackedScene _spawnPointScene = null;
@@ -43,6 +45,12 @@ public partial class MainMenuController : Control
 				_startButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnStartPressed)));
 				_settingsButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnSettingsPressed)));
 				_tutorialButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnTutorialPressed)));
+			}
+
+			_settingsWindow.GetVolume("Master", out float volumeDB);
+			if (volumeDB == -80)
+			{
+				_musicToggle.TextureNormal = _audioOFFTexture;
 			}
 	}
 
@@ -86,6 +94,14 @@ public partial class MainMenuController : Control
 		else
 		{
 			_settingsWindow.SetVolume("Master", -6);
+		}
+		if (_musicToggle.TextureNormal == _audioONTexture)
+		{
+			_musicToggle.TextureNormal = _audioOFFTexture;
+		}
+		else
+		{
+			_musicToggle.TextureNormal = _audioONTexture;
 		}
 
 		_settingsWindow.SaveSettings();

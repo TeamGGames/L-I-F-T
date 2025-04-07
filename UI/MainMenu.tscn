@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://f27bdr3jfoha"]
+[gd_scene load_steps=13 format=3 uid="uid://f27bdr3jfoha"]
 
 [ext_resource type="Theme" uid="uid://mhajft3v8s22" path="res://UI/MainTheme.tres" id="1_iy7t7"]
 [ext_resource type="Script" path="res://Code/MainMenuController.cs" id="1_m87ug"]
@@ -11,8 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://bedkuj7rlu8qf" path="res://Assets/music_toggle.png" id="4_nss8d"]
 [ext_resource type="PackedScene" uid="uid://nb5jwfmhymur" path="res://UI/buttonAudio.tscn" id="8_dl3cx"]
 [ext_resource type="AudioStream" uid="uid://cbutx7luhbwl6" path="res://Sounds/music/032925menumusic2.mp3" id="10_lcm10"]
+[ext_resource type="Texture2D" uid="uid://crws0knuyg45y" path="res://Assets/Sound-button disabled.png" id="11_hgdjq"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_tutorialButton", "_settingsButton", "_soundButton", "_settingsWindow", "_spawner", "_buttonAudio")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_tutorialButton", "_settingsButton", "_musicToggle", "_settingsWindow", "_spawner", "_buttonAudio")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,10 +25,12 @@ script = ExtResource("1_m87ug")
 _startButton = NodePath("BackGround/ButtonContainer/StartButton")
 _tutorialButton = NodePath("BackGround/ButtonContainer/TutorialButton")
 _settingsButton = NodePath("HBoxContainer/SettingsButton")
-_soundButton = NodePath("HBoxContainer/MusicToggle")
+_musicToggle = NodePath("HBoxContainer/MusicToggle")
 _settingsWindow = NodePath("SettingsWindow")
 _spawner = NodePath("SpawnPoint")
 _buttonAudio = NodePath("buttonAudio")
+_audioONTexture = ExtResource("4_nss8d")
+_audioOFFTexture = ExtResource("11_hgdjq")
 
 [node name="BackGround" type="Panel" parent="."]
 layout_mode = 1
@@ -97,10 +100,9 @@ flat = true
 
 [node name="Settings" type="Sprite2D" parent="HBoxContainer/SettingsButton"]
 
-[node name="MusicToggle" type="Button" parent="HBoxContainer"]
+[node name="MusicToggle" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
-icon = ExtResource("4_nss8d")
-flat = true
+texture_normal = ExtResource("4_nss8d")
 
 [node name="SettingsWindow" parent="." node_paths=PackedStringArray("_buttonAudio") instance=ExtResource("3_3l5fd")]
 layout_mode = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c8waskkpj52xw"]
+[gd_scene load_steps=13 format=3 uid="uid://c8waskkpj52xw"]
 
 [ext_resource type="Script" path="res://Code/Forklift.cs" id="1_g0d5j"]
 [ext_resource type="Texture2D" uid="uid://ckb4g578luspj" path="res://Assets/ForkliftSpriteSheet.png" id="2_l8r3c"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bax38opyasm7m" path="res://GameComponents/glow.tscn" id="5_gt0wh"]
 [ext_resource type="Texture2D" uid="uid://b8f3ljcsuhfa5" path="res://Assets/headlight_halo_resized.png" id="5_mmcd2"]
 [ext_resource type="AudioStream" uid="uid://e51tg4ynbusy" path="res://Sounds/sfx/engine-reworked.mp3" id="7_xc4gq"]
+[ext_resource type="AudioStream" uid="uid://brsxrwj184o33" path="res://Sounds/sfx/collision3.wav" id="8_5k1bn"]
 [ext_resource type="Script" path="res://Code/SoundDetectorArea.cs" id="8_v8r3m"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vtdxb"]
@@ -122,6 +123,7 @@ scale = Vector2(1.43713, 0.64022)
 shape = SubResource("RectangleShape2D_5bydl")
 
 [node name="CollisionSound" type="AudioStreamPlayer" parent="SoundDetectorArea"]
+stream = ExtResource("8_5k1bn")
 volume_db = -5.0
 
 [node name="Glow" parent="." instance=ExtResource("5_gt0wh")]
