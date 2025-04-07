@@ -34,7 +34,7 @@ public partial class MainMenuController : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-			base._Ready();
+			//base._Ready();
 			_mainMenuSceneTree = GetTree();
 			if (_mainMenuSceneTree == null)
 			{
@@ -47,10 +47,13 @@ public partial class MainMenuController : Control
 				_tutorialButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnTutorialPressed)));
 			}
 
-			_settingsWindow.GetVolume("Master", out float volumeDB);
-			if (volumeDB == -80)
+			if (_musicToggle != null)
 			{
-				_musicToggle.TextureNormal = _audioOFFTexture;
+				_settingsWindow.GetVolume("Master", out float volumeDB);
+				if (volumeDB == -80)
+				{
+					_musicToggle.TextureNormal = _audioOFFTexture;
+				}
 			}
 	}
 
