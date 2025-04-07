@@ -81,8 +81,6 @@ stream = ExtResource("10_lcm10")
 autoplay = true
 bus = &"Music"
 
-[node name="buttonAudio" parent="." instance=ExtResource("8_dl3cx")]
-
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 1
@@ -108,5 +106,7 @@ texture_normal = ExtResource("4_nss8d")
 layout_mode = 2
 anchors_preset = 0
 _buttonAudio = NodePath("../buttonAudio")
+
+[node name="buttonAudio" parent="." instance=ExtResource("8_dl3cx")]
 
 [connection signal="pressed" from="HBoxContainer/MusicToggle" to="." method="OnSoundButtonPressed"]

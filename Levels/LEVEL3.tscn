@@ -21,6 +21,7 @@ _signVariant2 = NodePath("Signs/Variant2")
 _signVariant3 = NodePath("Signs/Variant3")
 
 [node name="CanvasModulate" parent="." instance=ExtResource("2_dhswl")]
+visible = true
 
 [node name="UI" parent="." instance=ExtResource("3_qlsc8")]
 offset_left = 374.4

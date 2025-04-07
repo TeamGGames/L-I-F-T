@@ -11,6 +11,7 @@ namespace ForkliftGame
 		{
 			_timer = GetNode<Timer>("../Timer");
 			_timer.AddTime(_addedTime);
+			LevelManager.Current.ShowBatteryCollectEffect();
 
 		}
 	}

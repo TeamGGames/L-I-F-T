@@ -21,6 +21,7 @@ public partial class LevelManager : Node2D
 	[Export] private string _timerScenePath = "res://GameComponents/Timer.tscn";
 	[Export] private string _loadingAreaScenePath = "res://Levels/loading_area.tscn";
 	[Export] private string _pointsPowerUpScenePath = "res://GameComponents/PointsPowerUp.tscn";
+	[Export] private PackedScene _collectBatteryEffectScene = null;
 
 	[Export] private Ui _ui = null;
 	[Export] private SpawnPoint _spawner = null;
@@ -39,6 +40,7 @@ public partial class LevelManager : Node2D
 	private PackedScene _pointsPowerUpScene = null;
 	private PackedScene _loadingAreaScene = null;
 	private static LevelManager _current = null;
+	private GpuParticles2D _collectEffect = null;
 
 	private Forklift _forklift = null;
 	private Box _box = null;
@@ -483,6 +485,26 @@ public string LoadFromFile (string path, string fileName)
 		return null;
 	}
 
+}
+public bool ShowBatteryCollectEffect()
+{
+	if (_collectEffect == null && _collectBatteryEffectScene != null)
+			{
+				_collectEffect = _collectBatteryEffectScene.Instantiate<GpuParticles2D>();
+				AddChild(_collectEffect);
+			}
+			else if (_collectEffect == null && _collectBatteryEffectScene == null)
+			{
+				GD.PrintErr("Collect effect scene not loaded!");
+				return false;
+			}
+
+			// Aseta efektin sijainti ja käynnistä se. Varmista, että efekti toistetaan vain kerran.
+			_collectEffect.Position = _forklift.GlobalPosition;
+			_collectEffect.Restart();
+			_collectEffect.OneShot = true;
+
+			return true;
 }
 
 	public void Pause()
