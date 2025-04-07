@@ -10,3 +10,5 @@ _heartBeat = NodePath("AudioStreamPlayer")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_acl5y")
+volume_db = 10.0
+bus = &"SFX"

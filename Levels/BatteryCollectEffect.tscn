@@ -10,7 +10,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1m2gh"]
-lifetime_randomness = 0.38
+lifetime_randomness = 0.1
 particle_flag_disable_z = true
 emission_shape_scale = Vector3(5, 5, 1)
 emission_shape = 1
@@ -34,7 +34,6 @@ anim_offset_max = 0.7581
 z_index = 100
 material = SubResource("CanvasItemMaterial_3n043")
 amount = 16
-amount_ratio = 0.7524
 process_material = SubResource("ParticleProcessMaterial_1m2gh")
 texture = ExtResource("1_2y42p")
 speed_scale = 1.2

@@ -12,6 +12,7 @@ public partial class Ui : Control
 	[Export] private Label _1stScore = null;
 	[Export] private Label _2ndScore = null;
 	[Export] private Label _3rdScore = null;
+	[Export] private AudioStreamPlayer _gameOverSound = null;
 
 	private SceneTree _mainMenuSceneTree = null;
 	// Called when the node enters the scene tree for the first time.
@@ -57,5 +58,9 @@ public partial class Ui : Control
 		{
 			_3rdScore.Text = $"3. {score3}";
 		}
+	}
+	public void PlayGameOverSound()
+	{
+		_gameOverSound.Play();
 	}
 }

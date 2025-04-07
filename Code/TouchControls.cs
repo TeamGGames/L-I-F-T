@@ -93,6 +93,7 @@ public partial class TouchControls : Control
 	private void GrabReleaseButtonDown()
 	{
 		_forklift._grabReleasePressed = true;
+		_forklift._liftingSound.Play();
 	}
 
 	private void GrabReleaseButtonUp()
@@ -102,11 +103,13 @@ public partial class TouchControls : Control
 	private void ReverseDown()
 	{
 		_forklift._reversePressed = true;
+		_forklift._backDownSound.Play();
 	}
 
 	private void ReverseUp()
 	{
 		_forklift._reversePressed = false;
+		_forklift._backDownSound.Stop();
 	}
 
 

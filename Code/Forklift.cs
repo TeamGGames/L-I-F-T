@@ -28,6 +28,8 @@ public partial class Forklift : CharacterBody2D
 	// Added each time a box is grabbed. Adjust in Godot.
 	[Export] private float _reducedSpeedFromWeight = 0.25f;
 	[Export] private AudioStreamPlayer _engineSound = null;
+	[Export] public AudioStreamPlayer _backDownSound = null;
+	[Export] public AudioStreamPlayer _liftingSound = null;
 
 	// Used in connection with the above _reducedSpeedFromWeight to
 	// calculate thereduced speed when carrying a box. the _startAddedWeight
@@ -242,10 +244,10 @@ public partial class Forklift : CharacterBody2D
 			_acceleration =  Transform.X * _reversePower;
 		}
 
-		if (SpeedInput > 2.25 && _rightButtonPressed || SpeedInput > 2.25 && _leftButtonPressed)
-		{
-			_dropBoxes = true;
-		}
+		// if (SpeedInput > 2.25 && _rightButtonPressed || SpeedInput > 2.25 && _leftButtonPressed)
+		// {
+		// 	_dropBoxes = true;
+		//}
 
 		_steerAngle = turn * Mathf.DegToRad(_steeringAngle);
 		PitchAccelerationSound();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8waskkpj52xw"]
+[gd_scene load_steps=15 format=3 uid="uid://c8waskkpj52xw"]
 
 [ext_resource type="Script" path="res://Code/Forklift.cs" id="1_g0d5j"]
 [ext_resource type="Texture2D" uid="uid://ckb4g578luspj" path="res://Assets/ForkliftSpriteSheet.png" id="2_l8r3c"]
@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://dh6p7p856h1od" path="res://UI/ProgressUI.tscn" id="4_02cgl"]
 [ext_resource type="PackedScene" uid="uid://bax38opyasm7m" path="res://GameComponents/glow.tscn" id="5_gt0wh"]
 [ext_resource type="Texture2D" uid="uid://b8f3ljcsuhfa5" path="res://Assets/headlight_halo_resized.png" id="5_mmcd2"]
+[ext_resource type="AudioStream" uid="uid://bihrcy68awpm6" path="res://Sounds/sfx/backing-down.mp3" id="7_hqcbd"]
 [ext_resource type="AudioStream" uid="uid://e51tg4ynbusy" path="res://Sounds/sfx/engine-reworked.mp3" id="7_xc4gq"]
 [ext_resource type="AudioStream" uid="uid://brsxrwj184o33" path="res://Sounds/sfx/collision3.wav" id="8_5k1bn"]
+[ext_resource type="AudioStream" uid="uid://dhrsgekhry6ej" path="res://Sounds/sfx/lifting-releasing.mp3" id="8_khhp5"]
 [ext_resource type="Script" path="res://Code/SoundDetectorArea.cs" id="8_v8r3m"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vtdxb"]
@@ -19,7 +21,7 @@ size = Vector2(89, 96)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5bydl"]
 size = Vector2(100.896, 109.338)
 
-[node name="Forklift" type="CharacterBody2D" node_paths=PackedStringArray("_engineSound")]
+[node name="Forklift" type="CharacterBody2D" node_paths=PackedStringArray("_engineSound", "_backDownSound", "_liftingSound")]
 z_index = 3
 material = SubResource("CanvasItemMaterial_vtdxb")
 script = ExtResource("1_g0d5j")
@@ -30,6 +32,8 @@ _gearTwo = 2.25
 _gearThree = 3.0
 _reducedSpeedFromWeight = 0.15
 _engineSound = NodePath("Audio/Engine")
+_backDownSound = NodePath("Audio/BackDown")
+_liftingSound = NodePath("Audio/LiftingSound")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(73, -82)
@@ -107,8 +111,18 @@ offset = Vector2(60, -5)
 
 [node name="Engine" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("7_xc4gq")
-volume_db = 5.0
+volume_db = 10.0
 autoplay = true
+bus = &"SFX"
+
+[node name="BackDown" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("7_hqcbd")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="LiftingSound" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("8_khhp5")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="SoundDetectorArea" type="Area2D" parent="." node_paths=PackedStringArray("_collisionSound", "_forklift")]

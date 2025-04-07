@@ -85,6 +85,7 @@ public partial class LevelManager : Node2D
 		_signVariantList.Add(_signVariant3);
 
 		StartGame();
+		_collectEffect = _collectBatteryEffectScene.Instantiate<GpuParticles2D>();
     }
 
 	private Forklift CreateForklift()
@@ -404,12 +405,12 @@ public Vector2 CreateSpawnPoints()
 
 		if (SaveToFile(savePath, Config.QuickSaveFile, json))
 		{
-			GD.Print("Game data saved");
+			// GD.Print("Game data saved");
 		}
 
 		else
 		{
-			GD.Print("1 Error saving game data");
+			GD.PrintErr("1 Error saving game data");
 		}
 	}
 
@@ -488,9 +489,9 @@ public string LoadFromFile (string path, string fileName)
 }
 public bool ShowBatteryCollectEffect()
 {
-	if (_collectEffect == null && _collectBatteryEffectScene != null)
+	if (_collectBatteryEffectScene != null)
 			{
-				_collectEffect = _collectBatteryEffectScene.Instantiate<GpuParticles2D>();
+
 				AddChild(_collectEffect);
 			}
 			else if (_collectEffect == null && _collectBatteryEffectScene == null)
@@ -528,6 +529,7 @@ public bool ShowBatteryCollectEffect()
 	public void GameOver()
 	{
 		LevelMusic.Instance.StopMusic();
+		_ui.PlayGameOverSound();
 		_signVariantList[_spawner.randomLoadingAreaIndex].Visible = false;
 		int csvScore1 = 0;
 		int csvScore2 = 0;
