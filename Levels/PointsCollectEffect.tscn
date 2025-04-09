@@ -1,8 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://wpiugrxjqxrt"]
+[gd_scene load_steps=4 format=3 uid="uid://wpiugrxjqxrt"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7bbt2"]
+[ext_resource type="Texture2D" uid="uid://sppdkwoy7ffv" path="res://Assets/PointsPowerUpEffectpng.png" id="1_8hefy"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3n043"]
+light_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1m2gh"]
+lifetime_randomness = 0.1
 particle_flag_disable_z = true
-gravity = Vector3(0, 98, 0)
+emission_shape_scale = Vector3(5, 5, 1)
+emission_shape = 1
+emission_sphere_radius = 18.7
+spread = 180.0
+initial_velocity_min = 43.01
+initial_velocity_max = 64.51
+gravity = Vector3(0, 1, 0)
+radial_accel_min = -47.31
+radial_accel_max = 38.71
+scale_min = 0.1
+scale_max = 0.1
+color = Color(1, 1, 1, 0.701961)
+hue_variation_min = -2.23517e-08
+hue_variation_max = -2.23517e-08
+anim_speed_max = 9.08
+anim_offset_min = 0.3106
+anim_offset_max = 0.7581
+turbulence_enabled = true
 
-[node name="PointsCollectEffect" type="GPUParticles2D"]
-process_material = SubResource("ParticleProcessMaterial_7bbt2")
+[node name="PointsPowerUpEffect" type="GPUParticles2D"]
+z_index = 100
+material = SubResource("CanvasItemMaterial_3n043")
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_1m2gh")
+texture = ExtResource("1_8hefy")
+speed_scale = 1.2
+explosiveness = 0.82

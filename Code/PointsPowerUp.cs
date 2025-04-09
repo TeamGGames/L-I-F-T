@@ -13,6 +13,7 @@ namespace ForkliftGame
 
         LevelManager.Current.CurrentScore += _pointsAdded;
         _progressUi.SetScoreLabel(LevelManager.Current.CurrentScore);
+		LevelManager.Current.ShowPointsPowerUpCollectEffect();
 
 		}
 	}

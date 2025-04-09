@@ -116,8 +116,8 @@ public partial class Forklift : CharacterBody2D
 
 		// Read the user input.
 
-		//ReadInput();
-		ReadTouchInput();
+		ReadInput();
+		//ReadTouchInput();
 
 		// Apply friction forces.
 
@@ -288,13 +288,13 @@ public partial class Forklift : CharacterBody2D
 
 		if (Input.IsActionPressed(Config.TurnLeftAction) && Input.IsActionPressed(Config.GearOne))
 		{
-			turn -= 1.25f;
+			turn -= 1.0f;
 			_dropBoxes = false;
 		}
 
 		if (Input.IsActionPressed(Config.TurnRightAction)&& Input.IsActionPressed(Config.GearOne))
 		{
-			turn += 1.25f;
+			turn += 1.0f;
 			_dropBoxes = false;
 		}
 
@@ -302,13 +302,13 @@ public partial class Forklift : CharacterBody2D
 
 		if(Input.IsActionPressed(Config.TurnRightAction) && Input.IsActionPressed(Config.GearTwo)) {
 
-			turn += 1.0f;
+			turn += 0.75f;
 			_dropBoxes = false;
 		}
 
 		if(Input.IsActionPressed(Config.TurnLeftAction) && Input.IsActionPressed(Config.GearTwo)) {
 
-			turn -= 1.0f;
+			turn -= 0.75f;
 			_dropBoxes = false;
 		}
 

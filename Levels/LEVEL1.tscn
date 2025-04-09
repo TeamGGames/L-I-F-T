@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=4 uid="uid://btoat5wy7dcfv"]
+[gd_scene load_steps=14 format=4 uid="uid://btoat5wy7dcfv"]
 
 [ext_resource type="Script" path="res://Code/LevelManager.cs" id="1_ij7g0"]
 [ext_resource type="PackedScene" uid="uid://cfofh2gwt5pid" path="res://Levels/BatteryCollectEffect.tscn" id="2_7hsbc"]
 [ext_resource type="PackedScene" uid="uid://dhkj3eo7sf74c" path="res://GameComponents/UI.tscn" id="3_5jfww"]
+[ext_resource type="PackedScene" uid="uid://wpiugrxjqxrt" path="res://Levels/PointsCollectEffect.tscn" id="3_a7mxx"]
 [ext_resource type="PackedScene" uid="uid://30mo0njbrnjk" path="res://GameComponents/SpawnPoint.tscn" id="4_124d4"]
 [ext_resource type="PackedScene" uid="uid://fesxsculso7w" path="res://GameComponents/Darkness.tscn" id="5_di03n"]
 [ext_resource type="PackedScene" uid="uid://rnev0gpmfjo0" path="res://GameComponents/Shelves.tscn" id="6_5rueo"]
@@ -16,6 +17,7 @@
 [node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_ui", "_spawner", "_signVariant1", "_signVariant2", "_signVariant3")]
 script = ExtResource("1_ij7g0")
 _collectBatteryEffectScene = ExtResource("2_7hsbc")
+_collectPointsPowerUpEffectScene = ExtResource("3_a7mxx")
 _ui = NodePath("UI")
 _spawner = NodePath("SpawnPoint")
 _signVariant1 = NodePath("Signs/Variant1")
@@ -141,6 +143,7 @@ scale = Vector2(1.25, 1.25)
 tile_map_data = PackedByteArray("AAAPAP7/AQABAAAAAwAQAP7/AQABAAAAAwARAP7/AQABAAAAAwASAP7/AQABAAAAAwATAP7/AQABAAAAAwAPAP//AQABAAAAAwAQAP//AQABAAAAAwARAP//AQABAAAAAwASAP//AQABAAAAAwATAP//AQABAAAAAwD+/xcAAQABAAAAAAD//xcAAQABAAAAAAD//xgAAQABAAAAAAD//xkAAQABAAAAAAD//xoAAQABAAAAAAD//xsAAQABAAAAAAD+/xsAAQABAAAAAAD+/xoAAQABAAAAAAD+/xkAAQABAAAAAAD+/xgAAQABAAAAAAA=")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 z_index = 15
 offset_left = 466.0
 offset_top = 2182.0
@@ -150,6 +153,7 @@ text = "Level 1 Variant1
 "
 
 [node name="Label2" type="Label" parent="."]
+visible = false
 z_index = 15
 offset_left = 1273.0
 offset_top = 206.0
@@ -158,6 +162,7 @@ offset_bottom = 229.0
 text = "Level 1 Variant2"
 
 [node name="Label3" type="Label" parent="."]
+visible = false
 z_index = 15
 offset_left = 256.0
 offset_top = 772.0

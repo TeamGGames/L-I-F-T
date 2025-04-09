@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://cggl2h6jjg142"]
+[gd_scene load_steps=15 format=4 uid="uid://cggl2h6jjg142"]
 
 [ext_resource type="Script" path="res://Code/LevelManager.cs" id="1_raiq2"]
 [ext_resource type="PackedScene" uid="uid://cfofh2gwt5pid" path="res://Levels/BatteryCollectEffect.tscn" id="2_bihqh"]
 [ext_resource type="Theme" uid="uid://mhajft3v8s22" path="res://UI/MainTheme.tres" id="2_da2pp"]
 [ext_resource type="PackedScene" uid="uid://dhkj3eo7sf74c" path="res://GameComponents/UI.tscn" id="3_04cg4"]
+[ext_resource type="PackedScene" uid="uid://wpiugrxjqxrt" path="res://Levels/PointsCollectEffect.tscn" id="3_5lcwk"]
 [ext_resource type="PackedScene" uid="uid://30mo0njbrnjk" path="res://GameComponents/SpawnPoint.tscn" id="4_2o3k6"]
 [ext_resource type="PackedScene" uid="uid://fesxsculso7w" path="res://GameComponents/Darkness.tscn" id="5_tw3ic"]
 [ext_resource type="PackedScene" uid="uid://rnev0gpmfjo0" path="res://GameComponents/Shelves.tscn" id="6_p06fa"]
@@ -17,6 +18,7 @@
 [node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_ui", "_spawner", "_signVariant1", "_signVariant2", "_signVariant3")]
 script = ExtResource("1_raiq2")
 _collectBatteryEffectScene = ExtResource("2_bihqh")
+_collectPointsPowerUpEffectScene = ExtResource("3_5lcwk")
 _ui = NodePath("UI")
 _spawner = NodePath("SpawnPoint")
 _signVariant1 = NodePath("Signs/Variant1")

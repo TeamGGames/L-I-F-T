@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bfwd7gik83s0j"]
 
 [ext_resource type="Script" path="res://Code/PointsPowerUp.cs" id="1_1kak1"]
-[ext_resource type="Texture2D" uid="uid://dx0soq3u41ung" path="res://Assets/reverse.png" id="2_3dcux"]
+[ext_resource type="Texture2D" uid="uid://babbhx0iefgxf" path="res://Assets/coin_gold.png" id="2_fjj2s"]
 [ext_resource type="PackedScene" uid="uid://bax38opyasm7m" path="res://GameComponents/glow.tscn" id="3_xfc4k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ckr51"]
@@ -15,16 +15,14 @@ script = ExtResource("1_1kak1")
 _pointsAdded = 250
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -3.00002)
-scale = Vector2(0.132588, 0.144231)
-texture = ExtResource("2_3dcux")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_fjj2s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_ckr51")
 
 [node name="Glow" parent="." instance=ExtResource("3_xfc4k")]
-position = Vector2(1, -2)
 scale = Vector2(0.888672, 0.966797)
-color = Color(0.602496, 0.439667, 0, 1)
+color = Color(1, 0.819836, 0.469097, 1)
 energy = 1.25

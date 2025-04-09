@@ -22,13 +22,14 @@ gravity = Vector3(0, 1, 0)
 radial_accel_min = -47.31
 radial_accel_max = 38.71
 scale_min = 0.1
-scale_max = 0.2
-color = Color(0.824859, 0.21492, 0.137444, 1)
+scale_max = 0.1
+color = Color(1, 1, 1, 0.701961)
 hue_variation_min = -2.23517e-08
-hue_variation_max = 0.05
+hue_variation_max = -2.23517e-08
 anim_speed_max = 9.08
 anim_offset_min = 0.3106
 anim_offset_max = 0.7581
+turbulence_enabled = true
 
 [node name="BatteryCollectEffect" type="GPUParticles2D"]
 z_index = 100

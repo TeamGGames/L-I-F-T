@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=4 uid="uid://bidmih2vmbfuc"]
+[gd_scene load_steps=14 format=4 uid="uid://bidmih2vmbfuc"]
 
 [ext_resource type="Script" path="res://Code/LevelManager.cs" id="1_r7hoh"]
 [ext_resource type="PackedScene" uid="uid://fesxsculso7w" path="res://GameComponents/Darkness.tscn" id="2_dhswl"]
 [ext_resource type="PackedScene" uid="uid://cfofh2gwt5pid" path="res://Levels/BatteryCollectEffect.tscn" id="2_gu4eg"]
+[ext_resource type="PackedScene" uid="uid://wpiugrxjqxrt" path="res://Levels/PointsCollectEffect.tscn" id="3_gidxu"]
 [ext_resource type="PackedScene" uid="uid://dhkj3eo7sf74c" path="res://GameComponents/UI.tscn" id="3_qlsc8"]
 [ext_resource type="PackedScene" uid="uid://30mo0njbrnjk" path="res://GameComponents/SpawnPoint.tscn" id="4_bwy0k"]
 [ext_resource type="PackedScene" uid="uid://rnev0gpmfjo0" path="res://GameComponents/Shelves.tscn" id="5_udh5v"]
@@ -16,6 +17,7 @@
 [node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_ui", "_spawner", "_signVariant1", "_signVariant2", "_signVariant3")]
 script = ExtResource("1_r7hoh")
 _collectBatteryEffectScene = ExtResource("2_gu4eg")
+_collectPointsPowerUpEffectScene = ExtResource("3_gidxu")
 _ui = NodePath("UI")
 _spawner = NodePath("SpawnPoint")
 _signVariant1 = NodePath("Signs/Variant1")
@@ -150,6 +152,7 @@ position = Vector2(1787, 1375)
 texture = ExtResource("10_ekaxa")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 z_index = 15
 offset_left = 382.0
 offset_top = 2120.0
@@ -160,6 +163,7 @@ text = "Level3 Variant1
 metadata/_edit_use_anchors_ = true
 
 [node name="Label2" type="Label" parent="."]
+visible = false
 z_index = 15
 offset_left = 1366.0
 offset_top = 279.0
@@ -169,6 +173,7 @@ text = "Level3 Variant2"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label3" type="Label" parent="."]
+visible = false
 z_index = 15
 offset_left = 2534.0
 offset_top = 2050.0
