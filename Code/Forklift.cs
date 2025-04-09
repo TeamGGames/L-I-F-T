@@ -116,8 +116,8 @@ public partial class Forklift : CharacterBody2D
 
 		// Read the user input.
 
-		ReadInput();
-		//ReadTouchInput();
+		//ReadInput();
+		ReadTouchInput();
 
 		// Apply friction forces.
 
