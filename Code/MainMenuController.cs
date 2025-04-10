@@ -10,7 +10,7 @@ namespace ForkliftGame
 public partial class MainMenuController : Control
 {
 
-	[Export] private Button _startButton = null;
+	[Export] private TextureButton _startButton = null;
 	[Export] private Button _tutorialButton = null;
 	[Export] private Button _settingsButton = null;
 	[Export] private TextureButton _musicToggle = null;

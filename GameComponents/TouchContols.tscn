@@ -21,7 +21,6 @@ size = Vector2(125, 275)
 size = Vector2(255, 180)
 
 [node name="TouchControls" type="Control" node_paths=PackedStringArray("_pauseScreen", "_mainMenuButton", "_restartButton", "_resumeButton", "_menuController")]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

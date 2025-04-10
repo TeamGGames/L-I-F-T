@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://f27bdr3jfoha"]
+[gd_scene load_steps=14 format=3 uid="uid://f27bdr3jfoha"]
 
 [ext_resource type="Theme" uid="uid://mhajft3v8s22" path="res://UI/MainTheme.tres" id="1_iy7t7"]
 [ext_resource type="Script" path="res://Code/MainMenuController.cs" id="1_m87ug"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://30mo0njbrnjk" path="res://GameComponents/SpawnPoint.tscn" id="4_c6gjr"]
 [ext_resource type="Texture2D" uid="uid://c3kc0hpqtcmyl" path="res://Assets/menu/Logo.png" id="4_ie6d2"]
 [ext_resource type="Texture2D" uid="uid://bedkuj7rlu8qf" path="res://Assets/music_toggle.png" id="4_nss8d"]
+[ext_resource type="Texture2D" uid="uid://1swh3trfcpfx" path="res://Assets/menu/PlayButtonPressed.png" id="7_janqe"]
 [ext_resource type="PackedScene" uid="uid://nb5jwfmhymur" path="res://UI/buttonAudio.tscn" id="8_dl3cx"]
 [ext_resource type="AudioStream" uid="uid://cbutx7luhbwl6" path="res://Sounds/music/032925menumusic2.mp3" id="10_lcm10"]
 [ext_resource type="Texture2D" uid="uid://crws0knuyg45y" path="res://Assets/Sound-button disabled.png" id="11_hgdjq"]
@@ -59,11 +60,10 @@ offset_bottom = 99.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StartButton" type="Button" parent="BackGround/ButtonContainer"]
+[node name="StartButton" type="TextureButton" parent="BackGround/ButtonContainer"]
 layout_mode = 2
-icon = ExtResource("4_2gvbt")
-flat = true
-icon_alignment = 1
+texture_normal = ExtResource("4_2gvbt")
+texture_pressed = ExtResource("7_janqe")
 
 [node name="TutorialButton" type="Button" parent="BackGround/ButtonContainer"]
 layout_mode = 2
