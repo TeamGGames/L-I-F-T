@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://f27bdr3jfoha"]
+[gd_scene load_steps=15 format=3 uid="uid://f27bdr3jfoha"]
 
 [ext_resource type="Theme" uid="uid://mhajft3v8s22" path="res://UI/MainTheme.tres" id="1_iy7t7"]
 [ext_resource type="Script" path="res://Code/MainMenuController.cs" id="1_m87ug"]
@@ -13,8 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://nb5jwfmhymur" path="res://UI/buttonAudio.tscn" id="8_dl3cx"]
 [ext_resource type="AudioStream" uid="uid://cbutx7luhbwl6" path="res://Sounds/music/032925menumusic2.mp3" id="10_lcm10"]
 [ext_resource type="Texture2D" uid="uid://crws0knuyg45y" path="res://Assets/Sound-button disabled.png" id="11_hgdjq"]
+[ext_resource type="Script" path="res://Code/CreditsWindow.cs" id="14_wy5gd"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_tutorialButton", "_settingsButton", "_musicToggle", "_settingsWindow", "_spawner", "_buttonAudio")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_tutorialButton", "_settingsButton", "_creditsButton", "_musicToggle", "_settingsWindow", "_creditsWindow", "_spawner", "_buttonAudio")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,8 +27,10 @@ script = ExtResource("1_m87ug")
 _startButton = NodePath("BackGround/ButtonContainer/StartButton")
 _tutorialButton = NodePath("BackGround/ButtonContainer/TutorialButton")
 _settingsButton = NodePath("HBoxContainer/SettingsButton")
+_creditsButton = NodePath("BackGround/ButtonContainer/CreditsButton")
 _musicToggle = NodePath("HBoxContainer/MusicToggle")
 _settingsWindow = NodePath("SettingsWindow")
+_creditsWindow = NodePath("CreditsWindow")
 _spawner = NodePath("SpawnPoint")
 _buttonAudio = NodePath("buttonAudio")
 _audioONTexture = ExtResource("4_nss8d")
@@ -60,6 +63,11 @@ offset_bottom = 99.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Logo" type="Sprite2D" parent="BackGround/ButtonContainer"]
+position = Vector2(149, -43.5)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_ie6d2")
+
 [node name="StartButton" type="TextureButton" parent="BackGround/ButtonContainer"]
 layout_mode = 2
 texture_normal = ExtResource("4_2gvbt")
@@ -69,10 +77,10 @@ texture_pressed = ExtResource("7_janqe")
 layout_mode = 2
 text = "TUTORIAL"
 
-[node name="Logo" type="Sprite2D" parent="BackGround/ButtonContainer/TutorialButton"]
-position = Vector2(149, -303.5)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_ie6d2")
+[node name="CreditsButton" type="Button" parent="BackGround/ButtonContainer"]
+visible = false
+layout_mode = 2
+text = "CREDITS"
 
 [node name="SpawnPoint" parent="." instance=ExtResource("4_c6gjr")]
 
@@ -108,5 +116,30 @@ anchors_preset = 0
 _buttonAudio = NodePath("../buttonAudio")
 
 [node name="buttonAudio" parent="." instance=ExtResource("8_dl3cx")]
+
+[node name="CreditsWindow" type="Panel" parent="." node_paths=PackedStringArray("_exitButton", "_buttonAudio")]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("14_wy5gd")
+_exitButton = NodePath("Button")
+_buttonAudio = NodePath("../buttonAudio")
+
+[node name="Label" type="Label" parent="CreditsWindow"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 461.0
+offset_right = 282.0
+offset_bottom = 503.0
+text = "Credits here"
+
+[node name="Button" type="Button" parent="CreditsWindow"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 517.0
+offset_right = 236.0
+offset_bottom = 628.0
+icon = ExtResource("3_v7nq1")
 
 [connection signal="pressed" from="HBoxContainer/MusicToggle" to="." method="OnSoundButtonPressed"]

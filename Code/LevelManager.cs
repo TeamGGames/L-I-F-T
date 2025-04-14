@@ -76,6 +76,7 @@ public partial class LevelManager : Node2D
 
 	public int _nextLevel = 0;
 	public bool _isGameOver = false;
+	private bool _batteryAdded = false;
 	private ProgressUi _progressUi = null;
 	private List<int> _highScoreList = new List<int>();
 	private double _maxEnergy;
@@ -493,10 +494,10 @@ public string LoadFromFile (string path, string fileName)
 }
 public bool ShowBatteryCollectEffect()
 {
-	if (_collectBatteryEffectScene != null)
+	if (_collectBatteryEffectScene != null && !_batteryAdded)
 			{
-
 				AddChild(_collectBatteryEffect);
+				_batteryAdded = true;
 			}
 			else if (_collectBatteryEffect == null && _collectBatteryEffectScene == null)
 			{

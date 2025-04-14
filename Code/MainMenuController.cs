@@ -13,9 +13,11 @@ public partial class MainMenuController : Control
 	[Export] private TextureButton _startButton = null;
 	[Export] private Button _tutorialButton = null;
 	[Export] private Button _settingsButton = null;
+	[Export] private Button _creditsButton = null;
 	[Export] private TextureButton _musicToggle = null;
 
 	[Export] private SettingsWindow _settingsWindow = null;
+	[Export] private CreditsWindow _creditsWindow = null;
 
 	[Export] private SpawnPoint _spawner = null;
 	[Export] private double _maxEnergy = 45;
@@ -45,6 +47,7 @@ public partial class MainMenuController : Control
 				_startButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnStartPressed)));
 				_settingsButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnSettingsPressed)));
 				_tutorialButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnTutorialPressed)));
+				_creditsButton.Connect(Button.SignalName.Pressed, new Callable(this, nameof(OnCreditsPressed)));
 			}
 
 			if (_musicToggle != null)
@@ -118,6 +121,16 @@ public partial class MainMenuController : Control
 			_settingsWindow.Open();
 		}
 	}
+
+	private void OnCreditsPressed()
+		{
+			_buttonAudio.Play();
+			if (_creditsWindow != null)
+			{
+				_creditsWindow.Open();
+			}
+		}
+
 
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8waskkpj52xw"]
+[gd_scene load_steps=16 format=3 uid="uid://c8waskkpj52xw"]
 
 [ext_resource type="Script" path="res://Code/Forklift.cs" id="1_g0d5j"]
 [ext_resource type="Texture2D" uid="uid://ckb4g578luspj" path="res://Assets/ForkliftSpriteSheet.png" id="2_l8r3c"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://brsxrwj184o33" path="res://Sounds/sfx/collision3.wav" id="8_5k1bn"]
 [ext_resource type="AudioStream" uid="uid://dhrsgekhry6ej" path="res://Sounds/sfx/lifting-releasing.mp3" id="8_khhp5"]
 [ext_resource type="Script" path="res://Code/SoundDetectorArea.cs" id="8_v8r3m"]
+[ext_resource type="AudioStream" uid="uid://wu76uj6bjbiy" path="res://Sounds/sfx/engine-startup-rework.mp3" id="9_ny8iv"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vtdxb"]
 light_mode = 1
@@ -124,6 +125,11 @@ bus = &"SFX"
 stream = ExtResource("8_khhp5")
 volume_db = -5.0
 bus = &"SFX"
+
+[node name="EngineStartUp" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("9_ny8iv")
+volume_db = 0.936
+autoplay = true
 
 [node name="SoundDetectorArea" type="Area2D" parent="." node_paths=PackedStringArray("_collisionSound", "_forklift")]
 script = ExtResource("8_v8r3m")

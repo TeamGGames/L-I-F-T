@@ -1,6 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqxe4j0vkyhma"]
+[gd_scene load_steps=6 format=3 uid="uid://dqxe4j0vkyhma"]
 
 [ext_resource type="Texture2D" uid="uid://bkmdddbqw03oy" path="res://Assets/FloorTileSet.png" id="1_3t7ov"]
+[ext_resource type="Texture2D" uid="uid://b47hnknxefovd" path="res://Assets/OutdoorTiles.png" id="1_56o2o"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kd5hu"]
+texture = ExtResource("1_56o2o")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cxv8t"]
 texture = ExtResource("1_3t7ov")
@@ -20,6 +61,7 @@ tile_size = Vector2i(64, 64)
 occlusion_layer_0/light_mask = 1
 occlusion_layer_1/light_mask = 1
 sources/1 = SubResource("TileSetAtlasSource_cxv8t")
+sources/0 = SubResource("TileSetAtlasSource_kd5hu")
 
 [node name="Floortiles" type="TileMapLayer"]
 tile_set = SubResource("TileSet_n85bb")

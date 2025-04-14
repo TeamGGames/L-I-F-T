@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://fkrp2jd2xamr"]
+[gd_scene load_steps=6 format=3 uid="uid://fkrp2jd2xamr"]
 
 [ext_resource type="Texture2D" uid="uid://tjjctum5hnmv" path="res://Assets/Truck_Right.png" id="1_h7w0i"]
 [ext_resource type="PackedScene" uid="uid://bax38opyasm7m" path="res://GameComponents/glow.tscn" id="2_u21pd"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_die5v"]
 size = Vector2(20.75, 484)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s07yn"]
+polygon = PackedVector2Array(-298, -84, -274, -84, -275, -104, 296, -100, 299, 100, -267, 104, -272.114, 82.9192, -296, 83)
 
 [node name="Truck" type="StaticBody2D"]
 z_index = 11
@@ -41,3 +44,6 @@ stream = ExtResource("3_pq1uq")
 volume_db = 10.0
 pitch_scale = 0.5
 bus = &"SFX"
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_s07yn")
