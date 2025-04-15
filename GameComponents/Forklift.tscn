@@ -62,6 +62,7 @@ position = Vector2(46, -3)
 shape = SubResource("RectangleShape2D_w0fe1")
 
 [node name="StackedBoxesCount" type="Label" parent="."]
+visible = false
 offset_left = -56.0
 offset_top = -35.0
 offset_right = 16.0
