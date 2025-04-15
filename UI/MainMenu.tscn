@@ -1,19 +1,23 @@
-[gd_scene load_steps=15 format=3 uid="uid://f27bdr3jfoha"]
+[gd_scene load_steps=17 format=3 uid="uid://f27bdr3jfoha"]
 
 [ext_resource type="Theme" uid="uid://mhajft3v8s22" path="res://UI/MainTheme.tres" id="1_iy7t7"]
 [ext_resource type="Script" path="res://Code/MainMenuController.cs" id="1_m87ug"]
 [ext_resource type="PackedScene" uid="uid://cti7cqbbw8nut" path="res://UI/SettingsWindow.tscn" id="3_3l5fd"]
-[ext_resource type="Texture2D" path="res://Assets/menu/MenuBG.png" id="3_6r2fn"]
+[ext_resource type="Texture2D" uid="uid://dl3ywxqew4mlp" path="res://Assets/menu/MenuBG.png" id="3_6r2fn"]
 [ext_resource type="Texture2D" uid="uid://dggtbnrfjj0il" path="res://Assets/Settings_button.png" id="3_v7nq1"]
-[ext_resource type="Texture2D" path="res://Assets/menu/PlayButton.png" id="4_2gvbt"]
+[ext_resource type="Texture2D" uid="uid://jl8mi6chobu2" path="res://Assets/menu/PlayButton.png" id="4_2gvbt"]
 [ext_resource type="PackedScene" uid="uid://30mo0njbrnjk" path="res://GameComponents/SpawnPoint.tscn" id="4_c6gjr"]
-[ext_resource type="Texture2D" path="res://Assets/menu/Logo.png" id="4_ie6d2"]
+[ext_resource type="Texture2D" uid="uid://c3kc0hpqtcmyl" path="res://Assets/menu/Logo.png" id="4_ie6d2"]
 [ext_resource type="Texture2D" uid="uid://bedkuj7rlu8qf" path="res://Assets/music_toggle.png" id="4_nss8d"]
-[ext_resource type="Texture2D" path="res://Assets/menu/PlayButtonPressed.png" id="7_janqe"]
+[ext_resource type="Texture2D" uid="uid://1swh3trfcpfx" path="res://Assets/menu/PlayButtonPressed.png" id="7_janqe"]
 [ext_resource type="PackedScene" uid="uid://nb5jwfmhymur" path="res://UI/buttonAudio.tscn" id="8_dl3cx"]
 [ext_resource type="AudioStream" uid="uid://cbutx7luhbwl6" path="res://Sounds/music/032925menumusic2.mp3" id="10_lcm10"]
 [ext_resource type="Texture2D" uid="uid://crws0knuyg45y" path="res://Assets/Sound-button disabled.png" id="11_hgdjq"]
 [ext_resource type="Script" path="res://Code/CreditsWindow.cs" id="14_wy5gd"]
+[ext_resource type="Texture2D" uid="uid://detarxab6yvm2" path="res://Assets/backbutton.png" id="15_xu05h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sqo7g"]
+bg_color = Color(0.454902, 0.027451, 0.0117647, 1)
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_tutorialButton", "_settingsButton", "_creditsButton", "_musicToggle", "_settingsWindow", "_creditsWindow", "_spawner", "_buttonAudio")]
 layout_mode = 3
@@ -56,12 +60,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -147.0
-offset_top = -118.0
-offset_right = 127.0
-offset_bottom = 99.0
+offset_left = -158.0
+offset_top = -215.0
+offset_right = 138.0
+offset_bottom = 264.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 24
 
 [node name="Logo" type="Sprite2D" parent="BackGround/ButtonContainer"]
 position = Vector2(149, -43.5)
@@ -75,11 +80,12 @@ texture_pressed = ExtResource("7_janqe")
 
 [node name="TutorialButton" type="Button" parent="BackGround/ButtonContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "TUTORIAL"
 
 [node name="CreditsButton" type="Button" parent="BackGround/ButtonContainer"]
-visible = false
 layout_mode = 2
+size_flags_vertical = 3
 text = "CREDITS"
 
 [node name="SpawnPoint" parent="." instance=ExtResource("4_c6gjr")]
@@ -117,27 +123,40 @@ _buttonAudio = NodePath("../buttonAudio")
 
 [node name="CreditsWindow" type="Panel" parent="." node_paths=PackedStringArray("_exitButton", "_buttonAudio")]
 visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sqo7g")
 script = ExtResource("14_wy5gd")
 _exitButton = NodePath("Button")
 _buttonAudio = NodePath("../buttonAudio")
 
 [node name="Label" type="Label" parent="CreditsWindow"]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 461.0
-offset_right = 282.0
-offset_bottom = 503.0
-text = "Credits here"
+offset_left = 364.0
+offset_top = 194.0
+offset_right = 947.0
+offset_bottom = 596.0
+text = "         TeamGGames is:
+
+Dmitry Nazarov: Code, Music, Art
+
+Seppo Grubert: Code, Art
+
+Eeli Kemppainen: Art
+
+Remo Fredman: Art"
 
 [node name="Button" type="Button" parent="CreditsWindow"]
 layout_mode = 0
-offset_left = 108.0
-offset_top = 517.0
-offset_right = 236.0
-offset_bottom = 628.0
-icon = ExtResource("3_v7nq1")
+offset_left = 202.0
+offset_top = 478.0
+offset_right = 330.0
+offset_bottom = 589.0
+theme = ExtResource("1_iy7t7")
+icon = ExtResource("15_xu05h")
 
 [connection signal="pressed" from="HBoxContainer/MusicToggle" to="." method="OnSoundButtonPressed"]

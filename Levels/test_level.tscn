@@ -9,23 +9,19 @@
 [ext_resource type="PackedScene" uid="uid://30mo0njbrnjk" path="res://GameComponents/SpawnPoint.tscn" id="7_xvmo0"]
 
 [node name="TestLevel" type="Node2D" node_paths=PackedStringArray("_ui", "_spawner")]
-visible = false
 script = ExtResource("1_qr6ma")
 _ui = NodePath("UI")
 _spawner = NodePath("SpawnPoint")
 
 [node name="LoadingArea" parent="." instance=ExtResource("5_j2v3j")]
-visible = false
 z_index = 2
 position = Vector2(109, 102)
 scale = Vector2(0.78, 0.62)
 
 [node name="Sprite2D" type="Sprite2D" parent="LoadingArea"]
-visible = false
 texture = ExtResource("3_5vsxf")
 
 [node name="Shelves" type="Node2D" parent="."]
-visible = false
 z_index = 1
 
 [node name="Shelf (empty)" parent="Shelves" instance=ExtResource("7_eu3iy")]
@@ -244,4 +240,3 @@ offset_right = 640.0
 offset_bottom = 360.0
 
 [node name="SpawnPoint" parent="." instance=ExtResource("7_xvmo0")]
-visible = false
