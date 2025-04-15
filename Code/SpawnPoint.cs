@@ -3,6 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 
+
+/* This class is a container for type Vector2 coordinates for various random spawning points in the game maps.
+	The coordinates are a ll checked to be in logical spots in the game world. All except "Vector2[,] levelX"
+	type arrays are lists so should expand dynamically in the code.  */
 namespace ForkliftGame
 {
 public partial class SpawnPoint : Node2D
@@ -17,7 +21,7 @@ public partial class SpawnPoint : Node2D
 	public List<Vector2> _boxOnTruckList = new List<Vector2>();
 	public int randomLoadingAreaIndex = 0;
 
-	// Spawn points of boxes on the truck
+	// Spawn points of boxes on the truck. Purely for visual effect.
 	Vector2[,] levelZero = {
 		{new Vector2(1367, -82), new Vector2(1367, -200), new Vector2(1367, -316)},
 		{new Vector2(1367, -82), new Vector2(1367, -200), new Vector2(1367, -316)},
@@ -42,19 +46,12 @@ public partial class SpawnPoint : Node2D
 
 	};
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
-
 		_spawningPoint = this.Position;
-
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+// Spawn points for boxes and powerups. 6/10 are used per loadup of level. (Except tutorial uses 6/7 for easier play.)
 	public void fillSpawnerList(int level)
 	{
 		switch (level)
@@ -111,6 +108,9 @@ public partial class SpawnPoint : Node2D
 		}
 	}
 
+
+// Spawn points for Loading Areas (start points) for each level. All levels (except tutorial)
+// can start from 3 different spots
 	public void fillLoadingAreaSpawnerList(int level)
 	{
 		switch (level)
@@ -144,6 +144,8 @@ public partial class SpawnPoint : Node2D
 		}
 	}
 
+// Inserts "box-on-truckbed" spawning points to a list. This needs to be done here
+// since there are three different sets of places for the truck on each level (except the tutorial).
 	public void fillTruckSpawnerList(int level, int randomLoadingAreaIndex)
 	{
 		switch (level)
@@ -152,7 +154,6 @@ public partial class SpawnPoint : Node2D
 				_boxOnTruckList.Insert(0, levelZero[randomLoadingAreaIndex, 0]);
 				_boxOnTruckList.Insert(0, levelZero[randomLoadingAreaIndex, 1]);
 				_boxOnTruckList.Insert(0, levelZero[randomLoadingAreaIndex, 2]);
-
 				break;
 
 			case 1:

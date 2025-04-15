@@ -9,8 +9,7 @@ namespace ForkliftGame
 
 		protected override void Collect(Forklift forklift)
 		{
-            _progressUi = GetNode<ProgressUi>("../Forklift/UI/ProgressUI");
-
+        _progressUi = GetNode<ProgressUi>("../Forklift/UI/ProgressUI");
         LevelManager.Current.CurrentScore += _pointsAdded;
         _progressUi.SetScoreLabel(LevelManager.Current.CurrentScore);
 		LevelManager.Current.ShowPointsPowerUpCollectEffect();
