@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://Code/SettingsWindow.cs" id="1_l43fp"]
 [ext_resource type="Theme" uid="uid://mhajft3v8s22" path="res://UI/MainTheme.tres" id="1_mp45t"]
 [ext_resource type="PackedScene" uid="uid://butaqd57sv5ds" path="res://GameComponents/AudioControl.tscn" id="2_gjm6m"]
-[ext_resource type="Texture2D" uid="uid://qan6vlcvx72v" path="res://Assets/ENGflag.png" id="4_8wv0y"]
 [ext_resource type="Texture2D" uid="uid://dshy64qmx0apy" path="res://Assets/slider_toggle.png" id="4_qov6b"]
-[ext_resource type="Texture2D" uid="uid://rc72pvpgfkfk" path="res://Assets/FINflag.png" id="5_8koon"]
 [ext_resource type="Texture2D" uid="uid://dekieo0asw37" path="res://Assets/slider_toggle_dark.png" id="5_h1w0b"]
 [ext_resource type="Texture2D" uid="uid://detarxab6yvm2" path="res://Assets/backbutton.png" id="6_gti5k"]
+[ext_resource type="Texture2D" uid="uid://bpptb64x1mdxl" path="res://Assets/finland_flag.png" id="7_nvdim"]
+[ext_resource type="Texture2D" uid="uid://dup573mkouebr" path="res://Assets/britain_flag.png" id="8_p6vyw"]
 
 [node name="SettingsWindow" type="Panel" node_paths=PackedStringArray("_masterAudioControl", "_musicAudioControl", "_effectsAudioControl", "_exitButton", "_fiButton", "_enButton")]
 visible = false
@@ -136,22 +136,22 @@ texture_normal = ExtResource("6_gti5k")
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 layout_direction = 1
 layout_mode = 0
-offset_left = 106.0
+offset_left = 69.0
 offset_top = 20.0
-offset_right = 329.0
-offset_bottom = 100.0
+offset_right = 450.0
+offset_bottom = 110.0
 alignment = 2
 
 [node name="FIButton" type="TextureButton" parent="Panel/HBoxContainer"]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
-texture_normal = ExtResource("5_8koon")
+texture_normal = ExtResource("7_nvdim")
 
 [node name="ENButton" type="TextureButton" parent="Panel/HBoxContainer"]
 layout_mode = 2
 size_flags_stretch_ratio = 0.86
-texture_normal = ExtResource("4_8wv0y")
+texture_normal = ExtResource("8_p6vyw")
 
 [editable path="Panel/VBoxContainer/MasterVolume"]
 [editable path="Panel/VBoxContainer/MusicVolume"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2mwfsv2yconv"
-path="res://.godot/imported/GrassTiles64x64.png-a0e9a7028bd0e580aa3cbe0cfb9bf8d9.ctex"
+uid="uid://dup573mkouebr"
+path="res://.godot/imported/britain_flag.png-3dac10d3c23a5bd8de558f8aebfc857f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/GrassTiles64x64.png"
-dest_files=["res://.godot/imported/GrassTiles64x64.png-a0e9a7028bd0e580aa3cbe0cfb9bf8d9.ctex"]
+source_file="res://Assets/britain_flag.png"
+dest_files=["res://.godot/imported/britain_flag.png-3dac10d3c23a5bd8de558f8aebfc857f.ctex"]
 
 [params]
 

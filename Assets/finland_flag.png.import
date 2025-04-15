@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhysbdexegfx8"
-path="res://.godot/imported/coin_iron.png-b2660cd3ad8b21e7d4cf218e6da4161a.ctex"
+uid="uid://bpptb64x1mdxl"
+path="res://.godot/imported/finland_flag.png-d87187466552d3d27cdd12dec966cbeb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/coin_iron.png"
-dest_files=["res://.godot/imported/coin_iron.png-b2660cd3ad8b21e7d4cf218e6da4161a.ctex"]
+source_file="res://Assets/finland_flag.png"
+dest_files=["res://.godot/imported/finland_flag.png-d87187466552d3d27cdd12dec966cbeb.ctex"]
 
 [params]
 
