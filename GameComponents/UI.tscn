@@ -32,7 +32,6 @@ script = ExtResource("2_4nj08")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GameOverPanel" type="Panel" parent="CanvasLayer"]
-visible = false
 z_index = 12
 anchors_preset = 8
 anchor_left = 0.5
@@ -66,13 +65,13 @@ theme_override_font_sizes/font_size = 75
 text = "GAMEOVER"
 horizontal_alignment = 1
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/GameOverPanel/GameOverBox"]
-layout_mode = 2
-text = "MAINMENU"
-
 [node name="RestartButton" type="Button" parent="CanvasLayer/GameOverPanel/GameOverBox"]
 layout_mode = 2
 text = "RESTART"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/GameOverPanel/GameOverBox"]
+layout_mode = 2
+text = "MAINMENU"
 
 [node name="TEXT" type="Label" parent="CanvasLayer/GameOverPanel/GameOverBox"]
 layout_mode = 2
