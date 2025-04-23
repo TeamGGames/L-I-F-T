@@ -1,10 +1,10 @@
 [gd_resource type="Theme" load_steps=9 format=3 uid="uid://mhajft3v8s22"]
 
-[ext_resource type="Texture2D" uid="uid://dk1bhwoyops25" path="res://Assets/Gaspedal-pro.png" id="1_5rj06"]
 [ext_resource type="Texture2D" uid="uid://dshy64qmx0apy" path="res://Assets/slider_toggle.png" id="1_bs4fj"]
 [ext_resource type="FontFile" uid="uid://dnrvpp82sm72u" path="res://Fonts/Audiowide/Audiowide-Regular.ttf" id="1_ec3ef"]
 [ext_resource type="Texture2D" uid="uid://dekieo0asw37" path="res://Assets/slider_toggle_dark.png" id="2_gh250"]
 [ext_resource type="Texture2D" uid="uid://eueievvy5fr" path="res://Assets/Gaspedalbackground.png" id="2_p271n"]
+[ext_resource type="Texture2D" uid="uid://dk1bhwoyops25" path="res://Assets/Gaspedal.png" id="3_xeqwh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dtd2x"]
 bg_color = Color(0.454571, 0.0266564, 0.0134971, 1)
@@ -22,7 +22,7 @@ Button/styles/normal = SubResource("StyleBoxFlat_dtd2x")
 HSlider/styles/grabber_area = SubResource("StyleBoxTexture_c8oov")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_ducu4")
 Label/font_sizes/font_size = 32
-VSlider/icons/grabber = ExtResource("1_5rj06")
-VSlider/icons/grabber_disabled = ExtResource("1_5rj06")
-VSlider/icons/grabber_highlight = ExtResource("1_5rj06")
+VSlider/icons/grabber = ExtResource("3_xeqwh")
+VSlider/icons/grabber_disabled = ExtResource("3_xeqwh")
+VSlider/icons/grabber_highlight = ExtResource("3_xeqwh")
 VSlider/icons/tick = ExtResource("2_p271n")

@@ -12,6 +12,8 @@ export_presets.cfg
 *.translation
 
 # Mono-specific ignores
+.keystore
+.apk
 .mono/
 data_*/
 mono_crash.*.json

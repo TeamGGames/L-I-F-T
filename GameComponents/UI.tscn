@@ -32,6 +32,7 @@ script = ExtResource("2_4nj08")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GameOverPanel" type="Panel" parent="CanvasLayer"]
+visible = false
 z_index = 12
 anchors_preset = 8
 anchor_left = 0.5
