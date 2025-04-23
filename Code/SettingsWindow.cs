@@ -37,26 +37,34 @@ namespace ForkliftGame
 					new Callable(this, nameof(OnEnButtonPressed)));
 			}
 		}
-
+		/// <summary>
+		/// Loads settings from save file and opens window.
+		/// </summary>
 		public virtual void Open()
 		{
 			_data = LoadSettings();
-    		ApplySettingsData(_data);
-    		Show();
+			ApplySettingsData(_data);
+			Show();
 		}
-
+		/// <summary>
+		/// Closes window.
+		/// </summary>
 		public virtual void Close()
 		{
 			Hide();
 		}
-
+		/// <summary>
+		/// Saves current settings and closes window.
+		/// </summary>
 		protected virtual void OnExitButtonPressed()
 		{
 			_buttonAudio.Play();
 			SaveSettings();
-			// Handle Cancel button press logic here
 			Close();
 		}
+		/// <summary>
+		/// Changes games language to Finnish.
+		/// </summary>
 		private void OnFiButtonPressed()
 		{
 			_buttonAudio.Play();
@@ -65,6 +73,9 @@ namespace ForkliftGame
 			SaveSettings();
 
 		}
+		/// <summary>
+		/// Changes games language to English.
+		/// </summary>
 		private void OnEnButtonPressed()
 		{
 			_buttonAudio.Play();
@@ -73,12 +84,17 @@ namespace ForkliftGame
 			SaveSettings();
 
 		}
-
+		/// <summary>
+		/// Changes games language.
+		/// </summary>
 		private void ChangeLanguage(string langCode)
 		{
 			TranslationServer.SetLocale(langCode);
 		}
-
+		/// <summary>
+		/// Sets user values to variables.
+		/// </summary>
+		/// <param name="data">Object which contain variables (settings data)</param>
 		private void ApplySettingsData(SettingsData data)
 		{
 			if (data == null)
@@ -91,7 +107,10 @@ namespace ForkliftGame
 			SetVolume("SFX", data.SfxVolume);
 			ChangeLanguage(data.LangCode);
 		}
-
+		/// <summary>
+		/// Loads settings from save file.
+		/// </summary>
+		/// <returns>SettingsData object</returns>
 		private SettingsData LoadSettings()
 		{
 			SettingsData data = null;
@@ -115,7 +134,10 @@ namespace ForkliftGame
 
 			return data;
 		}
-
+		/// <summary>
+		/// Saves user settings.
+		/// </summary>
+		/// <returns>true if success</returns>
 		public bool SaveSettings()
 		{
 			if (_data == null)
@@ -137,7 +159,12 @@ namespace ForkliftGame
 
 			return true;
 		}
-
+		/// <summary>
+		/// Sets volume according to given value in db.
+		/// </summary>
+		/// <param name="busName">Name of the audio bus</param>
+		/// <param name="volumeDB">Value in db</param>
+		/// <returns></returns>
 		public bool SetVolume(string busName, float volumeDB)
 		{
 			if (_data == null)
@@ -172,7 +199,12 @@ namespace ForkliftGame
 
 			return true;
 		}
-
+		/// <summary>
+		/// Getter for current volume value.
+		/// </summary>
+		/// <param name="busName">Name of the audio bus</param>
+		/// <param name="volumeDB">Value in db</param>
+		/// <returns></returns>
 		public bool GetVolume(string busName, out float volumeDB)
 		{
 			int busIndex = AudioServer.GetBusIndex(busName);
@@ -186,7 +218,9 @@ namespace ForkliftGame
 			volumeDB = AudioServer.GetBusVolumeDb(busIndex);
 			return true;
 		}
-
+		/// <summary>
+		/// Initializes all audio buses.
+		/// </summary>
 		public void Initialize()
 		{
 			if (_masterAudioControl != null)

@@ -6,19 +6,20 @@ namespace ForkliftGame;
 public partial class MovementSlider : VSlider
 {
 	private Forklift _forklift;
-
 	private Dictionary<int, Vector2> touchData = new Dictionary<int, Vector2>();
 
-
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_forklift = GetParent().GetParent().GetParent<Forklift>();
 		this.ValueChanged += OnValueChanged;
 	}
 
-    public override void _GuiInput(InputEvent @event)
-    {
+	/// <summary>
+	/// Allows multitouch on slider. Updates slider value when pressed. Resets slider value when released.
+	/// </summary>
+	/// <param name="event">Touch event on slider.</param>
+	public override void _GuiInput(InputEvent @event)
+	{
 		if (@event is InputEventScreenTouch touch)
 		{
 			if (touch.IsPressed())
@@ -29,32 +30,39 @@ public partial class MovementSlider : VSlider
 			else
 			{
 				touchData.Remove(touch.Index);
-				if ( touchData.Count == 0)
+				if (touchData.Count == 0)
 				{
 					ResetSlider();
 				}
 			}
 		}
 
-
 		else if (@event is InputEventScreenDrag drag)
 		{
 			touchData[drag.Index] = drag.Position;
 			UpdateSlider(drag.Position);
 		}
-    }
-
-    public void ResetSlider()
-    {
-        Value = 0;
-    }
-
-    private void UpdateSlider(Vector2 position)
-    {
-        Value = (1-position.Y/Size.Y) * MaxValue;
-    }
-
-    private void OnValueChanged(double input)
+	}
+	/// <summary>
+	/// Resets slider to default position.
+	/// </summary>
+	public void ResetSlider()
+	{
+		Value = 0;
+	}
+	/// <summary>
+	/// Updates slider value when called.
+	/// </summary>
+	/// <param name="position">Position to be assigned.</param>
+	private void UpdateSlider(Vector2 position)
+	{
+		Value = (1 - position.Y / Size.Y) * MaxValue;
+	}
+	/// <summary>
+	/// When slider value is changed update forklifts speedinput variable.
+	/// </summary>
+	/// <param name="input">Sliders current value to be updated</param>
+	private void OnValueChanged(double input)
 	{
 		_forklift.SpeedInput = input;
 	}

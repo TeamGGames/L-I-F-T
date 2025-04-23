@@ -32,20 +32,17 @@ public partial class Forklift : CharacterBody2D
 	[Export] public AudioStreamPlayer _liftingSound = null;
 
 	// Used in connection with the above _reducedSpeedFromWeight to
-	// calculate thereduced speed when carrying a box. the _startAddedWeight
+	// calculate the reduced speed when carrying a box. the _startAddedWeight
 	// variable is used for runtime reset of the _addedWeight variable. Otherwise
 	// the value _addedWeight variable would stack making the truck eventually
 	// unable to move.
 	private float _addedWeight;
-
 	public float AddedWeight
 	{
 		get { return _addedWeight; }
 		set { _addedWeight = value; }
 	}
 	private float _startAddedWeight = 1.0f;
-
-	public float StartAddedWeight { get { return _startAddedWeight; } }
 
 	// Distance from front wheel to rear wheel.
 	private float _wheelBase = 70.0f;
@@ -60,7 +57,7 @@ public partial class Forklift : CharacterBody2D
 	// turning angles of the forklift.
 	private float _steerAngle;
 
-	// _friction and _drag bot are used in controlling the speed of
+	// _friction and _drag both are used in controlling the speed of
 	// and turning speed of the forklift.
 	private float _friction = -0.05f;
 	private float _drag = -0.0005f;
@@ -69,24 +66,17 @@ public partial class Forklift : CharacterBody2D
 	// further interaction
 	private bool _nearBox = false;
 
-	// Used if the speed is too fast and making a tight angle.
-	// Marked true causes the boxes to fall from the forklist.
-	private bool _dropBoxes = false;
-
 	// List of boxes to be grabbed
 	private List<Box> _nearBoxes;
 
 	// List of boxes that are currently grabbed
 	public List<Box> _stackedBoxes;
-
 	private double _speedInput = 0.0;
-
 	public double SpeedInput
 	{
 		get { return _speedInput; }
 		set { _speedInput = value; }
 	}
-
 	public bool _leftButtonPressed = false;
 	public bool _rightButtonPressed = false;
 	public bool _grabReleasePressed = false;
@@ -94,55 +84,39 @@ public partial class Forklift : CharacterBody2D
 	public bool _inArea = false;
 	public bool _readForRelease = false;
 
-
-    public override void _Ready()
-    {
-		// Initialise the lists used.
-
+	public override void _Ready()
+	{
 		_nearBoxes = new List<Box>();
 		_stackedBoxes = new List<Box>();
-
-		// Initialise the counter of how many boxes carried by the forklift.
-
-		// Initialise the _addedWeight to default value.
-
 		_addedWeight = _startAddedWeight;
-    }
-    public override void _PhysicsProcess(double delta)
-    {
+	}
+	public override void _PhysicsProcess(double delta)
+	{
 		// Reset the _acceleration every frame so the program responds to input real-time.
-
 		_acceleration = Vector2.Zero;
 
-		// Read the user input.
-
-		//ReadInput();
 		ReadTouchInput();
-
-		// Apply friction forces.
-
 		ApplyFriction();
-
-		// Calculate steering.
-
 		CalculateSteering((float)delta);
-
-		// Set _velocity.
-
 		_velocity += _acceleration * (float)delta;
 
 		// Velocity is a property of the forklift and used as input in MoveAndSlide() method.
-
 		Velocity = _velocity;
-
-		// Move the CharacterBody 2D Forklift based on the Velocity value of the forklift.
-		// Could be written as "MoveAndSlide(_velocity);"
 		MoveAndSlide();
+	}
 
-    }
+	public override void _Process(double delta)
+	{
+		IsAbleToGrabOrRelease();
+	}
 
-    public override void _Process(double delta)
-    {
+	/// <summary>
+	/// Checks if there are boxes near and gives the player the ability to grab them.
+	/// If boxes are grabbed and the player is in the loading area, the player gets
+	/// the ability to release boxes.
+	/// </summary>
+	private void IsAbleToGrabOrRelease()
+	{
 		// If the list _nearBox contains boxes, the user can grab it by GrabAction keypress.
 		if (!_inArea)
 		{
@@ -150,9 +124,10 @@ public partial class Forklift : CharacterBody2D
 			{
 				if (Input.IsActionJustPressed(Config.GrabAction) || _grabReleasePressed)
 				{
-					if ( _nearBoxes.Count > 0)
+					if (_nearBoxes.Count > 0)
 					{
 						Box box = _nearBoxes[0];
+
 						// Insert the box from _nearBoxes list to _stackedBoxes list.
 
 						_stackedBoxes.Insert(0, box);
@@ -173,30 +148,31 @@ public partial class Forklift : CharacterBody2D
 		// If there are boxes in the _stackedBoxes list, the player can release them. Will release all the boxes at once.
 		if (_inArea)
 		{
-			if (_stackedBoxes.Count > 0  && Input.IsActionJustPressed(Config.ReleaseAction) || _stackedBoxes.Count > 0  && _grabReleasePressed && _readForRelease)
+			if (_stackedBoxes.Count > 0 && Input.IsActionJustPressed(Config.ReleaseAction) || _stackedBoxes.Count > 0 && _grabReleasePressed && _readForRelease)
+			{
+				while (_stackedBoxes.Count != 0) // until the list is done
 				{
-					while (_stackedBoxes.Count != 0) // until the list is done
-				{
-						// Remove the box from being a child of the forklift and restore it as a child of the scene.
+					// Remove the box from being a child of the forklift and restore it as a child of the scene.
 
-						_stackedBoxes[0].Release();
+					_stackedBoxes[0].Release();
 
-						// Remove the Box from the _stackedBoxes list.
+					// Remove the Box from the _stackedBoxes list.
 
-						_stackedBoxes.Remove(_stackedBoxes[0]);
+					_stackedBoxes.Remove(_stackedBoxes[0]);
 
-						// Reset the _addedWeight so the forklift can move normally without the load. Without this, the
-						// _addedWeight variable would stack until the forklift cannot move even if empty.
+					// Reset the _addedWeight so the forklift can move normally without the load. Without this, the
+					// _addedWeight variable would stack until the forklift cannot move even if empty.
 
-						_addedWeight = _startAddedWeight;
-
-						_readForRelease = false;
+					_addedWeight = _startAddedWeight;
+					_readForRelease = false;
 				}
-
 			}
 		}
-    }
+	}
 
+	/// <summary>
+	/// Handles the Forklift's movement by reading variables that are linkd to TouchControls.cs.
+	/// </summary>
 	private void ReadTouchInput()
 	{
 		float turn = 0.0f;
@@ -241,171 +217,18 @@ public partial class Forklift : CharacterBody2D
 		}
 		else if (_reversePressed)
 		{
-			_acceleration =  Transform.X * _reversePower;
+			_acceleration = Transform.X * _reversePower;
 		}
-
-		// if (SpeedInput > 2.25 && _rightButtonPressed || SpeedInput > 2.25 && _leftButtonPressed)
-		// {
-		// 	_dropBoxes = true;
-		//}
 
 		_steerAngle = turn * Mathf.DegToRad(_steeringAngle);
 		PitchAccelerationSound();
-
-		if (_dropBoxes == true)
-		{
-
-			// Perform as long as there are items in the _stackedBoxes list.
-			for(int i = 0; i < _stackedBoxes.Count; i++)
-			{
-			// Release a box.
-			_stackedBoxes[0].Release();
-
-			// Remove from the list.
-			_stackedBoxes.Remove(_stackedBoxes[0]);
-
-			// Reset the _addedWeight factor. Otherwise it will keep on stacking
-			// and eventually the truck won't be able to move even when empty.
-			_addedWeight = _startAddedWeight;
-			}
-			_dropBoxes = false;
-		}
 	}
 
 	/// <summary>
-	/// Reads user input and controls the movement of the forklift accordingly.
+	/// Without CalculateSteering the forklift cannot turn. The  _steerAngle variable calculated in ReadInput()
+	/// is an integral part of the calulations. Also, this method provides the forklift with a natural feel to steering.
 	/// </summary>
-    private void ReadInput()
-	{
-		// Initialise the turn angle value of the forklift. Will be used so that the higher
-		// the speed, the wider arc the forklift turns. the turn variable is set as a different
-		// value depending on user input, and is either decreased or increased every frame, as well
-		// as reset to zero. This gives the forklift the feel of a continuous smooth movement.
-
-		float turn = 0;
-
-		// On GearOne the turn arc is quite tight and boxes won't be dropped.
-
-		if (Input.IsActionPressed(Config.TurnLeftAction) && Input.IsActionPressed(Config.GearOne))
-		{
-			turn -= 1.0f;
-			_dropBoxes = false;
-		}
-
-		if (Input.IsActionPressed(Config.TurnRightAction)&& Input.IsActionPressed(Config.GearOne))
-		{
-			turn += 1.0f;
-			_dropBoxes = false;
-		}
-
-		// On GearTwo the arc is wider and the boxes won't be dropped.
-
-		if(Input.IsActionPressed(Config.TurnRightAction) && Input.IsActionPressed(Config.GearTwo)) {
-
-			turn += 0.75f;
-			_dropBoxes = false;
-		}
-
-		if(Input.IsActionPressed(Config.TurnLeftAction) && Input.IsActionPressed(Config.GearTwo)) {
-
-			turn -= 0.75f;
-			_dropBoxes = false;
-		}
-
-		// On GearThree the arc is wide and if the player tries to turn with this speed
-		// the boxes will be dropped from the forklift. The player can drive straight on without
-		// the boxes dropping.
-
-		if(Input.IsActionPressed(Config.TurnRightAction) && Input.IsActionPressed(Config.GearThree)) {
-
-			turn += 0.75f;
-			_dropBoxes = true;
-		}
-
-		if(Input.IsActionPressed(Config.TurnLeftAction) && Input.IsActionPressed(Config.GearThree)) {
-
-			turn -= 0.75f;
-			_dropBoxes = true;
-		}
-
-		// On reverse the turning arc is normal and there is no fear of boxes dropping.
-
-		if (Input.IsActionPressed(Config.ReverseAction) && Input.IsActionPressed(Config.TurnRightAction)) {
-			turn = 1.0f;
-			_dropBoxes = false;
-		}
-
-		if (Input.IsActionPressed(Config.ReverseAction) && Input.IsActionPressed(Config.TurnLeftAction)) {
-			turn = -1.0f;
-			_dropBoxes = false;
-		}
-
-
-		// Below the actual speed of the forklift is calculated. The if statement checks which Gear is on
-		// (One, Two, Three or Reverse) and counts the _acceleration. Also the added weight from the boxes
-		// is taken into account as _addedWeight.
-
-		if (Input.IsActionPressed(Config.ForwardAction) && Input.IsActionPressed(Config.GearOne))
-		{
-			// _acceleration is later multiplied by delta time in _Process.
-			// Transform.X is the direction, _enginePower the amount of thrust, next the
-			// multiplier from _gearOne/Two/Three and finally the modifier from _addedWeight (determined
-			// by how many boxes are being currently carried.)
-
-			_acceleration = Transform.X * _enginePower * _gearOne * _addedWeight;
-		}
-
-		else if (Input.IsActionPressed(Config.ForwardAction) && Input.IsActionPressed(Config.GearTwo))
-		{
-			_acceleration = Transform.X * _enginePower * _gearTwo * _addedWeight;
-		}
-
-		// Gear three is a special case since boxes can fall off at this speed.
-
-		else if (Input.IsActionPressed(Config.ForwardAction) && Input.IsActionPressed(Config.GearThree))
-		{
-			_acceleration = Transform.X * _enginePower * _gearThree * _addedWeight;
-
-		// This statement  will check if _dropBoxes is set true. (Normally it is false but true only when
-		// driving on Gear Three and making a turn.)
-
-				if (_dropBoxes == true)
-				{
-
-					// Perform as long as there are items in the _stackedBoxes list.
-					for(int i = 0; i < _stackedBoxes.Count; i++)
-					{
-					// Release a box.
-					_stackedBoxes[0].Release();
-
-					// Remove from the list.
-					_stackedBoxes.Remove(_stackedBoxes[0]);
-
-					// Reset the _addedWeight factor. Otherwise it will keep on stacking
-					// and eventually the truck won't be able to move even when empty.
-					_addedWeight = _startAddedWeight;
-					}
-				}
-		}
-
-		// Perform the same speed calculations for the reverse gear.
-
-		if (Input.IsActionPressed(Config.ReverseAction))
-		{
-			_acceleration =  Transform.X * _reversePower;
-		}
-
-		// _steerAngle can now be calculated and will be used later in CalculateSteering();
-
-		_steerAngle = turn * Mathf.DegToRad(_steeringAngle);
-
-	}
-
-/// <summary>
-/// Without CalculateSteering the forklift cannot turn. The  _steerAngle variable calculated in ReadInput()
-/// is an integral part of the calulations. Also, this method provides the forklift with a natural feel to steering.
-/// </summary>
-/// <param name="delta"></param>
+	/// <param name="delta"> Time. </param>
 	private void CalculateSteering(float delta)
 	{
 		// The direction vector of both front and rear wheels are set.
@@ -441,15 +264,14 @@ public partial class Forklift : CharacterBody2D
 		Rotation = newHeading.Angle();
 	}
 
-/// <summary>
-/// In applyFriction we limit Godot's RigidBody2D physics so that the forklift moves in a more
-/// natural way. Without the limitations in this method there would be no slowing down when
-/// for example releasing the 'forward' button. This method provides a natural feel to the
-/// movement of the forklift.
-/// </summary>
+	/// <summary>
+	/// In applyFriction we limit Godot's RigidBody2D physics so that the forklift moves in a more
+	/// natural way. Without the limitations in this method there would be no slowing down when
+	/// for example releasing the 'forward' button. This method provides a natural feel to the
+	/// movement of the forklift.
+	/// </summary>
 	private void ApplyFriction()
 	{
-
 		Vector2 frictionForce = _velocity * _friction;
 		Vector2 dragForce = _velocity * _velocity.Length() * _drag;
 
@@ -464,7 +286,7 @@ public partial class Forklift : CharacterBody2D
 		// Stops the forklift when reversing and and the player releases the reverse
 		// button.
 
-		else if(Input.IsActionJustReleased(Config.ReverseAction))
+		else if (Input.IsActionJustReleased(Config.ReverseAction))
 		{
 			_velocity = Vector2.Zero;
 		}
@@ -482,33 +304,32 @@ public partial class Forklift : CharacterBody2D
 		_velocity += (dragForce + frictionForce) * 0.5f;
 	}
 
+	/// <summary>
+	/// Pitches the engine sound in relation with SpeedInput.
+	/// </summary>
 	private void PitchAccelerationSound()
 	{
-
-			_engineSound.PitchScale = (float)(1 + (1.75 - 1) * SpeedInput / 2.5);
-
-		}
+		_engineSound.PitchScale = (float)(1 + (1.75 - 1) * SpeedInput / 2.5);
+	}
 
 
 	/// <summary>
 	/// If the Interactionarea of the forklift and the box meet, this method will
 	/// add the box to the _nearBoxes list thus making it possible to grab and carry.
 	/// </summary>
-	/// <param name="body"></param>
+	/// <param name="body"> Body that enters the area. </param>
 	private void OnInteractionAreaBodyEntered(Node2D body)
-    {
+	{
 		// If the interaction area the enters the forklift's belongs to a box is checked first.
-        if (body is Box box)
-        {
+		if (body is Box box)
+		{
 			// The box gets a true value on _nearBox.
-
 			_nearBox = true;
-
 
 			// The box is inserted to the _nearBoxes list.
 			_nearBoxes.Insert(0, box);
-        }
-    }
+		}
+	}
 
 	/// <summary>
 	/// If the interaction ares of the forklift and the box no longer overlap,
@@ -516,26 +337,32 @@ public partial class Forklift : CharacterBody2D
 	/// We use this so that a plpayer can't first tumble into a box and later
 	/// drive further away and still be able to grab a box from distance.
 	/// </summary>
-	/// <param name="body"></param>
+	/// <param name="body"> Body that exits the area. </param>
 	private void OnInteractionAreaBodyExited(Node2D body)
-    {	// If the interaction area the exits the forklift's belongs to a box is checked first.
-        if (body is Box box)
-        {
+	{   // If the interaction area the exits the forklift's belongs to a box is checked first.
+		if (body is Box box)
+		{
 			// The box's _nearbox value is set as false.
-
 			_nearBox = false;
 
 			// The box is removed from the _nearBoxes list.
-
 			_nearBoxes.Remove(box);
-        }
-    }
-
-	private void EnteredLoadingArea(Area2D area)
-	{
-			_inArea = true;
+		}
 	}
 
+	/// <summary>
+	/// Toggle when interaction are is enterd by another interaction area.
+	/// </summary>
+	/// <param name="area"> Interaction area that is entered. </param>
+	private void EnteredLoadingArea(Area2D area)
+	{
+		_inArea = true;
+	}
+
+	/// <summary>
+	/// Toggle when interaction are is exited by another interaction area.
+	/// </summary>
+	/// <param name="loadingArea"> Interaction are that is existed. </param>
 	private void ExitedLoadingArea(Area2D loadingArea)
 	{
 		_inArea = false;

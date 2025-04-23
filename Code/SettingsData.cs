@@ -2,6 +2,10 @@ namespace ForkliftGame
 {
 	public class SettingsData
 	{
+		/// <summary>
+		/// Set default values to the settings.
+		/// </summary>
+		/// <returns></returns>
 		public static SettingsData CreateDefaults()
 		{
 			return new SettingsData

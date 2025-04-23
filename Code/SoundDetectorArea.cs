@@ -13,6 +13,10 @@ public partial class SoundDetectorArea : Area2D
         _shelves = GetNode<TileMapLayer>("../../Shelves");
 
     }
+    /// <summary>
+    /// Plays collision sound when close to shelves.
+    /// </summary>
+    /// <param name="body">Body</param>
     private void OnBodyEntered(Node2D body)
     {
         if (body == _shelves && _forklift.SpeedInput > 0)

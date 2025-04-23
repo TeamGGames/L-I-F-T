@@ -3,7 +3,7 @@ using System;
 
 namespace ForkliftGame;
 /// <summary>
-/// Config file for input control for the whole project.
+/// Config file for the whole project.
 /// </summary>
 public static class Config
 {
@@ -24,5 +24,4 @@ public static class Config
     public const string SaveFolder = "Save";
     public const string QuickSaveFile = "quicksave.json";
     public const string SettingsFile = "user://settings.cfg";
-
 }

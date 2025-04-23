@@ -14,10 +14,13 @@ namespace ForkliftGame
             }
             else
             {
-                QueueFree(); // Prevent multiple instances
+                QueueFree();
             }
         }
 
+        /// <summary>
+        /// Play music.
+        /// </summary>
         public void PlayMusic()
         {
             if (!Playing)
@@ -26,6 +29,9 @@ namespace ForkliftGame
             }
         }
 
+        /// <summary>
+        /// Stop playing music.
+        /// </summary>
         public void StopMusic()
         {
             Stop();

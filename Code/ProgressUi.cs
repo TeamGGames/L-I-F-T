@@ -6,30 +6,33 @@ namespace ForkliftGame
 {
 
 
-public partial class ProgressUi : Control
-{
-	[Export] private Label _score;
-	[Export] private Label _highScore;
-
-
-
-	public void SetScoreLabel(int score)
+	public partial class ProgressUi : Control
 	{
-		_score.Text = $"{score}";
+		[Export] private Label _score;
+		[Export] private Label _highScore;
 
-		if (LevelManager.Current.HighScore <= score)
+		/// <summary>
+		/// Updates the current score value on ScoreLabel and shows it on screen.
+		/// </summary>
+		/// <param name="score">Current score</param>
+		public void SetScoreLabel(int score)
 		{
-			LevelManager.Current.HighScore = score;
-			SetHighScoreLabel(score);
+			_score.Text = $"{score}";
+
+			if (LevelManager.Current.HighScore <= score)
+			{
+				LevelManager.Current.HighScore = score;
+				SetHighScoreLabel(score);
+			}
+		}
+
+		/// <summary>
+		/// Updates the HighScore label on screen if the player's current score exceeds it.
+		/// </summary>
+		/// <param name="score">Current score</param>
+		public void SetHighScoreLabel(int score)
+		{
+			_highScore.Text = $"{score}";
 		}
 	}
-
-	public void SetHighScoreLabel(int score)
-	{
-		_highScore.Text = $"{score}";
-
-	}
-
-
-}
 }

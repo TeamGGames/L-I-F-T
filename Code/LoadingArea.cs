@@ -11,18 +11,18 @@ public partial class LoadingArea : Node2D
 /// </summary>
 {
 
-	private Box _box = null;
+    private Box _box = null;
     private SpawnPoint _spawner = null;
     private int _score = 10;
     private Vector2 _spawnPosition;
-    public Vector2 SpawnPosition {
+    public Vector2 SpawnPosition
+    {
         get { return _spawnPosition; }
     }
     private List<Box> _boxesInTargetList = new List<Box>();
     private ProgressUi _progressUi = null;
-
-
-    public Box Box {
+    public Box Box
+    {
         get { return _box; }
     }
 
@@ -33,22 +33,23 @@ public partial class LoadingArea : Node2D
 
     public override void _Process(double delta)
     {
-        if(_boxesInTargetList.Count >= 3)
-                {
-                    for (int i = 0; i < _boxesInTargetList.Count; i ++)
-                    {
-                        _boxesInTargetList[i].QueueFree();
-                    }
-                    _boxesInTargetList.Clear();
-                    LevelManager.Current.GoToNextLevel();
-                }
+        if (_boxesInTargetList.Count >= 3)
+        {
+            for (int i = 0; i < _boxesInTargetList.Count; i++)
+            {
+                _boxesInTargetList[i].QueueFree();
+            }
+            _boxesInTargetList.Clear();
+            LevelManager.Current.GoToNextLevel();
+        }
     }
-/// <summary>
-/// Adds points whenever a box is released int the target area.
-/// </summary>
-/// <param name="body"></param>
-///
-	private void OnRegisteringAreaBodyEntered(Node2D body)
+    /// <summary>
+    /// Places boxes on the truck bed and
+    /// adds points whenever a box is released int the target area.
+    /// </summary>
+    /// <param name="body"> Which body enters the area, box or forklift. </param>
+
+    private void OnRegisteringAreaBodyEntered(Node2D body)
     {
         if (body is Box box)
         {
@@ -63,7 +64,6 @@ public partial class LoadingArea : Node2D
             LevelManager.Current.CurrentScore += _box.ScoreAddUp;
             _progressUi = GetNode<ProgressUi>("../Forklift/UI/ProgressUI");
             _progressUi.SetScoreLabel(LevelManager.Current.CurrentScore);
-
         }
 
         if (body is Forklift forklift)
